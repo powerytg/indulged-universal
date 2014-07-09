@@ -1,5 +1,7 @@
 ﻿using Indulged.Common;
 using Indulged.Data;
+using Indulged.UI.Common.Controls;
+using Indulged.UI.Login;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,34 +79,6 @@ namespace Indulged
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-1");
             this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
-
-            Grid bgGrid = new Grid();
-            bgGrid.Width = Window.Current.Bounds.Width;
-            bgGrid.Height = Window.Current.Bounds.Height;
-            bgGrid.Background = new SolidColorBrush(Color.FromArgb(0x66, 0x00, 0x00, 0x00));
-
-            Grid panel = new Grid();
-            panel.HorizontalAlignment = HorizontalAlignment.Stretch;
-            panel.VerticalAlignment = VerticalAlignment.Center;
-            panel.Width = Window.Current.Bounds.Width;
-            panel.Height = 300;
-            panel.Background = new SolidColorBrush(Colors.Gray);
-            bgGrid.Children.Add(panel);
-
-            TextBlock textLabel = new TextBlock(); 
-            textLabel.Text = "Hello, world";
-            textLabel.FontSize = 28;
-            textLabel.HorizontalAlignment = HorizontalAlignment.Center;
-            textLabel.VerticalAlignment = VerticalAlignment.Center;
-            panel.Children.Add(textLabel);
-           
-            Popup dialog = new Popup();
-            dialog.Child = bgGrid;
-            dialog.IsOpen = true;
-
-            var frame = (Frame)Window.Current.Content;
-            var page = (Page)frame.Content;
-            page.BottomAppBar.IsEnabled = false;
         }
 
         /// <summary>

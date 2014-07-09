@@ -45,12 +45,12 @@ namespace Indulged.Common
     ///     in navigation by overriding the <see cref="Windows.UI.Xaml.Controls.Page.OnNavigatedTo"/> 
     ///     and <see cref="Windows.UI.Xaml.Controls.Page.OnNavigatedFrom"/> events.
     /// <code>
-    ///     protected override void OnNavigatedTo(NavigationEventArgs e)
+    ///     private override void OnNavigatedTo(NavigationEventArgs e)
     ///     {
     ///         navigationHelper.OnNavigatedTo(e);
     ///     }
     ///     
-    ///     protected override void OnNavigatedFrom(NavigationEventArgs e)
+    ///     private override void OnNavigatedFrom(NavigationEventArgs e)
     ///     {
     ///         navigationHelper.OnNavigatedFrom(e);
     ///     }
