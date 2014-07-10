@@ -115,5 +115,26 @@ namespace Indulged.UI.Login
         {
             Frame.Navigate(typeof(LoginWebPage));
         }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginWebPage));
+        }
+
+        private void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAboutView();
+        }
+
+        private void AboutLabel_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ShowAboutView();
+        }
+
+        private void ShowAboutView()
+        {
+            string aboutText = "Indulged 3.0 for WinRT" + "\n\nFrom photographer, for photographer!\n\n2013 - 2014 Tiangong You\nAll rights reserved";
+            ModalPopup.Show(aboutText,"About", new List<string> { "Done" });
+        }
     }
 }

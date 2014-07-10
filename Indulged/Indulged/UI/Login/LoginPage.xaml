@@ -31,11 +31,13 @@
                     Margin="0, 160, 20, 0">
             <Button Content="SIGN IN" FontWeight="Light" FontSize="24"
                     Foreground="#7592dc" BorderThickness="0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    Click="LoginButton_Click"/>
 
-            <Button Content="ABOUT" FontWeight="Light" FontSize="24"
+            <Button x:Name="AboutButton" Content="ABOUT" FontWeight="Light" FontSize="24"
                     Foreground="#7592dc" BorderThickness="0"
-                    HorizontalAlignment="Right"/>
+                    HorizontalAlignment="Right"
+                    Click="AboutButton_Click"/>
 
         </StackPanel>
         
@@ -56,10 +58,10 @@
                        Foreground="White" FontWeight="Light" FontSize="16"
                        Grid.Column="0"/>
             
-            <TextBlock Text="ABOUT"
+            <TextBlock x:Name="AboutLabel" Text="ABOUT"
                     Grid.Column="1"
                     Foreground="#7592dc"
-                    FontSize="16"/>
+                    FontSize="16" Tapped="AboutLabel_Tapped"/>
         </Grid>
     </Grid>
 </Page>
