@@ -28,5 +28,25 @@ namespace Indulged.UI.Login.SupportClasses
 
             RingAnimation.Begin();
         }
+
+        private void UserControl_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Pressed", false);
+        }
+
+        private void UserControl_PointerCanceled(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void UserControl_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void UserControl_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
     }
 }

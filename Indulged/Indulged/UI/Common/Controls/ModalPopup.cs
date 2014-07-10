@@ -174,6 +174,7 @@ namespace Indulged.UI.Common.Controls
             label.FontSize = 24;
             label.Margin = new Thickness(28);
             label.Text = text;
+            label.TextAlignment = TextAlignment.Center;
             label.Width = Window.Current.Bounds.Width - label.Margin.Left - label.Margin.Right;
             label.TextWrapping = TextWrapping.Wrap;
             return Show(label, title, buttonTitles, _shoulsAutoDismissWhenClickingOnButtons);

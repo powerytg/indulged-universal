@@ -42,7 +42,8 @@
         <!--Sign In-->
         <localControl:LoginRingButton x:Name="SignInButton"
                                       HorizontalAlignment="Center" VerticalAlignment="Top"
-                                      Width="254" Height="254" Margin="0, 338, 0, 0"/>
+                                      Width="254" Height="254" Margin="0, 338, 0, 0"
+                                      Tapped="SignInButton_Tapped"/>
         
         <!--Bottom-->
         <Grid VerticalAlignment="Bottom" Margin="10, 0, 10, 4">

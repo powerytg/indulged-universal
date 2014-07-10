@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="254"
-    d:DesignWidth="254">
+    d:DesignWidth="254"
+    PointerPressed="UserControl_PointerPressed"
+    PointerReleased="UserControl_PointerReleased"
+    PointerCanceled="UserControl_PointerCanceled"
+    PointerCaptureLost="UserControl_PointerCaptureLost">
 
     <UserControl.Resources>
         <Storyboard x:Name="RingAnimation">
@@ -23,7 +27,26 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid x:Name="LayoutRoot">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="Pressed" To="Normal">
+                        <Storyboard>
+                            <PointerUpThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                        </Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <PointerDownThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
         <Grid>
             <Grid.RenderTransform>
                 <RotateTransform x:Name="OutterRingRotation" CenterX="127" CenterY="127"/>
