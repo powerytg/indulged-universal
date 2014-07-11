@@ -181,6 +181,7 @@ namespace Indulged.UI.Login
         {
             APIService.Instance.GetAccessTokenAsync(() =>
             {
+                APIService.Instance.SaveAccessCredentials();
                 ModalPopup.Show(APIService.Instance.AccessToken, "OK", new List<string> { "Confirm" });
             }, 
             (errorMessage) =>

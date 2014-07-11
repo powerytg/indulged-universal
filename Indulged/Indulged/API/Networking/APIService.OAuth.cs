@@ -231,9 +231,6 @@ namespace Indulged.API.Networking
                     AccessToken = dict.GetFirstValueByName("oauth_token");
                     AccessTokenSecret = dict.GetFirstValueByName("oauth_token_secret");
 
-                    // Store access token
-                    //this.SaveAccessCredentials();
-
                     // Construct current user object
                     /*
                     User currentUser = new User();

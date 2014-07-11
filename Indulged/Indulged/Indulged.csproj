@@ -184,6 +184,7 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="API\Storage\Models\" />
     <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +196,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Networking\APIService.Storage.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
