@@ -13,7 +13,7 @@ namespace Indulged.API.Utils
     /// Date: 2008-Dec-23 
     /// (Ported to C# by t3rse (http://www.t3rse.com)) 
     /// </summary> 
-    public class UrlHelper
+    public class UrlUtils
     {
         public static string Encode(string str)
         {

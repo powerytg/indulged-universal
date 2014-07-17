@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 
-namespace Indulged.Utils
+namespace Indulged.API.Utils
 {
     public static class EventUtils
     {

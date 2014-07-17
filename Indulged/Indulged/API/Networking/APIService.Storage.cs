@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Indulged.API.Networking
 {
-    public class APIService
+    public partial class APIService
     {
 
         private string containerKey = "oauth";

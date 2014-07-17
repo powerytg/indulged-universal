@@ -118,8 +118,40 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIService.cs" />
+    <Compile Include="API\Networking\Events\APIEventArgs.cs" />
+    <Compile Include="API\Storage\Events\StorageEventArgs.cs" />
+    <Compile Include="API\Storage\Factories\FlickrActivityFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrGroupFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrCommentFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrPhotoEXIFFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrPhotoFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrAlbumFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrTopicFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrReplyFactory.cs" />
+    <Compile Include="API\Storage\Factories\FlickrUserFactory.cs" />
+    <Compile Include="API\Storage\Models\FlickrAlbum.cs" />
+    <Compile Include="API\Storage\Models\FlickrComment.cs" />
+    <Compile Include="API\Storage\Models\FlickrGroup.cs" />
+    <Compile Include="API\Storage\Models\FlickrModelBase.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhoto.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhotoActivity.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhotoActivityCommentEvent.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhotoActivityEventBase.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhotoActivityFavouriteEvent.cs" />
+    <Compile Include="API\Storage\Models\FlickrPhotoStream.cs" />
+    <Compile Include="API\Storage\Models\FlickrReply.cs" />
+    <Compile Include="API\Storage\Models\FlickrTag.cs" />
+    <Compile Include="API\Storage\Models\FlickrTopic.cs" />
+    <Compile Include="API\Storage\Models\FlickrUser.cs" />
+    <Compile Include="API\Storage\StorageService.Activities.cs" />
+    <Compile Include="API\Storage\StorageService.cs" />
+    <Compile Include="API\Storage\StorageService.Events.cs" />
+    <Compile Include="API\Storage\StorageService.Groups.cs" />
+    <Compile Include="API\Storage\StorageService.Photos.cs" />
+    <Compile Include="API\Storage\StorageService.Streams.cs" />
     <Compile Include="API\Utils\DateTimeUtils.cs" />
-    <Compile Include="API\Utils\UrlHelper.cs" />
+    <Compile Include="API\Utils\StringUtils.cs" />
+    <Compile Include="API\Utils\UrlUtils.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -150,8 +182,8 @@
     <Compile Include="UI\Login\SupportClasses\LoginRingButton.xaml.cs">
       <DependentUpon>LoginRingButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils\EventUtils.cs" />
-    <Compile Include="Utils\TypeUtils.cs" />
+    <Compile Include="API\Utils\EventUtils.cs" />
+    <Compile Include="API\Utils\TypeUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -184,8 +216,8 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API\Storage\Models\" />
     <Folder Include="Assets\Fonts\" />
+    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIService.OAuth.cs" />

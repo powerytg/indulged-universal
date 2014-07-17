@@ -127,8 +127,8 @@ namespace Indulged.API.Networking
 
         private string GenerateSignature(string httpMethod, string secret, string apiUrl, string parameters)
         {
-            string encodedUrl = UrlHelper.Encode(apiUrl);
-            string encodedParameters = UrlHelper.Encode(parameters);
+            string encodedUrl = UrlUtils.Encode(apiUrl);
+            string encodedParameters = UrlUtils.Encode(parameters);
 
             //generate the basestring
             string basestring = httpMethod + "&" + encodedUrl + "&" + encodedParameters;
@@ -141,7 +141,7 @@ namespace Indulged.API.Networking
             string signature = Sha1Encrypt(basestring, key);
 
             //encode the signature to make it url safe and return the encoded url
-            return UrlHelper.Encode(signature);
+            return UrlUtils.Encode(signature);
         }
 
         // Get request token
@@ -151,7 +151,7 @@ namespace Indulged.API.Networking
             string nonce = GenerateNonce();
 
             // Encode the request string
-            string paramString = "oauth_callback=" + UrlHelper.Encode(CallbackUrl);
+            string paramString = "oauth_callback=" + UrlUtils.Encode(CallbackUrl);
             paramString += "&oauth_consumer_key=" + consumerKey;
             paramString += "&oauth_nonce=" + nonce;
             paramString += "&oauth_signature_method=HMAC-SHA1";
