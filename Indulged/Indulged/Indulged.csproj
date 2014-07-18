@@ -144,10 +144,12 @@
     <Compile Include="API\Storage\Models\FlickrTopic.cs" />
     <Compile Include="API\Storage\Models\FlickrUser.cs" />
     <Compile Include="API\Storage\StorageService.Activities.cs" />
+    <Compile Include="API\Storage\StorageService.Albums.cs" />
     <Compile Include="API\Storage\StorageService.cs" />
     <Compile Include="API\Storage\StorageService.Events.cs" />
     <Compile Include="API\Storage\StorageService.Groups.cs" />
     <Compile Include="API\Storage\StorageService.Photos.cs" />
+    <Compile Include="API\Storage\StorageService.Search.cs" />
     <Compile Include="API\Storage\StorageService.Streams.cs" />
     <Compile Include="API\Utils\DateTimeUtils.cs" />
     <Compile Include="API\Utils\StringUtils.cs" />
