@@ -1,4 +1,6 @@
 ﻿using Indulged.API.Networking;
+using Indulged.API.Storage;
+using Indulged.API.Storage.Models;
 using Indulged.Common;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Common.Controls.Events;
@@ -179,10 +181,27 @@ namespace Indulged.UI.Login
 
         private void GetAccessToken()
         {
-            APIService.Instance.GetAccessTokenAsync(() =>
+            APIService.Instance.GetAccessTokenAsync((dict) =>
             {
+                // Save access token
                 APIService.Instance.SaveAccessCredentials();
-                ModalPopup.Show(APIService.Instance.AccessToken, "OK", new List<string> { "Confirm" });
+
+                // Construct current user object
+                string userId = Uri.UnescapeDataString(dict.GetFirstValueByName("user_nsid"));
+                var currentUser = new FlickrUser(userId);
+                currentUser.Name = dict.GetFirstValueByName("fullname");
+                currentUser.UserName = dict.GetFirstValueByName("username");
+
+                StorageService.Instance.UserCache[userId] = currentUser;
+                StorageService.Instance.CurrentUser = currentUser;
+                StorageService.Instance.SaveCurrentUserInfo();
+
+                // Remove all the login related pages and navigate to the main page
+                Frame.Navigate(typeof(PivotPage));
+                while (Frame.CanGoBack)
+                {
+                    Frame.BackStack.RemoveAt(0);
+                }
             }, 
             (errorMessage) =>
             {

@@ -14,6 +14,7 @@ namespace Indulged.API.Storage.Events
         public string AlbumId { get; set; }
         public string GroupId { get; set; }
         public string TopicId { get; set; }
+        public string UserId { get; set; }
 
         public int Page { get; set; }
         public int PageCount { get; set; }
@@ -25,6 +26,8 @@ namespace Indulged.API.Storage.Events
         public List<FlickrPhoto> NewPhotos { get; set; }
         public List<FlickrComment> NewComments { get; set; }
         public List<FlickrGroup> NewGroups { get; set; }
+        public List<FlickrTag> NewTags { get; set; }
+        public List<FlickrUser> NewUsers { get; set; }
 
         public FlickrPhotoStream UpdatedStream { get; set; }
     }

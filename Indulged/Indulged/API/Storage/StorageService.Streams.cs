@@ -118,5 +118,44 @@ namespace Indulged.API.Storage
             PhotoStreamUpdated.DispatchEvent(this, evt);
         }
 
+        // Photo stream retrieved for a user
+        private void OnUserPhotoStreamReturned(object sender, APIEventArgs e)
+        {
+            // Find the user
+            if (!UserCache.ContainsKey(e.UserId))
+                return;
+
+            var user = UserCache[e.UserId];
+
+            JObject rawJson = JObject.Parse(e.Response);
+            JObject rootJson = (JObject)rawJson["photos"];
+            user.PhotoStream.PhotoCount = int.Parse(rootJson["total"].ToString());
+            int page = int.Parse(rootJson["page"].ToString());
+            int numPages = int.Parse(rootJson["pages"].ToString());
+            int perPage = int.Parse(rootJson["perpage"].ToString());
+
+            var newPhotos = new List<FlickrPhoto>();
+            foreach (var entry in rootJson["photo"])
+            {
+                JObject json = (JObject)entry;
+                var photo = FlickrPhotoFactory.PhotoWithJObject(json);
+
+                if (!user.PhotoStream.Photos.Contains(photo))
+                {
+                    user.PhotoStream.Photos.Add(photo);
+                    newPhotos.Add(photo);
+                }
+            }
+
+            // Dispatch event
+            var evt = new StorageEventArgs();
+            evt.Page = page;
+            evt.PageCount = numPages;
+            evt.PerPage = perPage;
+            evt.NewPhotos = newPhotos;
+            evt.UserId = e.UserId;
+            evt.UpdatedStream = user.PhotoStream;
+            PhotoStreamUpdated.DispatchEvent(this, evt);
+        }
     }
 }

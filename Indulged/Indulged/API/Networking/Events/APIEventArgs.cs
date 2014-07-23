@@ -16,6 +16,7 @@ namespace Indulged.API.Networking.Events
         public string AlbumId { get; set; }
         public string GroupId { get; set; }
         public string TopicId { get; set; }
+        public string UserId { get; set; }
 
         public bool IsUploadedPhoto { get; set; }
 

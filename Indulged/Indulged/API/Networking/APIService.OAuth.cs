@@ -199,7 +199,7 @@ namespace Indulged.API.Networking
             }
         }
 
-        public async void GetAccessTokenAsync(Action success, Action<string> failure)
+        public async void GetAccessTokenAsync(Action<WwwFormUrlDecoder> success, Action<string> failure)
         {
             string timestamp = DateTimeUtils.GetTimestamp();
             string nonce = GenerateNonce();
@@ -231,21 +231,9 @@ namespace Indulged.API.Networking
                     AccessToken = dict.GetFirstValueByName("oauth_token");
                     AccessTokenSecret = dict.GetFirstValueByName("oauth_token_secret");
 
-                    // Construct current user object
-                    /*
-                    User currentUser = new User();
-                    currentUser.ResourceId = Uri.UnescapeDataString(dict["user_nsid"]);
-                    currentUser.Name = dict["fullname"];
-                    currentUser.UserName = dict["username"];
-
-                    Cinderella.Cinderella.CinderellaCore.UserCache[currentUser.ResourceId] = currentUser;
-                    Cinderella.Cinderella.CinderellaCore.CurrentUser = currentUser;
-                    Cinderella.Cinderella.CinderellaCore.SaveCurrentUserInfo();
-                     * */
-
                     // Dispatch a login-success event
                     Debug.WriteLine(result);
-                    success();
+                    success(dict);
                 }
                 else
                 {
