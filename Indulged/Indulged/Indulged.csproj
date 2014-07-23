@@ -99,7 +99,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\PhotoListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\Controls\SimpleLoadingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\CommonPhotoRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\CommonStreamListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dashboard\PreludeSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,7 +145,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Networking\APIResponse.cs" />
     <Compile Include="API\Networking\APIService.cs" />
+    <Compile Include="API\Networking\APIService.Requests.cs" />
+    <Compile Include="API\Networking\APIService.Streams.cs" />
     <Compile Include="API\Networking\Events\APIEventArgs.cs" />
     <Compile Include="API\Storage\Events\StorageEventArgs.cs" />
     <Compile Include="API\Storage\Factories\FlickrActivityFactory.cs" />
@@ -178,6 +209,29 @@
     <Compile Include="UI\Common\Controls\SimpleLoadingView.xaml.cs">
       <DependentUpon>SimpleLoadingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\PhotoStream\CommonPhotoRenderer.xaml.cs">
+      <DependentUpon>CommonPhotoRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\CommonStreamListView.xaml.cs">
+      <DependentUpon>CommonStreamListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\PhotoRendererBase.cs" />
+    <Compile Include="UI\Common\PhotoStream\PhotoTileFactory.cs" />
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml.cs">
+      <DependentUpon>PhotoTileRenderer1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer2.xaml.cs">
+      <DependentUpon>PhotoTileRenderer2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer3.xaml.cs">
+      <DependentUpon>PhotoTileRenderer3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
+    <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
+    <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
+      <DependentUpon>PreludeSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -189,6 +243,8 @@
     </Compile>
     <Compile Include="API\Utils\EventUtils.cs" />
     <Compile Include="API\Utils\TypeUtils.cs" />
+    <Compile Include="UI\Models\PhotoTile.cs" />
+    <Compile Include="UI\Models\PhotoTileCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

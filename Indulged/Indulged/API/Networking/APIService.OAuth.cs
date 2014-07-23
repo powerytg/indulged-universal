@@ -55,6 +55,14 @@ namespace Indulged.API.Networking
             }
         }
 
+        public string APIUrl
+        {
+            get
+            {
+                return "https://api.flickr.com/services/rest/";
+            }
+        }
+
         private string GenerateNonce()
         {
             return Guid.NewGuid().ToString().Replace("-", null);
@@ -248,6 +256,24 @@ namespace Indulged.API.Networking
                 failure(ex.Message);
             }
 
+        }
+
+        public Dictionary<string, string> GetBaseRequestParameters()
+        {
+            string timestamp = DateTimeUtils.GetTimestamp();
+            string nonce = GenerateNonce();
+
+            Dictionary<string, string> paramDict = new Dictionary<string, string>();
+            paramDict["format"] = "json";
+            paramDict["nojsoncallback"] = "1";
+            paramDict["oauth_consumer_key"] = consumerKey;
+            paramDict["oauth_nonce"] = nonce;
+            paramDict["oauth_signature_method"] = "HMAC-SHA1";
+            paramDict["oauth_timestamp"] = timestamp;
+            paramDict["oauth_token"] = AccessToken;
+            paramDict["oauth_version"] = "1.0";
+
+            return paramDict;
         }
 
     }

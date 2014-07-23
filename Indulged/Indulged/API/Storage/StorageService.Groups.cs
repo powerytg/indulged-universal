@@ -29,45 +29,7 @@ namespace Indulged.API.Storage
 
             GroupInfoUpdated.DispatchEvent(this, evt);
         }
-
-        private void OnGroupPhotosReturned(object sender, APIEventArgs e)
-        {
-            if (!GroupCache.ContainsKey(e.GroupId))
-                return;
-
-            FlickrGroup group = GroupCache[e.GroupId];
-
-            JObject rawJson = JObject.Parse(e.Response);
-            JObject rootJson = (JObject)rawJson["photos"];
-            int TotalCount = int.Parse(rootJson["total"].ToString());
-            int page = int.Parse(rootJson["page"].ToString());
-            int numPages = int.Parse(rootJson["pages"].ToString());
-            int perPage = int.Parse(rootJson["perpage"].ToString());
-
-            List<FlickrPhoto> newPhotos = new List<FlickrPhoto>();
-            foreach (var entry in rootJson["photo"])
-            {
-                JObject json = (JObject)entry;
-                FlickrPhoto photo = FlickrPhotoFactory.PhotoWithJObject(json);
-
-                if (!group.PhotoStream.Photos.Contains(photo))
-                {
-                    group.PhotoStream.Photos.Add(photo);
-                    newPhotos.Add(photo);
-                }
-            }
-
-            // Dispatch event
-            var evt = new StorageEventArgs();
-            evt.GroupId = group.ResourceId;
-            evt.Page = page;
-            evt.PageCount = numPages;
-            evt.PerPage = perPage;
-            evt.NewPhotos = newPhotos;
-            evt.UpdatedStream = group.PhotoStream;
-            PhotoStreamUpdated.DispatchEvent(this, evt);
-        }
-
+       
         private void OnGroupTopicsReturned(object sender, APIEventArgs e)
         {
             if (!GroupCache.ContainsKey(e.GroupId))

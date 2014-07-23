@@ -1,0 +1,39 @@
+﻿<local:PhotoRendererBase
+    x:Class="Indulged.UI.Common.PhotoStream.CommonPhotoRenderer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Common.PhotoStream"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    PointerPressed="PhotoRendererBase_PointerPressed"
+    PointerReleased="PhotoRendererBase_PointerReleased"
+    PointerCanceled="PhotoRendererBase_PointerCanceled"
+    PointerCaptureLost="PhotoRendererBase_PointerCaptureLost">
+    
+    <Grid x:Name="LayoutRoot">
+        <Image x:Name="ImageView" Stretch="UniformToFill"/>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="Pressed" To="Normal">
+                        <Storyboard>
+                            <PointerUpThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                        </Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <PointerDownThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+    </Grid>
+
+</local:PhotoRendererBase>

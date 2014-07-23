@@ -1,0 +1,42 @@
+﻿<local:StreamListViewBase
+    x:Class="Indulged.UI.Common.PhotoStream.CommonStreamListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Common.PhotoStream"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <ListView x:Name="PhotoListView" DataFetchSize="1" 
+                  ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
+
+            <ListView.ItemTemplateSelector>
+                <local:PhotoTileRendererSelector>
+
+                    <local:PhotoTileRendererSelector.Renderer1>
+                        <DataTemplate>
+                            <local:PhotoTileRenderer1 PhotoTileSource="{Binding}"/>
+                        </DataTemplate>
+                    </local:PhotoTileRendererSelector.Renderer1>
+
+                    <local:PhotoTileRendererSelector.Renderer2>
+                        <DataTemplate>
+                            <local:PhotoTileRenderer2 PhotoTileSource="{Binding}"/>
+                        </DataTemplate>
+                    </local:PhotoTileRendererSelector.Renderer2>
+
+                    <local:PhotoTileRendererSelector.Renderer3>
+                        <DataTemplate>
+                            <local:PhotoTileRenderer3 PhotoTileSource="{Binding}"/>
+                        </DataTemplate>
+                    </local:PhotoTileRendererSelector.Renderer3>
+
+                </local:PhotoTileRendererSelector>
+            </ListView.ItemTemplateSelector>
+
+        </ListView>
+    </Grid>
+</local:StreamListViewBase>

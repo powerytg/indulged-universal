@@ -14,10 +14,41 @@ namespace Indulged.API.Storage
 {
     public partial class StorageService
     {
-        // Discovery stream returned
-        private void OnDiscoveryStreamReturned(object sender, APIEventArgs e)
+        public List<FlickrPhoto> OnPhotoStreamReturned(FlickrPhotoStream stream, string json)
         {
-            JObject rawJson = JObject.Parse(e.Response);
+            if (stream.StreamType == FlickrPhotoStreamType.AlbumStream)
+            {
+                return OnAlbumStreamUpdated(stream.AlbumId, json);
+            }
+            else if (stream.StreamType == FlickrPhotoStreamType.ContactStream)
+            {
+                return null;
+            }
+            else if (stream.StreamType == FlickrPhotoStreamType.UserStream)
+            {
+                return OnUserPhotoStreamReturned(stream.UserId, json);
+            }
+            else if (stream.StreamType == FlickrPhotoStreamType.GroupStream)
+            {
+                return OnGroupPhotoStreamReturned(stream.GroupId, json);
+            }
+            else if (stream.StreamType == FlickrPhotoStreamType.DiscoveryStream)
+            {
+                return OnDiscoveryStreamReturned(json);
+            }
+            else if (stream.StreamType == FlickrPhotoStreamType.FavouriteStream)
+            {
+                return OnFavouriteStreamReturned(json);
+            }
+
+            // Unsupported
+            return null;
+        }
+
+        // Discovery stream returned
+        private List<FlickrPhoto> OnDiscoveryStreamReturned(string response)
+        {
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["photos"];
             DiscoveryStream.PhotoCount = int.Parse(rootJson["total"].ToString());
             int page = int.Parse(rootJson["page"].ToString());
@@ -45,12 +76,14 @@ namespace Indulged.API.Storage
             args.NewPhotos = newPhotos;
             args.UpdatedStream = DiscoveryStream;
             PhotoStreamUpdated.DispatchEvent(this, args);
+
+            return newPhotos;
         }
 
         // Favourite stream returned
-        private void OnFavouriteStreamReturned(object sender, APIEventArgs e)
+        private List<FlickrPhoto> OnFavouriteStreamReturned(string response)
         {
-            JObject rawJson = JObject.Parse(e.Response);
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["photos"];
             FavouriteStream.PhotoCount = int.Parse(rootJson["total"].ToString());
             int page = int.Parse(rootJson["page"].ToString());
@@ -78,16 +111,18 @@ namespace Indulged.API.Storage
             args.NewPhotos = newPhotos;
             args.UpdatedStream = FavouriteStream;
             PhotoStreamUpdated.DispatchEvent(this, args);
+
+            return newPhotos;
         }
 
-        private void OnAlbumStreamUpdated(object sender, APIEventArgs e)
+        private List<FlickrPhoto> OnAlbumStreamUpdated(string albumId, string response)
         {
-            if (!AlbumCache.ContainsKey(e.AlbumId))
-                return;
+            if (!AlbumCache.ContainsKey(albumId))
+                return new List<FlickrPhoto>();
 
-            FlickrAlbum photoset = AlbumCache[e.AlbumId];
+            FlickrAlbum photoset = AlbumCache[albumId];
 
-            JObject rawJson = JObject.Parse(e.Response);
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["photoset"];
             int TotalCount = int.Parse(rootJson["total"].ToString());
             int page = int.Parse(rootJson["page"].ToString());
@@ -116,18 +151,20 @@ namespace Indulged.API.Storage
             evt.NewPhotos = newPhotos;
             evt.UpdatedStream = photoset.PhotoStream;
             PhotoStreamUpdated.DispatchEvent(this, evt);
+
+            return newPhotos;
         }
 
         // Photo stream retrieved for a user
-        private void OnUserPhotoStreamReturned(object sender, APIEventArgs e)
+        private List<FlickrPhoto> OnUserPhotoStreamReturned(string userId, string response)
         {
             // Find the user
-            if (!UserCache.ContainsKey(e.UserId))
-                return;
+            if (!UserCache.ContainsKey(userId))
+                return new List<FlickrPhoto>();
 
-            var user = UserCache[e.UserId];
+            var user = UserCache[userId];
 
-            JObject rawJson = JObject.Parse(e.Response);
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["photos"];
             user.PhotoStream.PhotoCount = int.Parse(rootJson["total"].ToString());
             int page = int.Parse(rootJson["page"].ToString());
@@ -153,9 +190,52 @@ namespace Indulged.API.Storage
             evt.PageCount = numPages;
             evt.PerPage = perPage;
             evt.NewPhotos = newPhotos;
-            evt.UserId = e.UserId;
+            evt.UserId = userId;
             evt.UpdatedStream = user.PhotoStream;
             PhotoStreamUpdated.DispatchEvent(this, evt);
+
+            return newPhotos;
         }
+
+        private List<FlickrPhoto> OnGroupPhotoStreamReturned(string groupId, string response)
+        {
+            if (!GroupCache.ContainsKey(groupId))
+                return new List<FlickrPhoto>();
+
+            FlickrGroup group = GroupCache[groupId];
+
+            JObject rawJson = JObject.Parse(response);
+            JObject rootJson = (JObject)rawJson["photos"];
+            int TotalCount = int.Parse(rootJson["total"].ToString());
+            int page = int.Parse(rootJson["page"].ToString());
+            int numPages = int.Parse(rootJson["pages"].ToString());
+            int perPage = int.Parse(rootJson["perpage"].ToString());
+
+            List<FlickrPhoto> newPhotos = new List<FlickrPhoto>();
+            foreach (var entry in rootJson["photo"])
+            {
+                JObject json = (JObject)entry;
+                FlickrPhoto photo = FlickrPhotoFactory.PhotoWithJObject(json);
+
+                if (!group.PhotoStream.Photos.Contains(photo))
+                {
+                    group.PhotoStream.Photos.Add(photo);
+                    newPhotos.Add(photo);
+                }
+            }
+
+            // Dispatch event
+            var evt = new StorageEventArgs();
+            evt.GroupId = group.ResourceId;
+            evt.Page = page;
+            evt.PageCount = numPages;
+            evt.PerPage = perPage;
+            evt.NewPhotos = newPhotos;
+            evt.UpdatedStream = group.PhotoStream;
+            PhotoStreamUpdated.DispatchEvent(this, evt);
+
+            return newPhotos;
+        }
+
     }
 }
