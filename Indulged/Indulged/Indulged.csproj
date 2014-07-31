@@ -163,6 +163,7 @@
     <Compile Include="API\Storage\Models\FlickrAlbum.cs" />
     <Compile Include="API\Storage\Models\FlickrComment.cs" />
     <Compile Include="API\Storage\Models\FlickrGroup.cs" />
+    <Compile Include="API\Storage\Models\FlickrLicense.cs" />
     <Compile Include="API\Storage\Models\FlickrModelBase.cs" />
     <Compile Include="API\Storage\Models\FlickrPhoto.cs" />
     <Compile Include="API\Storage\Models\FlickrPhotoActivity.cs" />
@@ -202,6 +203,10 @@
     <Compile Include="PivotPage.xaml.cs">
       <DependentUpon>PivotPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PolKit\Events\PolicyChangedEventArgs.cs" />
+    <Compile Include="PolKit\PolicyConstants.cs" />
+    <Compile Include="PolKit\PolicyKit.cs" />
+    <Compile Include="PolKit\PolicyKit.Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
@@ -278,7 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Fonts\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIService.OAuth.cs" />

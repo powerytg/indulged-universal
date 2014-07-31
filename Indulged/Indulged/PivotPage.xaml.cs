@@ -1,5 +1,6 @@
 ﻿using Indulged.Common;
 using Indulged.Data;
+using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Login;
 using System;
@@ -38,6 +39,9 @@ namespace Indulged
         public PivotPage()
         {
             this.InitializeComponent();
+
+            // Retrieve settings
+            PolicyKit.Instance.RetrieveSettings();
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 

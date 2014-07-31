@@ -50,5 +50,16 @@ namespace Indulged.UI.Common.PhotoStream
             return result;
         }
 
+        public List<PhotoTile> GenerateLinearPhotoTiles(List<FlickrPhoto> photos)
+        {
+            List<PhotoTile> result = new List<PhotoTile>();
+            foreach (var photo in photos)
+            {
+                var tile = new PhotoTile(new List<FlickrPhoto> { photo });
+                result.Add(tile);
+            }
+
+            return result;
+        }
     }
 }
