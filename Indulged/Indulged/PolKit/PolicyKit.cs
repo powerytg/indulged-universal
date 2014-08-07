@@ -48,6 +48,7 @@ namespace Indulged.PolKit
             Licenses["8"] = new FlickrLicense { Name = "United States Government Work", Url = "http://www.usa.gov/copyright.shtml" };
         }
 
+        // Blurred background
         private bool _useBlurredBackground = true;
         public bool UseBlurredBackground
         {
@@ -68,7 +69,6 @@ namespace Indulged.PolKit
                 }                
             }
         }
-
-
+       
     }
 }

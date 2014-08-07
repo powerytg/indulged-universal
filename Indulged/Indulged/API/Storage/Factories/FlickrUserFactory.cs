@@ -27,6 +27,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("ownername", out nameValue))
             {
                 user.Name = json["ownername"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken farmValue;
@@ -61,6 +62,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("authorname", out nameValue))
             {
                 user.Name = json["authorname"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken farmValue;
@@ -95,6 +97,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("authorname", out nameValue))
             {
                 user.Name = json["authorname"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken farmValue;
@@ -137,6 +140,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("username", out nameValue))
             {
                 user.Name = json["username"]["_content"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken realNameValue;
@@ -219,6 +223,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("username", out nameValue))
             {
                 user.Name = json["username"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken farmValue;
@@ -253,6 +258,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("username", out nameValue))
             {
                 user.Name = json["username"].ToString();
+                user.PhotoStream.Name = user.Name + "'s Photos";
             }
 
             JToken farmValue;

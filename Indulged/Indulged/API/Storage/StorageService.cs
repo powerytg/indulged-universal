@@ -61,8 +61,13 @@ namespace Indulged.API.Storage
         {
             // Initialize special streams
             DiscoveryStream = new FlickrPhotoStream(FlickrPhotoStreamType.DiscoveryStream);
+            DiscoveryStream.Name = "Popular Photos";
+
             FavouriteStream = new FlickrPhotoStream(FlickrPhotoStreamType.FavouriteStream);
+            FavouriteStream.Name = "Favourite Photos";
+
             ContactStream = new FlickrPhotoStream(FlickrPhotoStreamType.ContactStream);
+            ContactStream.Name = "Contact Photos";
 
             // User cache
             UserCache = new Dictionary<string, FlickrUser>();

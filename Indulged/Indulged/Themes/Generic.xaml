@@ -6,6 +6,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/ModalPopupStyle.xaml"/>
         <ResourceDictionary Source="/Themes/PhotoListViewStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/MainPivotStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/RoundedTransparentButtonStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

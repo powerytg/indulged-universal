@@ -9,5 +9,6 @@ namespace Indulged.PolKit
     public static class PolicyConstants
     {
         public const string UseBlurredBackground = "UseBlurredBackground";
+        public const string UserMagazineLayout = "UseMagazineLayout";
     }
 }

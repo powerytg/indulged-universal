@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Indulged"
     xmlns:dashboard="using:Indulged.UI.Dashboard"
+    xmlns:common="using:Indulged.UI.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:Indulged.Data"
@@ -20,22 +21,36 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Grid>
-        <Pivot x:Uid="Pivot" Title="MY APPLICATION" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True">
+    <Grid Margin="0">
+        <!--Background-->
+        <common:BlurredBackgroundView x:Name="BackgroundView"
+                                      Margin="0, -32, 0, 0"/>
+        
+        <Pivot x:Uid="Pivot" x:Name="pivot"
+               Style="{StaticResource MainPivotStyle}"
+               CommonNavigationTransitionInfo.IsStaggerElement="True">
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <dashboard:TitleBannerView x:Name="TitleView" VerticalAlignment="Top"/>
+                </DataTemplate>                
+            </Pivot.TitleTemplate>
             <!--Prelude-->
             <PivotItem
-                Header="stream"
                 CommonNavigationTransitionInfo.IsStaggerElement="True"
                 Margin="0">
 
                 <dashboard:PreludeSection x:Name="PreludeView"/>
             </PivotItem>
 
+            <!--Stream list-->
+            <PivotItem Margin="0">
+                <Grid/>
+            </PivotItem>
         </Pivot>
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar x:Name="MainCommandBar">
+        <CommandBar x:Name="MainCommandBar" IsOpen="False" ClosedDisplayMode="Minimal">
             <AppBarButton x:Uid="AddAppBarButton" x:Name="AddAppBarButton" Label="add" Icon="Add" Click="AddAppBarButton_Click" />
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="SecondaryButton1" x:Name="SecondaryButton1" Label="secondary command 1" />

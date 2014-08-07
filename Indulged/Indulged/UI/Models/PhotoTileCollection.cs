@@ -77,8 +77,8 @@ namespace Indulged.UI.Models
 
                 var newPhotos = StorageService.Instance.OnPhotoStreamReturned(stream, retVal.Result);
 
-                //var tiles = factory.GeneratePhotoTiles(newPhotos);
-                var tiles = factory.GenerateLinearPhotoTiles(newPhotos);
+                var tiles = factory.GeneratePhotoTiles(newPhotos);
+                //var tiles = factory.GenerateLinearPhotoTiles(newPhotos);
                 foreach (var tile in tiles)
                 {
                     this.Add(tile);

@@ -1,4 +1,6 @@
 ﻿using Indulged.API.Storage;
+using Indulged.API.Storage.Models;
+using Indulged.UI.Dashboard.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +23,24 @@ namespace Indulged.UI.Dashboard
 {
     public sealed partial class PreludeSection : UserControl
     {
+        private FlickrPhotoStream _currentStream;
+        public FlickrPhotoStream CurrentStream
+        {
+            get
+            {
+                return _currentStream;
+            }
+
+            set
+            {
+                if (_currentStream != value)
+                {
+                    _currentStream = value;
+                    PhotoListView.Stream = _currentStream;
+                }
+            }
+        }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -29,11 +49,12 @@ namespace Indulged.UI.Dashboard
             this.InitializeComponent();
 
             // Initialize stream
-            PhotoListView.Stream = StorageService.Instance.DiscoveryStream;
+            CurrentStream = StorageService.Instance.DiscoveryStream;
 
             // Events
             PhotoListView.LoadingStarted += OnLoadingStarted;
             PhotoListView.LoadingComplete += OnLoadingComplete;
+            SelectorView.StreamSelectionChanged += OnStreamSelectionChanged;
         }
 
         private async void OnLoadingStarted(object sender, EventArgs e)
@@ -46,6 +67,14 @@ namespace Indulged.UI.Dashboard
         {
             StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
             await statusBar.ProgressIndicator.HideAsync();
+        }
+
+        private void OnStreamSelectionChanged(object sender, StreamSelectionChangedEventArgs e)
+        {
+            if (e.SelectedStream != null)
+            {
+                CurrentStream = e.SelectedStream;
+            }            
         }
 
     }

@@ -10,6 +10,8 @@ namespace Indulged.API.Storage.Models
 
     public class FlickrPhotoStream
     {
+        public string Name { get; set; }
+
         public List<FlickrPhoto> Photos { get; set; }
         public int PhotoCount { get; set; }
         public int VideoCount { get; set; }

@@ -104,6 +104,9 @@ namespace Indulged.API.Storage
                 return null;
             }
 
+            // Photo stream
+            currentUser.PhotoStream.Name = "My Photos";
+
             CurrentUser = currentUser;
             UserCache[userId] = currentUser;
             return currentUser;

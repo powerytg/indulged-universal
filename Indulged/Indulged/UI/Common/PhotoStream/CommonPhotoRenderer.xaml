@@ -14,7 +14,8 @@
     PointerCaptureLost="PhotoRendererBase_PointerCaptureLost">
     
     <Grid x:Name="LayoutRoot">
-        <Image x:Name="ImageView" Stretch="UniformToFill"/>
+        <Image x:Name="ImageView" Stretch="UniformToFill"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">

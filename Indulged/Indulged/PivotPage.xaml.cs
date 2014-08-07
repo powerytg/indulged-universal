@@ -1,4 +1,6 @@
-﻿using Indulged.Common;
+﻿using Indulged.API.Storage;
+using Indulged.API.Storage.Events;
+using Indulged.Common;
 using Indulged.Data;
 using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
@@ -83,6 +85,9 @@ namespace Indulged
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-1");
             this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
+
+            // Events
+            StorageService.Instance.PhotoStreamUpdated += OnPhotoStreamUpdated;
         }
 
         /// <summary>
@@ -95,7 +100,8 @@ namespace Indulged
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            // TODO: Save the unique state of the page here.
+            // Events
+            StorageService.Instance.PhotoStreamUpdated -= OnPhotoStreamUpdated;
         }
 
         /// <summary>
@@ -171,5 +177,17 @@ namespace Indulged
         }
 
         #endregion
+
+        private void OnPhotoStreamUpdated(object sender, StorageEventArgs e)
+        {
+            if (PreludeView.CurrentStream == e.UpdatedStream)
+            {
+                if (e.UpdatedStream.Photos.Count != 0)
+                {
+                    BackgroundView.PhotoSource = e.UpdatedStream.Photos[0]; 
+                }                
+            }
+        }
+
     }
 }
