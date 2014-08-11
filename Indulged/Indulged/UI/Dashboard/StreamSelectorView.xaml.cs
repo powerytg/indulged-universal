@@ -33,6 +33,8 @@ namespace Indulged.UI.Dashboard
         public StreamSelectorView()
         {
             this.InitializeComponent();
+
+            AvatarView.User = StorageService.Instance.CurrentUser;
         }
 
         private void SelectorButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +49,7 @@ namespace Indulged.UI.Dashboard
                     streamEvent.SelectedStream = contentView.SelectedStream;
 
                     // Update title
-                    SelectorButton.Content = contentView.SelectedStream.Name.ToUpper();
+                    StreamNameLabel.Text = contentView.SelectedStream.Name.ToUpper();
 
                     StreamSelectionChanged.DispatchEvent(this, streamEvent);
                 }

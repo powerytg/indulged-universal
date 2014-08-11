@@ -10,5 +10,6 @@ namespace Indulged.PolKit
     {
         public const string UseBlurredBackground = "UseBlurredBackground";
         public const string UserMagazineLayout = "UseMagazineLayout";
+        public const string ShowOverlayOnPreludeTiles = "ShowOverlayOnPreludeTiles";
     }
 }

@@ -13,9 +13,8 @@
     PointerCanceled="PhotoRendererBase_PointerCanceled"
     PointerCaptureLost="PhotoRendererBase_PointerCaptureLost">
     
-    <Grid x:Name="LayoutRoot">
-        <Image x:Name="ImageView" Stretch="UniformToFill"
-               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid x:Name="LayoutRoot" Background="#444"
+          SizeChanged="LayoutRoot_SizeChanged">
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="CommonStates">
@@ -35,6 +34,13 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
 
+        <!--Image view-->
+        <Image x:Name="ImageView" Stretch="UniformToFill"
+               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <!--Overlay view-->
+        <local:CommonPhotoOverlayView x:Name="OverlayView"/>
+        
     </Grid>
 
 </local:PhotoRendererBase>

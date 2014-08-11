@@ -9,7 +9,7 @@
                 <ControlTemplate TargetType="local:ModalPopup">
                     <Grid>
                         <Grid.Background>
-                            <SolidColorBrush Color="Black" Opacity="0.8"/>
+                            <SolidColorBrush Color="Black" Opacity="0.7"/>
                         </Grid.Background>
 
                         <Grid VerticalAlignment="Center">
@@ -21,7 +21,7 @@
                             </Grid.RowDefinitions>
 
                             <!-- Upper shadow -->
-                            <Rectangle x:Name="TopShadow" Fill="#59a5b5" Height="4" Grid.Row="0">
+                            <Rectangle x:Name="TopShadow" Fill="#59a5b5" Height="2" Grid.Row="0">
                                 <Rectangle.RenderTransform>
                                     <CompositeTransform/>
                                 </Rectangle.RenderTransform>
@@ -47,7 +47,7 @@
                             </Grid>
 
                             <!-- Lower shadow -->
-                            <Rectangle x:Name="BottomShadow" Fill="#59a5b5" Height="4" Grid.Row="2">
+                            <Rectangle x:Name="BottomShadow" Fill="#59a5b5" Height="2" Grid.Row="2">
                                 <Rectangle.RenderTransform>
                                     <CompositeTransform/>
                                 </Rectangle.RenderTransform>

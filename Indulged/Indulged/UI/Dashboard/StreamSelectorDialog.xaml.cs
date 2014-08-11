@@ -39,6 +39,7 @@ namespace Indulged.UI.Dashboard
             foreach (var stream in streams)
             {
                 var entry = new RadioButton();
+                entry.Style = Application.Current.Resources["MainRadioButtonStyle"] as Style;
                 entry.Content = stream.Name;
                 entry.GroupName = "Stream";
                 entry.Checked += (sender, e) =>

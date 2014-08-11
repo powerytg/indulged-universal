@@ -96,7 +96,17 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Themes\MainButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\MainPivotStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\MainRadioButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -121,7 +131,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\Controls\UserAvatarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\CommonPhotoOverlayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\PhotoStream\CommonPhotoRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\CommonPhotoStatView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +235,7 @@
     <Compile Include="API\Storage\StorageService.Tags.cs" />
     <Compile Include="API\Storage\StorageService.Users.cs" />
     <Compile Include="API\Utils\DateTimeUtils.cs" />
+    <Compile Include="API\Utils\NumericUtils.cs" />
     <Compile Include="API\Utils\StringUtils.cs" />
     <Compile Include="API\Utils\UrlUtils.cs" />
     <Compile Include="App.xaml.cs">
@@ -243,8 +266,17 @@
     <Compile Include="UI\Common\Controls\SimpleLoadingView.xaml.cs">
       <DependentUpon>SimpleLoadingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\Controls\UserAvatarView.xaml.cs">
+      <DependentUpon>UserAvatarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\CommonPhotoOverlayView.xaml.cs">
+      <DependentUpon>CommonPhotoOverlayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Common\PhotoStream\CommonPhotoRenderer.xaml.cs">
       <DependentUpon>CommonPhotoRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\CommonPhotoStatView.xaml.cs">
+      <DependentUpon>CommonPhotoStatView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Common\PhotoStream\CommonStreamListView.xaml.cs">
       <DependentUpon>CommonStreamListView.xaml</DependentUpon>
@@ -296,8 +328,11 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\LightBanner.png" />
+    <Content Include="Assets\Dashboard\PreludeArrow.png" />
+    <Content Include="Assets\Dashboard\PreludeSmallIndicator.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
     <Content Include="Assets\Login\LoginLogo.png" />
     <Content Include="Assets\Login\LoginOutterRing.png" />

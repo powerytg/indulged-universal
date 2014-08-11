@@ -69,6 +69,28 @@ namespace Indulged.PolKit
                 }                
             }
         }
-       
+
+
+        // Show extra overlay on Prelude's photo tiles
+        private bool _showOverlayOnPreludeTiles = true;
+        public bool ShowOverlayOnPreludeTiles
+        {
+            get
+            {
+                return _showOverlayOnPreludeTiles;
+            }
+
+            set
+            {
+                if (_showOverlayOnPreludeTiles != value)
+                {
+                    _showOverlayOnPreludeTiles = value;
+
+                    var evt = new PolicyChangedEventArgs();
+                    evt.PolicyName = PolicyConstants.ShowOverlayOnPreludeTiles;
+                    PolicyChanged.DispatchEvent(this, evt);
+                }
+            }
+        }
     }
 }

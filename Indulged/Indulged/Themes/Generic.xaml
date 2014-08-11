@@ -8,6 +8,8 @@
         <ResourceDictionary Source="/Themes/PhotoListViewStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainPivotStyle.xaml"/>
         <ResourceDictionary Source="/Themes/RoundedTransparentButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/MainRadioButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/MainButtonStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

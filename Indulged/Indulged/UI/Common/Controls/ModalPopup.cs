@@ -208,7 +208,7 @@ namespace Indulged.UI.Common.Controls
                 titleLabel = new TextBlock();
                 titleLabel.Text = title;
                 titleLabel.Foreground = new SolidColorBrush(Color.FromArgb(0xff, 0x00, 0xd9, 0xf3));
-                titleLabel.FontSize = 42;
+                titleLabel.FontSize = 30;
                 titleLabel.HorizontalAlignment = HorizontalAlignment.Center;
                 titleLabel.TextWrapping = TextWrapping.Wrap;
                 titleLabel.TextAlignment = TextAlignment.Center;
@@ -252,6 +252,7 @@ namespace Indulged.UI.Common.Controls
                 {
                     var button = new Button();
                     button.Content = buttonTitle;
+                    button.Style = Application.Current.Resources["MainButtonStyle"] as Style;
                     button.Margin = new Thickness(20, 0, 20, 0);
                     button.HorizontalAlignment = HorizontalAlignment.Right;
                     buttonContainer.Children.Add(button);

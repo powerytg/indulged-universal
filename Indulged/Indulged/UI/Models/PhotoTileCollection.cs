@@ -35,6 +35,9 @@ namespace Indulged.UI.Models
                 stream = value;
                 this.Clear();
 
+                // Reset page to 1
+                page = 1;
+
                 // Create a photo group factory
                 factory = new PhotoTileFactory();
             }
