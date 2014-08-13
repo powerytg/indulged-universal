@@ -33,8 +33,6 @@ namespace Indulged.UI.Dashboard
         public StreamSelectorView()
         {
             this.InitializeComponent();
-
-            AvatarView.User = StorageService.Instance.CurrentUser;
         }
 
         private void SelectorButton_Click(object sender, RoutedEventArgs e)

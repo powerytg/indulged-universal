@@ -15,7 +15,6 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!--
@@ -23,25 +22,16 @@
                Width="6"
                Grid.Column="0"/>
         -->
-        
-        <common:UserAvatarView x:Name="AvatarView"
-                               Width="36" Height="36"
-                               Margin="4, 0, 4, 0"
-                               Grid.Column="1"/>
 
-        <Line Grid.Column="2"
-              X2="300" Stretch="Fill"
-              Stroke="#a1a09b" StrokeDashArray="2,3" StrokeThickness="1"/>
-        
         <Button x:Name="SelectorButton" Style="{StaticResource RoundedTransparentButtonStyle}"
                 Background="#91aaba" MinHeight="24" Padding="4"
-                Grid.Column="3" VerticalAlignment="Center"
-                Margin="12, 0, 8, 0"
+                Grid.Column="1" VerticalAlignment="Center"
+                Margin="0, 0, 8, 0"
                 Click="SelectorButton_Click">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="StreamNameLabel"
-                               FontWeight="Light" FontSize="18" Foreground="Black"
+                               FontWeight="Light" FontSize="18" Foreground="#cacaca"
                                Text="POPULAR PHOTOS"/>
 
                     <Image Source="/Assets/Dashboard/PreludeArrow.png" Width="13"
@@ -50,7 +40,9 @@
                 </StackPanel>
             </Button.Content>
         </Button>
-
+        <Line Grid.Column="2"
+              X2="300" Stretch="Fill"
+              Stroke="#a1a09b" StrokeDashArray="2,3" StrokeThickness="1"/>
         
         
     </Grid>

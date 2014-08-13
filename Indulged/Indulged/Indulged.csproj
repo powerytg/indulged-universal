@@ -163,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\DashboardBackgroundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\PreludeSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,6 +299,12 @@
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
     <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
+    <Compile Include="UI\Dashboard\DashboardBackgroundView.xaml.cs">
+      <DependentUpon>DashboardBackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dashboard\DashboardThemeManager.cs" />
+    <Compile Include="UI\Dashboard\DashboardThemes.cs" />
+    <Compile Include="UI\Dashboard\Events\DashboardThemeChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\Events\StreamSelectionChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
       <DependentUpon>PreludeSection.xaml</DependentUpon>
@@ -329,6 +339,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Common\View-Light.png" />
+    <Content Include="Assets\Dashboard\DarkBanner.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\LightBanner.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />

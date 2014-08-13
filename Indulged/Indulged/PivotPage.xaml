@@ -10,7 +10,7 @@
     xmlns:data="using:Indulged.Data"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#1c1c1c">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -23,12 +23,17 @@
 
     <Grid Margin="0">
         <!--Background-->
+        <dashboard:DashboardBackgroundView x:Name="BackgroundView"
+                                           Margin="0, -32, 0, 0"/>
+        <!--
         <common:BlurredBackgroundView x:Name="BackgroundView"
                                       Margin="0, -32, 0, 0"/>
+        -->
         
-        <Pivot x:Uid="Pivot" x:Name="pivot"
+        <Pivot x:Uid="Pivot" x:Name="MainPivot"
                Style="{StaticResource MainPivotStyle}"
-               CommonNavigationTransitionInfo.IsStaggerElement="True">
+               CommonNavigationTransitionInfo.IsStaggerElement="True"
+               SelectionChanged="pivot_SelectionChanged">
             <Pivot.TitleTemplate>
                 <DataTemplate>
                     <dashboard:TitleBannerView x:Name="TitleView" VerticalAlignment="Top"/>

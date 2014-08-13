@@ -4,6 +4,7 @@ using Indulged.Common;
 using Indulged.Data;
 using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
+using Indulged.UI.Dashboard;
 using Indulged.UI.Login;
 using System;
 using System.Collections.Generic;
@@ -109,11 +110,11 @@ namespace Indulged
         /// </summary>
         private void AddAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            string groupName = this.pivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
+            string groupName = this.MainPivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
             var group = this.DefaultViewModel[groupName] as SampleDataGroup;
             var nextItemId = group.Items.Count + 1;
             var newItem = new SampleDataItem(
-                string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.pivot.SelectedIndex + 1, nextItemId),
+                string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.MainPivot.SelectedIndex + 1, nextItemId),
                 string.Format(CultureInfo.CurrentCulture, this.resourceLoader.GetString("NewItemTitle"), nextItemId),
                 string.Empty,
                 string.Empty,
@@ -123,7 +124,7 @@ namespace Indulged
             group.Items.Add(newItem);
 
             // Scroll the new item into view.
-            var container = this.pivot.ContainerFromIndex(this.pivot.SelectedIndex) as ContentControl;
+            var container = this.MainPivot.ContainerFromIndex(this.MainPivot.SelectedIndex) as ContentControl;
             var listView = container.ContentTemplateRoot as ListView;
             listView.ScrollIntoView(newItem, ScrollIntoViewAlignment.Leading);
         }
@@ -184,8 +185,20 @@ namespace Indulged
             {
                 if (e.UpdatedStream.Photos.Count != 0)
                 {
-                    BackgroundView.PhotoSource = e.UpdatedStream.Photos[0]; 
+                    //BackgroundView.PhotoSource = e.UpdatedStream.Photos[0]; 
                 }                
+            }
+        }
+
+        private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MainPivot.SelectedIndex == 0)
+            {
+                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Dark;
+            }
+            else
+            {
+                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Light;
             }
         }
 
