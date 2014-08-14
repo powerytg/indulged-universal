@@ -89,7 +89,8 @@ namespace Indulged.API.Storage
             ActivityCache = new Dictionary<string, FlickrPhotoActivity>();
             ActivityList = new List<FlickrPhotoActivity>();
 
-           
+           // Events
+            InitializeEventListeners();
         }
     }
 }

@@ -163,11 +163,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\CatalogSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\DashboardBackgroundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dashboard\PreludeSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,7 +206,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
+    <Compile Include="API\Networking\APIService.Album.cs" />
     <Compile Include="API\Networking\APIService.cs" />
+    <Compile Include="API\Networking\APIService.Events.cs" />
     <Compile Include="API\Networking\APIService.Requests.cs" />
     <Compile Include="API\Networking\APIService.Streams.cs" />
     <Compile Include="API\Networking\Events\APIEventArgs.cs" />
@@ -299,6 +309,9 @@
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
     <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
+    <Compile Include="UI\Dashboard\CatalogSection.xaml.cs">
+      <DependentUpon>CatalogSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\DashboardBackgroundView.xaml.cs">
       <DependentUpon>DashboardBackgroundView.xaml</DependentUpon>
     </Compile>
@@ -308,6 +321,9 @@
     <Compile Include="UI\Dashboard\Events\StreamSelectionChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
       <DependentUpon>PreludeSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml.cs">
+      <DependentUpon>DashboardAlbumRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dashboard\StreamSelectorDialog.xaml.cs">
       <DependentUpon>StreamSelectorDialog.xaml</DependentUpon>
@@ -338,6 +354,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Common\PhotoListViewShadow.png" />
     <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\DarkBanner.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />

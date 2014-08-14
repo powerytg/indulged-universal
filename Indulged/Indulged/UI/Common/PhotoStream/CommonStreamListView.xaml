@@ -38,5 +38,8 @@
             </ListView.ItemTemplateSelector>
 
         </ListView>
+        
+        <Image Source="/Assets/Common/PhotoListViewShadow.png"
+               Stretch="Fill" Height="38" VerticalAlignment="Top"/>
     </Grid>
 </local:StreamListViewBase>

@@ -47,9 +47,9 @@
                 <dashboard:PreludeSection x:Name="PreludeView"/>
             </PivotItem>
 
-            <!--Stream list-->
+            <!--Album and group list-->
             <PivotItem Margin="0">
-                <Grid/>
+                <dashboard:CatalogSection x:Name="CatalogView"/>
             </PivotItem>
         </Pivot>
     </Grid>

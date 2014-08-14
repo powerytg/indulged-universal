@@ -1,4 +1,5 @@
-﻿using Indulged.API.Storage.Events;
+﻿using Indulged.API.Networking;
+using Indulged.API.Storage.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,5 +62,10 @@ namespace Indulged.API.Storage
 
         // Activity stream events
         public EventHandler ActivityStreamUpdated;
+
+        public void InitializeEventListeners()
+        {
+            APIService.Instance.AlbumListReturned += OnAlbumListReturned;
+        }
     }
 }

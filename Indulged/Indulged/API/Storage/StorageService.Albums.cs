@@ -14,7 +14,7 @@ namespace Indulged.API.Storage
 {
     public partial class StorageService
     {
-        private void OnAlbumListReturned(object sender, APIEventArgs e)
+        public void OnAlbumListReturned(object sender, APIEventArgs e)
         {
             JObject json = JObject.Parse(e.Response);
             JObject photosetJson = (JObject)json["photosets"];
