@@ -15,7 +15,7 @@
         <ListView x:Name="AlbumListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <renderer:DashboardAlbumRenderer Album="{Binding}"/>
+                    <renderer:DashboardAlbumSimpleRenderer Album="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

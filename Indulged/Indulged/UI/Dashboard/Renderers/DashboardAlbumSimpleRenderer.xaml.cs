@@ -1,5 +1,4 @@
-﻿using Indulged.API.Storage.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,26 +11,26 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Indulged.UI.Dashboard.Renderers
 {
-    public sealed partial class DashboardAlbumRenderer : DashboardAlbumRendererBase
-    {        
-        protected override void OnAlbumChanged()
-        {
-            ImageView.Source = new BitmapImage(new Uri(Album.PrimaryPhoto.GetImageUrl()));
-        }
-
+    public sealed partial class DashboardAlbumSimpleRenderer : DashboardAlbumRendererBase
+    {
         /// <summary>
         /// Constructor
         /// </summary>
-        public DashboardAlbumRenderer()
+        public DashboardAlbumSimpleRenderer()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnAlbumChanged()
+        {
+            //AvatarView.Album = Album;
+            AlbumLabel.Text = Album.Title;
         }
     }
 }

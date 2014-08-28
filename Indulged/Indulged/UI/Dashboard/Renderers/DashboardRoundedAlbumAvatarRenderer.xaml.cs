@@ -1,5 +1,4 @@
-﻿using Indulged.API.Storage.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,19 +18,20 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Indulged.UI.Dashboard.Renderers
 {
-    public sealed partial class DashboardAlbumRenderer : DashboardAlbumRendererBase
-    {        
-        protected override void OnAlbumChanged()
-        {
-            ImageView.Source = new BitmapImage(new Uri(Album.PrimaryPhoto.GetImageUrl()));
-        }
-
+    public sealed partial class DashboardRoundedAlbumAvatarRenderer : DashboardAlbumRendererBase
+    {
         /// <summary>
         /// Constructor
         /// </summary>
-        public DashboardAlbumRenderer()
+        public DashboardRoundedAlbumAvatarRenderer()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnAlbumChanged()
+        {
+            base.OnAlbumChanged();
+            AlbumImageView.Source = new BitmapImage(new Uri(Album.PrimaryPhoto.GetImageUrl(Indulged.API.Storage.Models.FlickrPhoto.PhotoSize.Medium)));
         }
     }
 }

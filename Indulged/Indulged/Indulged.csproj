@@ -179,6 +179,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\Renderers\DashboardAlbumSimpleRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dashboard\Renderers\DashboardRoundedAlbumAvatarRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\StreamSelectorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -325,6 +333,13 @@
     <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml.cs">
       <DependentUpon>DashboardAlbumRenderer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRendererBase.cs" />
+    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumSimpleRenderer.xaml.cs">
+      <DependentUpon>DashboardAlbumSimpleRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dashboard\Renderers\DashboardRoundedAlbumAvatarRenderer.xaml.cs">
+      <DependentUpon>DashboardRoundedAlbumAvatarRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\StreamSelectorDialog.xaml.cs">
       <DependentUpon>StreamSelectorDialog.xaml</DependentUpon>
     </Compile>
@@ -359,6 +374,7 @@
     <Content Include="Assets\Dashboard\DarkBanner.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\LightBanner.png" />
+    <Content Include="Assets\Dashboard\PreludeAlbumMask.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />
     <Content Include="Assets\Dashboard\PreludeSmallIndicator.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
