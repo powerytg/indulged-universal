@@ -12,7 +12,6 @@
     <Grid>
         <ListView x:Name="PhotoListView" DataFetchSize="1" 
                   ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
-
             <ListView.ItemTemplateSelector>
                 <local:PhotoTileRendererSelector>
 

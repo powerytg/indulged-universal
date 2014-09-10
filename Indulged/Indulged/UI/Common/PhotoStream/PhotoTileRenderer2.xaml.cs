@@ -79,12 +79,12 @@ namespace Indulged.UI.Common.PhotoStream
                 }
             }
 
-            if (ratio < 0.4f)
+            if (ratio < 0.2f)
             {
                 ratio = 0.4f;
             }
 
-            if (ratio > 0.65f)
+            if (ratio > 0.8f)
             {
                 ratio = 0.65f;
             }

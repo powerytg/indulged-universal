@@ -23,7 +23,13 @@ namespace Indulged.UI.Dashboard.Renderers
     {        
         protected override void OnAlbumChanged()
         {
+            if (Album == null)
+            {
+                return;
+            }
+
             ImageView.Source = new BitmapImage(new Uri(Album.PrimaryPhoto.GetImageUrl()));
+            AlbumLabel.Text = Album.Title;
         }
 
         /// <summary>

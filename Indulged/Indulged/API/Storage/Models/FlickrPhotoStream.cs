@@ -12,6 +12,27 @@ namespace Indulged.API.Storage.Models
     {
         public string Name { get; set; }
 
+        protected string _shortName;
+        public string ShortName
+        {
+            get
+            {
+                if (_shortName == null)
+                {
+                    return Name;
+                }
+                else
+                {
+                    return _shortName;
+                }
+            }
+
+            set
+            {
+                _shortName = value;
+            }
+        }
+
         public List<FlickrPhoto> Photos { get; set; }
         public int PhotoCount { get; set; }
         public int VideoCount { get; set; }

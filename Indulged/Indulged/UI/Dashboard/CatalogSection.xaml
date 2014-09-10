@@ -12,10 +12,10 @@
     Unloaded="UserControl_Unloaded">
 
     <Grid>
-        <ListView x:Name="AlbumListView">
+        <ListView x:Name="AlbumListView" ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <renderer:DashboardAlbumSimpleRenderer Album="{Binding}"/>
+                    <renderer:DashboardAlbumRenderer Album="{Binding}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

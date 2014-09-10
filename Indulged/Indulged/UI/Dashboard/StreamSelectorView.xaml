@@ -14,36 +14,35 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <!--
-        <Image Source="/Assets/Dashboard/PreludeSmallIndicator.png"
-               Width="6"
-               Grid.Column="0"/>
-        -->
+        <Image Source="/Assets/Common/PageSeperatorLeft.png"
+               Width="100"
+               Grid.Column="0" HorizontalAlignment="Center"/>
 
         <Button x:Name="SelectorButton" Style="{StaticResource RoundedTransparentButtonStyle}"
                 Background="#91aaba" MinHeight="24" Padding="4"
                 Grid.Column="1" VerticalAlignment="Center"
-                Margin="0, 0, 8, 0"
+                Margin="12, 0, 12, 0"
                 Click="SelectorButton_Click">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="StreamNameLabel"
-                               FontWeight="Light" FontSize="18" Foreground="#cacaca"
-                               Text="POPULAR PHOTOS"/>
+                               FontWeight="Light" FontSize="16" Foreground="#cacaca"
+                               Text="POPULAR"/>
 
-                    <Image Source="/Assets/Dashboard/PreludeArrow.png" Width="13"
+                    <Image Source="/Assets/Dashboard/PreludeArrow.png" Width="8"
                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
                            Margin="6, 0, 0, 4"/>
                 </StackPanel>
             </Button.Content>
         </Button>
-        <Line Grid.Column="2"
-              X2="300" Stretch="Fill"
-              Stroke="#a1a09b" StrokeDashArray="2,3" StrokeThickness="1"/>
-        
-        
+
+        <Image Source="/Assets/Common/PageSeperatorRight.png"
+               Width="100"
+               Grid.Column="2" HorizontalAlignment="Center"/>
+
+
     </Grid>
 </UserControl>

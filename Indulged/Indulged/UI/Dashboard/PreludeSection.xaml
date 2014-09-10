@@ -18,8 +18,8 @@
 
         <!--Stream selection view-->
         <local:StreamSelectorView x:Name="SelectorView"
-                                  VerticalAlignment="Top"
-                                  Grid.Row="0" Margin="0, 0, 0, 8"/>
+                                  VerticalAlignment="Top" HorizontalAlignment="Center"
+                                  Grid.Row="0" Margin="0, 12, 0, 12"/>
 
         <!--Photo stream-->
         <stream:CommonStreamListView x:Name="PhotoListView"

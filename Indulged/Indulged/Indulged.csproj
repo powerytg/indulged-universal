@@ -369,6 +369,9 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Common\PageSeperator.png" />
+    <Content Include="Assets\Common\PageSeperatorLeft.png" />
+    <Content Include="Assets\Common\PageSeperatorRight.png" />
     <Content Include="Assets\Common\PhotoListViewShadow.png" />
     <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\DarkBanner.png" />

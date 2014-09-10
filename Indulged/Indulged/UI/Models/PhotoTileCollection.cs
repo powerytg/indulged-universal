@@ -20,6 +20,7 @@ namespace Indulged.UI.Models
         public EventHandler LoadingComplete;
 
         private int page = 1;
+        private int maxPage = 8;
 
         private PhotoTileFactory factory;
         private FlickrPhotoStream stream;
@@ -47,7 +48,7 @@ namespace Indulged.UI.Models
         {
             get
             {
-                return Stream.Photos.Count < Stream.PhotoCount;
+                return (Stream.Photos.Count < Stream.PhotoCount && page < maxPage);
             }
         }
 
