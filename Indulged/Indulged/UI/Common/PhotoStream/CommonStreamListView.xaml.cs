@@ -84,6 +84,11 @@ namespace Indulged.UI.Common.PhotoStream
 
         private void OnLoadingComplete(object sender, EventArgs e)
         {
+            if (FooterImage.Visibility == Visibility.Collapsed)
+            {
+                FooterImage.Visibility = Visibility.Visible;
+            }
+
             // Delegate event
             if (LoadingComplete != null)
             {

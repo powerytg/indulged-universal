@@ -42,6 +42,13 @@
                 </local:PhotoTileRendererSelector>
             </ListView.ItemTemplateSelector>
 
+            <ListView.Footer>
+                <Image x:Name="FooterImage" Source="/Assets/Common/Fin.png" Width="146"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Margin="0, 50, 0, 50"
+                       Visibility="Collapsed"/>
+            </ListView.Footer>
+            
         </ListView>
         
         <Image x:Name="TopShadow" Source="/Assets/Common/PhotoListViewShadow.png"

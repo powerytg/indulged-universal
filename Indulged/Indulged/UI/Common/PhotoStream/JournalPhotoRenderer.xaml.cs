@@ -45,7 +45,14 @@ namespace Indulged.UI.Common.PhotoStream
                 AuthorLabel.Text = StorageService.Instance.UserCache[PhotoSource.UserId].Name.ToUpper();
             }
 
-            TitleLabel.Text = PhotoSource.Title;
+            if (PhotoSource.Title.Length == 0)
+            {
+                TitleLabel.Text = "Untitled";
+            }
+            else
+            {
+                TitleLabel.Text = PhotoSource.Title;
+            }            
 
             if (PhotoSource.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(PhotoSource.Description))
             {
