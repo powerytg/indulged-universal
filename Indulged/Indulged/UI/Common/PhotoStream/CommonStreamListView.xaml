@@ -33,6 +33,12 @@
                         </DataTemplate>
                     </local:PhotoTileRendererSelector.Renderer3>
 
+                    <local:PhotoTileRendererSelector.JournalRenderer>
+                        <DataTemplate>
+                            <local:JournalPhotoTileRenderer PhotoTileSource="{Binding}"/>
+                        </DataTemplate>
+                    </local:PhotoTileRendererSelector.JournalRenderer>
+                    
                 </local:PhotoTileRendererSelector>
             </ListView.ItemTemplateSelector>
 

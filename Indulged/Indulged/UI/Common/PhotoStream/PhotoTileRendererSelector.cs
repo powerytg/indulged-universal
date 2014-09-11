@@ -15,9 +15,16 @@ namespace Indulged.UI.Common.PhotoStream
         public DataTemplate Renderer2 { get; set; }
         public DataTemplate Renderer3 { get; set; }
 
+        public DataTemplate JournalRenderer { get; set; }
+
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             PhotoTile photoGroup = item as PhotoTile;
+
+            if (photoGroup.ShowAsJournal)
+            {
+                return JournalRenderer;
+            }
 
             if (photoGroup.Photos.Count == 1)
             {

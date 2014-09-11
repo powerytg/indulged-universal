@@ -46,7 +46,6 @@ namespace Indulged.UI.Common.PhotoStream
         private void PhotoRendererBase_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             bool result = VisualStateManager.GoToState(this, "Pressed", false);
-            Debug.WriteLine(result);
         }
 
         private void PhotoRendererBase_PointerReleased(object sender, PointerRoutedEventArgs e)

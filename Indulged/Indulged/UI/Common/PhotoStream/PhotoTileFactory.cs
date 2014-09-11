@@ -61,5 +61,18 @@ namespace Indulged.UI.Common.PhotoStream
 
             return result;
         }
+
+        public List<PhotoTile> GenerateJournalPhotoTiles(List<FlickrPhoto> photos)
+        {
+            List<PhotoTile> result = new List<PhotoTile>();
+            foreach (var photo in photos)
+            {
+                var tile = new PhotoTile(new List<FlickrPhoto> { photo });
+                tile.ShowAsJournal = true;
+                result.Add(tile);
+            }
+
+            return result;
+        }
     }
 }

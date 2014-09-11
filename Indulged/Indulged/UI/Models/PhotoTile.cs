@@ -11,6 +11,8 @@ namespace Indulged.UI.Models
     {
         public List<FlickrPhoto> Photos { get; set; }
 
+        public bool ShowAsJournal { get; set; }
+
         /// <summary>
         /// Constructor
         /// </summary>

@@ -151,6 +151,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\PhotoStream\JournalPhotoRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\JournalPhotoTileRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -303,6 +311,12 @@
     <Compile Include="UI\Common\PhotoStream\CommonStreamListView.xaml.cs">
       <DependentUpon>CommonStreamListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\PhotoStream\JournalPhotoRenderer.xaml.cs">
+      <DependentUpon>JournalPhotoRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\JournalPhotoTileRenderer.xaml.cs">
+      <DependentUpon>JournalPhotoTileRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Common\PhotoStream\PhotoRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileFactory.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml.cs">
@@ -374,9 +388,12 @@
     <Content Include="Assets\Common\PageSeperatorRight.png" />
     <Content Include="Assets\Common\PhotoListViewShadow.png" />
     <Content Include="Assets\Common\View-Light.png" />
+    <Content Include="Assets\Dashboard\CommentQuote.png" />
     <Content Include="Assets\Dashboard\DarkBanner.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
+    <Content Include="Assets\Dashboard\FavInStream.png" />
     <Content Include="Assets\Dashboard\LightBanner.png" />
+    <Content Include="Assets\Dashboard\PageCurl.png" />
     <Content Include="Assets\Dashboard\PreludeAlbumMask.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />
     <Content Include="Assets\Dashboard\PreludeSmallIndicator.png" />
