@@ -21,6 +21,32 @@ namespace Indulged.UI.Common.PhotoStream
 {
     public sealed partial class CommonStreamListView : StreamListViewBase
     {
+        public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.Register(
+        "ShowShadow",
+        typeof(bool),
+        typeof(CommonStreamListView),
+        new PropertyMetadata(true, OShowShadowPropertyChanged));
+
+        public bool ShowShadow
+        {
+            get { return (bool)GetValue(ShowShadowProperty); }
+            set { SetValue(ShowShadowProperty, value); }
+        }
+
+        private static void OShowShadowPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var target = (CommonStreamListView)sender;
+            target.OnShowShadowChanged();
+        }
+
+        private void OnShowShadowChanged()
+        {
+            TopShadow.Visibility = ShowShadow ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Data source
+        /// </summary>
         private PhotoTileCollection ds = new PhotoTileCollection();
 
         /// <summary>

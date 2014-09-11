@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Indulged.API.Storage;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,12 @@ namespace Indulged.UI.Common.PhotoStream
             }
 
             ImageView.Source = new BitmapImage(new Uri(PhotoSource.GetImageUrl(), UriKind.Absolute));
+
+            if (StorageService.Instance.UserCache.ContainsKey(PhotoSource.UserId))
+            {
+                AuthorLabel.Text = StorageService.Instance.UserCache[PhotoSource.UserId].Name.ToUpper();
+            }
+
             TitleLabel.Text = PhotoSource.Title;
 
             if (PhotoSource.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(PhotoSource.Description))

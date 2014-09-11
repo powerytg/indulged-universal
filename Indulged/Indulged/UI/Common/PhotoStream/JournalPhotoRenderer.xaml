@@ -44,6 +44,20 @@
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Grid.Row="0"/>
 
+        <!--Image overlays-->
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            
+            <TextBlock x:Name="AuthorLabel"
+                       Foreground="White" FontWeight="Thin" FontSize="14"
+                       TextWrapping="Wrap" VerticalAlignment="Top"
+                       Margin="0, 3, 10, 3"/>
+            
+            <Image Source="/Assets/Dashboard/PageCurl.png"
+                   Width="33"/>
+            
+        </StackPanel>
+        
         <!--Title and description-->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
