@@ -24,7 +24,6 @@
         <Button x:Name="SelectorButton" Style="{StaticResource RoundedTransparentButtonStyle}"
                 Background="#91aaba" MinHeight="24" Padding="4"
                 Grid.Column="1" VerticalAlignment="Center"
-                Margin="12, 0, 12, 0"
                 Click="SelectorButton_Click">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
