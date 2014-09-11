@@ -29,7 +29,7 @@
 
                     <local:PhotoTileRendererSelector.Renderer3>
                         <DataTemplate>
-                            <local:PhotoTileRenderer3 PhotoTileSource="{Binding}"/>
+                            <local:PhotoTileRenderer3 PhotoTileSource="{Binding}" FontFamily="Global User Interface"/>
                         </DataTemplate>
                     </local:PhotoTileRendererSelector.Renderer3>
 

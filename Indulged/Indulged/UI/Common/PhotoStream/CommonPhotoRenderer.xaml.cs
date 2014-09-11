@@ -106,7 +106,7 @@ namespace Indulged.UI.Common.PhotoStream
                 }
                 else
                 {
-                    if (LayoutRoot.ActualWidth > screenSize - 20)
+                    if (LayoutRoot.ActualWidth > LayoutRoot.ActualHeight * 1.4)
                     {
                         LayoutOverlayInOverlayModeHorizontally();
                     }
