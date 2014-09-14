@@ -1,4 +1,5 @@
 ﻿using Indulged.API.Storage.Models;
+using Indulged.UI.Common.PhotoStream;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,7 +30,19 @@ namespace Indulged.UI.Dashboard.Renderers
             }
 
             ImageView.Source = new BitmapImage(new Uri(Album.PrimaryPhoto.GetImageUrl()));
-            AlbumLabel.Text = Album.Title;
+            TitleLabel.Text = Album.Title.Length > 0 ? Album.Title : "Untitled";
+            DateLabel.Text = "Last updated on " + Album.UpdatedDate.ToString("MMM d, yyyy");
+            StatLabel.Text = Album.PhotoStream.PhotoCount.ToString();
+
+            if (Album.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(Album.Description))
+            {
+                DescLabel.Visibility = Visibility.Visible;
+                DescLabel.Text = Album.Description;
+            }
+            else
+            {
+                DescLabel.Visibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>

@@ -13,11 +13,27 @@
 
     <Grid>
         <ListView x:Name="AlbumListView" ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <renderer:DashboardAlbumRenderer Album="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            <ListView.ItemTemplateSelector>
+                <local:CatalogAlbumSelector>
+                    
+                    <!--Album-->
+                    <local:CatalogAlbumSelector.AlbumRenderer>
+                        <DataTemplate>
+                            <renderer:DashboardAlbumRenderer Album="{Binding}"/>
+                        </DataTemplate>
+                    </local:CatalogAlbumSelector.AlbumRenderer>
+                    
+                    <!--Album section header-->
+                    <local:CatalogAlbumSelector.AlbumSectionHeaderRenderer>
+                        <DataTemplate>
+                            <local:StreamSectionView Title="ALBUMS" 
+                                                     HorizontalAlignment="Center"
+                                                     Margin="12"/>
+                        </DataTemplate>
+                    </local:CatalogAlbumSelector.AlbumSectionHeaderRenderer>
+                    
+                </local:CatalogAlbumSelector>
+            </ListView.ItemTemplateSelector>
         </ListView>
     </Grid>
 </UserControl>

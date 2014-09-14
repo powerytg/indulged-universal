@@ -1,9 +1,12 @@
 ﻿using Indulged.API.Networking;
 using Indulged.API.Storage;
 using Indulged.API.Storage.Events;
+using Indulged.API.Storage.Models;
 using Indulged.UI.Common.Controls;
+using Indulged.UI.Dashboard.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -55,7 +58,14 @@ namespace Indulged.UI.Dashboard
 
         private void OnAlbumListUpdated(object sender, StorageEventArgs e)
         {
-            AlbumListView.ItemsSource = StorageService.Instance.AlbumList;
+            var ds = new ObservableCollection<FlickrModelBase>();
+            ds.Add(new DashboardAlbumHeader());
+            foreach (var album in StorageService.Instance.AlbumList)
+            {
+                ds.Add(album);
+            }
+
+            AlbumListView.ItemsSource = ds;
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

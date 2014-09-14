@@ -10,7 +10,7 @@
     xmlns:data="using:Indulged.Data"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    Background="#1c1c1c">
+    Background="#000">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>
@@ -50,6 +50,11 @@
             <!--Album and group list-->
             <PivotItem Margin="0">
                 <dashboard:CatalogSection x:Name="CatalogView"/>
+            </PivotItem>
+            
+            <!--Contact stream-->
+            <PivotItem Margin="0">
+                <dashboard:ContactSection x:Name="ContactView"/>
             </PivotItem>
         </Pivot>
     </Grid>

@@ -175,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\ContactSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\DashboardBackgroundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dashboard\Renderers\DashboardRoundedAlbumAvatarRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dashboard\StreamSectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,6 +342,9 @@
     <Compile Include="UI\Dashboard\CatalogSection.xaml.cs">
       <DependentUpon>CatalogSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dashboard\ContactSection.xaml.cs">
+      <DependentUpon>ContactSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\DashboardBackgroundView.xaml.cs">
       <DependentUpon>DashboardBackgroundView.xaml</DependentUpon>
     </Compile>
@@ -341,6 +352,8 @@
     <Compile Include="UI\Dashboard\DashboardThemes.cs" />
     <Compile Include="UI\Dashboard\Events\DashboardThemeChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\Events\StreamSelectionChangedEventArgs.cs" />
+    <Compile Include="UI\Dashboard\CatalogAlbumSelector.cs" />
+    <Compile Include="UI\Dashboard\Models\DashboardAlbumHeader.cs" />
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
       <DependentUpon>PreludeSection.xaml</DependentUpon>
     </Compile>
@@ -353,6 +366,9 @@
     </Compile>
     <Compile Include="UI\Dashboard\Renderers\DashboardRoundedAlbumAvatarRenderer.xaml.cs">
       <DependentUpon>DashboardRoundedAlbumAvatarRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Dashboard\StreamSectionView.xaml.cs">
+      <DependentUpon>StreamSectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dashboard\StreamSelectorDialog.xaml.cs">
       <DependentUpon>StreamSelectorDialog.xaml</DependentUpon>
@@ -389,10 +405,12 @@
     <Content Include="Assets\Common\PageSeperatorRight.png" />
     <Content Include="Assets\Common\PhotoListViewShadow.png" />
     <Content Include="Assets\Common\View-Light.png" />
+    <Content Include="Assets\Dashboard\AlbumShadow.png" />
     <Content Include="Assets\Dashboard\CommentQuote.png" />
     <Content Include="Assets\Dashboard\DarkBanner.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\FavInStream.png" />
+    <Content Include="Assets\Dashboard\FileIcon.png" />
     <Content Include="Assets\Dashboard\LightBanner.png" />
     <Content Include="Assets\Dashboard\PageCurl.png" />
     <Content Include="Assets\Dashboard\PreludeAlbumMask.png" />

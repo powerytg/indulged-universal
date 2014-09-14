@@ -192,13 +192,13 @@ namespace Indulged
 
         private void pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (MainPivot.SelectedIndex == 0)
+            if (MainPivot.SelectedIndex == 2)
             {
-                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Dark;
+                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Light;
             }
             else
             {
-                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Light;
+                DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Dark;
             }
         }
 
