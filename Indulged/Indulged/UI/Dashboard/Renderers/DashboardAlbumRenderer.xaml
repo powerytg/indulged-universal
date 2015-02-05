@@ -18,30 +18,12 @@
         </Grid.RowDefinitions>
             
         <!--Title-->
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="0" Margin="10, 10, 25, 0" >
-
-            <TextBlock x:Name="TitleLabel"
-                       Margin="0, 0, 4, 0"
+        <TextBlock x:Name="TitleLabel"
+                       Margin="10, 10, 25, 0"
                        TextWrapping="Wrap"
                        Foreground="White" FontWeight="Normal" FontSize="20"
-                       VerticalAlignment="Center"/>
-
-            <!--Photo count stat-->
-            <Border Background="#5077cd"
-                    Padding="4, 0, 4, 0" CornerRadius="3" Height="15"
-                    VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="/Assets/Dashboard/FileIcon.png"
-                           VerticalAlignment="Center" Width="7"
-                           Margin="0, 0, 5, 0"/>
-                    
-                    <TextBlock x:Name="StatLabel"
-                               FontWeight="Bold" Foreground="Black" FontSize="10"
-                               VerticalAlignment="Center"/>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+                       VerticalAlignment="Center"
+                       Grid.Row="0"/>
 
         <!--Updated date-->
         <TextBlock x:Name="DateLabel"
@@ -58,7 +40,7 @@
                        Foreground="#4e5c7c" FontWeight="Thin" FontSize="14"/>
 
         <!--Image-->
-        <Grid Margin="0, 6, 0, 0" Grid.Row="3" Height="120">
+        <Grid Margin="0, 6, 0, 0" Grid.Row="3">
             <Image x:Name="ImageView"
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Stretch="UniformToFill"/>
@@ -69,8 +51,6 @@
             <Rectangle Fill="White" Opacity="0.2" Height="1"
                        VerticalAlignment="Bottom"/>
 
-            <Image Source="/Assets/Dashboard/AlbumShadow.png"
-                   Stretch="Fill"/>
         </Grid>
 
     </Grid>
