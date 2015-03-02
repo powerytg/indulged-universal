@@ -1,0 +1,46 @@
+﻿<UserControl
+    x:Class="Indulged.UI.Dashboard.CatalogAlbumGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Dashboard"
+    xmlns:renderers="using:Indulged.UI.Common.AlbumStream"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <!--Album grid-->
+        <Grid x:Name="Grid1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!--Header renderer-->
+            <renderers:HeaderAlbumRenderer x:Name="Renderer1"
+                                           Margin="1"
+                                           Grid.Row="0" MinHeight="300" MaxHeight="500"/>
+
+            <!--Other renderers-->
+            <Grid Grid.Row="1" x:Name="Grid2">
+                <renderers:CommonAlbumRenderer x:Name="Renderer2" MaxHeight="300"
+                                               Margin="1"/>
+                <Grid x:Name="Grid3">
+                    <renderers:CommonAlbumRenderer x:Name="Renderer3" MaxHeight="150"
+                                                   Margin="1"/>
+                    <renderers:CommonAlbumRenderer x:Name="Renderer4" MaxHeight="150"
+                                                   Margin="1"/>
+                </Grid>                
+            </Grid>
+        </Grid>
+        
+        <!--Empty album text-->
+        <TextBlock x:Name="EmptyAlbumLabel" 
+                           Text="You don't appear to have any albums"
+                           Foreground="#444444" FontSize="18" TextAlignment="Center"
+                           Margin="30" Visibility="Collapsed"/>
+
+    </Grid>
+</UserControl>

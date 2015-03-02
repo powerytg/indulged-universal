@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Indulged.UI.Dashboard"
     xmlns:renderer="using:Indulged.UI.Dashboard.Renderers"
+    xmlns:common="using:Indulged.UI.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -12,28 +13,38 @@
     Unloaded="UserControl_Unloaded">
 
     <Grid>
-        <ListView x:Name="AlbumListView" ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
-            <ListView.ItemTemplateSelector>
-                <local:CatalogAlbumSelector>
-                    
-                    <!--Album-->
-                    <local:CatalogAlbumSelector.AlbumRenderer>
-                        <DataTemplate>
-                            <renderer:DashboardAlbumRenderer Album="{Binding}"/>
-                        </DataTemplate>
-                    </local:CatalogAlbumSelector.AlbumRenderer>
-                    
-                    <!--Album section header-->
-                    <local:CatalogAlbumSelector.AlbumSectionHeaderRenderer>
-                        <DataTemplate>
-                            <local:StreamSectionView Title="ALBUMS" 
-                                                     HorizontalAlignment="Center"
-                                                     Margin="12"/>
-                        </DataTemplate>
-                    </local:CatalogAlbumSelector.AlbumSectionHeaderRenderer>
-                    
-                </local:CatalogAlbumSelector>
-            </ListView.ItemTemplateSelector>
-        </ListView>
+        <ScrollViewer x:Name="ContainerView" Visibility="Collapsed">
+            <StackPanel Orientation="Vertical">
+                <!--Album header-->
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="/Assets/Dashboard/DarkBanner.png"
+                       Grid.Row="0"/>
+
+                        <local:DashboardHeaderView 
+                            x:Name="AlbumHeaderView"
+                            Subtitle="Photo Albums"
+                            VerticalAlignment="Top" HorizontalAlignment="Center"
+                            Grid.Row="1" Margin="0, 12, 0, 12"/>
+                    </StackPanel>
+
+                    <!--Bubble decorations-->
+                    <Image Source="/Assets/Dashboard/DarkBubbles.png"
+                       Stretch="Uniform" Height="140"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="40, 15, 0, 0"/>
+                </Grid>
+                
+                <!--Album list-->
+                <local:CatalogAlbumGridView x:Name="AlbumGridView"/>
+            </StackPanel>            
+        </ScrollViewer>
+        
+        <!--Loading indicator-->
+        <common:RetryLoadingView x:Name="LoadingView"
+                                 VerticalAlignment="Center"/>
+        
     </Grid>
+    
+
 </UserControl>

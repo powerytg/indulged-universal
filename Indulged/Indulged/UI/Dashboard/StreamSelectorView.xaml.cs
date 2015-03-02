@@ -1,22 +1,11 @@
-﻿using Indulged.API.Utils;
-using Indulged.API.Storage;
-using Indulged.API.Storage.Models;
+﻿using Indulged.API.Storage;
+using Indulged.API.Utils;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Dashboard.Events;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -33,6 +22,9 @@ namespace Indulged.UI.Dashboard
         public StreamSelectorView()
         {
             this.InitializeComponent();
+
+            // Default stream set to "Discovery"
+            StreamNameLabel.Text = StorageService.Instance.DiscoveryStream.Name;
         }
 
         private void SelectorButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +39,7 @@ namespace Indulged.UI.Dashboard
                     streamEvent.SelectedStream = contentView.SelectedStream;
 
                     // Update title
-                    StreamNameLabel.Text = contentView.SelectedStream.Name.ToUpper();
+                    StreamNameLabel.Text = contentView.SelectedStream.Name;
 
                     StreamSelectionChanged.DispatchEvent(this, streamEvent);
                 }

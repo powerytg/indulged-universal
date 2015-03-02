@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace Indulged.UI.Common.PhotoStream
 {
-    public partial class StreamListViewBase : UserControl
+    public partial class StreamListViewBase : ListView
     {
         // Events
         public EventHandler LoadingStarted;

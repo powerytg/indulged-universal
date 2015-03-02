@@ -53,8 +53,7 @@ namespace Indulged.UI.Dashboard
 
             // Events
             PhotoListView.LoadingStarted += OnLoadingStarted;
-            PhotoListView.LoadingComplete += OnLoadingComplete;
-            SelectorView.StreamSelectionChanged += OnStreamSelectionChanged;
+            PhotoListView.LoadingComplete += OnLoadingComplete;            
         }
 
         private async void OnLoadingStarted(object sender, EventArgs e)
@@ -75,6 +74,17 @@ namespace Indulged.UI.Dashboard
             {
                 CurrentStream = e.SelectedStream;
             }            
+        }
+
+        private void SelectorView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SelectorView == null)
+            {
+                SelectorView = sender as StreamSelectorView;
+                SelectorView.StreamSelectionChanged -= OnStreamSelectionChanged;
+                SelectorView.StreamSelectionChanged += OnStreamSelectionChanged;
+            }
+
         }
 
     }

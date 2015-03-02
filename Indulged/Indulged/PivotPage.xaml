@@ -25,20 +25,17 @@
         <!--Background-->
         <dashboard:DashboardBackgroundView x:Name="BackgroundView"
                                            Margin="0, -32, 0, 0"/>
-        <!--
-        <common:BlurredBackgroundView x:Name="BackgroundView"
-                                      Margin="0, -32, 0, 0"/>
-        -->
-        
+
         <Pivot x:Uid="Pivot" x:Name="MainPivot"
                Style="{StaticResource MainPivotStyle}"
                CommonNavigationTransitionInfo.IsStaggerElement="True"
                SelectionChanged="pivot_SelectionChanged">
-            <Pivot.TitleTemplate>
-                <DataTemplate>
-                    <dashboard:TitleBannerView x:Name="TitleView" VerticalAlignment="Top"/>
-                </DataTemplate>                
-            </Pivot.TitleTemplate>
+            
+            <!--Hide header and title -->
+            <Pivot.HeaderTemplate>
+                <DataTemplate/>
+            </Pivot.HeaderTemplate>
+
             <!--Prelude-->
             <PivotItem
                 CommonNavigationTransitionInfo.IsStaggerElement="True"

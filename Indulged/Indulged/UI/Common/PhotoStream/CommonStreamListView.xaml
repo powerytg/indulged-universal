@@ -7,51 +7,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
-    
-    <Grid>
-        <ListView x:Name="PhotoListView" DataFetchSize="1" 
-                  ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
-            <ListView.ItemTemplateSelector>
-                <local:PhotoTileRendererSelector>
+    d:DesignWidth="400"
+    DataFetchSize="1" 
+    ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
 
-                    <local:PhotoTileRendererSelector.Renderer1>
-                        <DataTemplate>
-                            <local:PhotoTileRenderer1 PhotoTileSource="{Binding}"/>
-                        </DataTemplate>
-                    </local:PhotoTileRendererSelector.Renderer1>
+    <local:StreamListViewBase.ItemTemplateSelector>
+        <local:PhotoTileRendererSelector>
+            <local:PhotoTileRendererSelector.Renderer1>
+                <DataTemplate>
+                    <local:PhotoTileRenderer1 PhotoTileSource="{Binding}"/>
+                </DataTemplate>
+            </local:PhotoTileRendererSelector.Renderer1>
 
-                    <local:PhotoTileRendererSelector.Renderer2>
-                        <DataTemplate>
-                            <local:PhotoTileRenderer2 PhotoTileSource="{Binding}"/>
-                        </DataTemplate>
-                    </local:PhotoTileRendererSelector.Renderer2>
+            <local:PhotoTileRendererSelector.Renderer2>
+                <DataTemplate>
+                    <local:PhotoTileRenderer2 PhotoTileSource="{Binding}"/>
+                </DataTemplate>
+            </local:PhotoTileRendererSelector.Renderer2>
 
-                    <local:PhotoTileRendererSelector.Renderer3>
-                        <DataTemplate>
-                            <local:PhotoTileRenderer3 PhotoTileSource="{Binding}" FontFamily="Global User Interface"/>
-                        </DataTemplate>
-                    </local:PhotoTileRendererSelector.Renderer3>
+            <local:PhotoTileRendererSelector.Renderer3>
+                <DataTemplate>
+                    <local:PhotoTileRenderer3 PhotoTileSource="{Binding}" FontFamily="Global User Interface"/>
+                </DataTemplate>
+            </local:PhotoTileRendererSelector.Renderer3>
 
-                    <local:PhotoTileRendererSelector.JournalRenderer>
-                        <DataTemplate>
-                            <local:JournalPhotoTileRenderer PhotoTileSource="{Binding}"/>
-                        </DataTemplate>
-                    </local:PhotoTileRendererSelector.JournalRenderer>
-                    
-                </local:PhotoTileRendererSelector>
-            </ListView.ItemTemplateSelector>
+            <local:PhotoTileRendererSelector.JournalRenderer>
+                <DataTemplate>
+                    <local:JournalPhotoTileRenderer PhotoTileSource="{Binding}"/>
+                </DataTemplate>
+            </local:PhotoTileRendererSelector.JournalRenderer>
+        </local:PhotoTileRendererSelector>
+    </local:StreamListViewBase.ItemTemplateSelector>
 
-            <ListView.Footer>
-                <Image x:Name="FooterImage" Source="/Assets/Common/Fin.png" Width="146"
-                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Margin="0, 50, 0, 50"
-                       Visibility="Collapsed"/>
-            </ListView.Footer>
-            
-        </ListView>
-        
-        <Image x:Name="TopShadow" Source="/Assets/Common/PhotoListViewShadow.png"
-               Stretch="Fill" Height="38" VerticalAlignment="Top"/>
-    </Grid>
 </local:StreamListViewBase>

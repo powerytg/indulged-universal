@@ -9,21 +9,30 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
+
+    <!--Photo stream-->
+    <stream:CommonStreamListView x:Name="PhotoListView">
+        <stream:CommonStreamListView.Header>
+            <Grid>
+                <!--Logo and stream selector-->
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/Assets/Dashboard/DarkBanner.png"
+                       Grid.Row="0"/>
+
+                    <local:StreamSelectorView 
+                    x:Name="SelectorView"
+                    VerticalAlignment="Top" HorizontalAlignment="Center"
+                    Grid.Row="1" Margin="0, 12, 0, 12"
+                    Loaded="SelectorView_Loaded"/>
+                </StackPanel>
+                
+                <!--Bubble decorations-->
+                <Image Source="/Assets/Dashboard/DarkBubbles.png"
+                       Stretch="Uniform" Height="140"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="40, 15, 0, 0"/>
+            </Grid>
+        </stream:CommonStreamListView.Header>
+    </stream:CommonStreamListView>
     
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <!--Stream selection view-->
-        <local:StreamSelectorView x:Name="SelectorView"
-                                  VerticalAlignment="Top" HorizontalAlignment="Center"
-                                  Grid.Row="0" Margin="0, 12, 0, 12"/>
-
-        <!--Photo stream-->
-        <stream:CommonStreamListView x:Name="PhotoListView"
-                                      Grid.Row="1"/>
-
-    </Grid>
 </UserControl>

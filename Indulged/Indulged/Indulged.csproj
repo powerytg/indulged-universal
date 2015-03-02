@@ -123,7 +123,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\AlbumStream\CommonAlbumRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\AlbumStream\HeaderAlbumRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\Controls\BlurredBackgroundView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\Controls\RetryLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +183,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\CatalogAlbumGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\CatalogSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,15 +199,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\DashboardHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\PreludeSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dashboard\Renderers\DashboardAlbumSimpleRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,10 +220,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dashboard\StreamSelectorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dashboard\TitleBannerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -291,12 +303,22 @@
     <Compile Include="PolKit\PolicyKit.cs" />
     <Compile Include="PolKit\PolicyKit.Storage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Common\AlbumStream\CommonAlbumRenderer.xaml.cs">
+      <DependentUpon>CommonAlbumRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\AlbumStream\AlbumRendererBase.cs" />
+    <Compile Include="UI\Common\AlbumStream\HeaderAlbumRenderer.xaml.cs">
+      <DependentUpon>HeaderAlbumRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Common\Controls\BlurredBackgroundView.xaml.cs">
       <DependentUpon>BlurredBackgroundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
     <Compile Include="UI\Common\Controls\ModalPopup.cs" />
+    <Compile Include="UI\Common\Controls\RetryLoadingView.xaml.cs">
+      <DependentUpon>RetryLoadingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Common\Controls\SimpleLoadingView.xaml.cs">
       <DependentUpon>SimpleLoadingView.xaml</DependentUpon>
     </Compile>
@@ -335,6 +357,9 @@
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
     <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
+    <Compile Include="UI\Dashboard\CatalogAlbumGridView.xaml.cs">
+      <DependentUpon>CatalogAlbumGridView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\CatalogSection.xaml.cs">
       <DependentUpon>CatalogSection.xaml</DependentUpon>
     </Compile>
@@ -344,12 +369,13 @@
     <Compile Include="UI\Dashboard\DashboardBackgroundView.xaml.cs">
       <DependentUpon>DashboardBackgroundView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dashboard\DashboardHeaderView.xaml.cs">
+      <DependentUpon>DashboardHeaderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\DashboardThemeManager.cs" />
     <Compile Include="UI\Dashboard\DashboardThemes.cs" />
     <Compile Include="UI\Dashboard\Events\DashboardThemeChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\Events\StreamSelectionChangedEventArgs.cs" />
-    <Compile Include="UI\Dashboard\CatalogAlbumSelector.cs" />
-    <Compile Include="UI\Dashboard\Models\DashboardAlbumHeader.cs" />
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
       <DependentUpon>PreludeSection.xaml</DependentUpon>
     </Compile>
@@ -357,9 +383,6 @@
       <DependentUpon>DashboardAlbumRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRendererBase.cs" />
-    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumSimpleRenderer.xaml.cs">
-      <DependentUpon>DashboardAlbumSimpleRenderer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Dashboard\StreamSectionView.xaml.cs">
       <DependentUpon>StreamSectionView.xaml</DependentUpon>
     </Compile>
@@ -368,9 +391,6 @@
     </Compile>
     <Compile Include="UI\Dashboard\StreamSelectorView.xaml.cs">
       <DependentUpon>StreamSelectorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dashboard\TitleBannerView.xaml.cs">
-      <DependentUpon>TitleBannerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -392,14 +412,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Common\Fin.png" />
     <Content Include="Assets\Common\PageSeperator.png" />
     <Content Include="Assets\Common\PageSeperatorLeft.png" />
     <Content Include="Assets\Common\PageSeperatorRight.png" />
-    <Content Include="Assets\Common\PhotoListViewShadow.png" />
     <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\CommentQuote.scale-240.png" />
     <Content Include="Assets\Dashboard\DarkBanner.scale-240.png" />
+    <Content Include="Assets\Dashboard\DarkBubbles.scale-240.png" />
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\FavInStream.png" />
     <Content Include="Assets\Dashboard\LightBanner.scale-240.png" />
