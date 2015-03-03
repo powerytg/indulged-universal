@@ -17,6 +17,7 @@ namespace Indulged.API.Storage.Models
 
         public bool IsAdmin { get; set; }
         public bool IsInvitationOnly { get; set; }
+        public bool IsEighteenPlus { get; set; }
         public int MemberCount { get; set; }
         public int TopicCount { get; set; }
         public FlickrGroupPrivicy Privacy { get; set; }

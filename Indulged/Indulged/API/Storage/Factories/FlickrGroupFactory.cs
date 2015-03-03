@@ -67,6 +67,20 @@ namespace Indulged.API.Storage.Factories
                 group.IsInvitationOnly = (json["invitation_only"].ToString() == "1");
             }
 
+            // Is admin
+            JToken adminValue;
+            if (json.TryGetValue("admin", out adminValue))
+            {
+                group.IsAdmin = (json["admin"].ToString() == "1");
+            }
+
+            // Is 18+
+            JToken explictValue;
+            if (json.TryGetValue("eighteenplus", out explictValue))
+            {
+                group.IsEighteenPlus = (json["eighteenplus"].ToString() == "1");
+            }
+
             JToken rulesValue;
             if (json.TryGetValue("rules", out rulesValue))
             {

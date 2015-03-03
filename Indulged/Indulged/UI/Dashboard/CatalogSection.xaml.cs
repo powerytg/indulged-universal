@@ -1,6 +1,7 @@
 ﻿using Indulged.API.Networking;
 using Indulged.API.Storage;
 using Indulged.API.Storage.Events;
+using Indulged.API.Storage.Models;
 using Indulged.UI.Common.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace Indulged.UI.Dashboard
 {
     public sealed partial class CatalogSection : UserControl
     {
+        private bool albumListRetrieved = false;
+        private bool groupListRetrieved = false;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -22,30 +26,69 @@ namespace Indulged.UI.Dashboard
 
             // Events
             StorageService.Instance.AlbumListUpdated += OnAlbumListUpdated;
+            StorageService.Instance.GroupListUpdated += OnGroupListUpdated;
 
-            // Get album list
+            // Retry action for loading album list and group list
             LoadingView.LoadingAction = () =>
             {
-                LoadAlbumList();
+                LoadAlbumsAndGroups();
             };
 
-            LoadAlbumList();
+            LoadAlbumsAndGroups();
         }
 
-        private async void LoadAlbumList()
+        private async void LoadAlbumsAndGroups()
         {
-            var retVal = await APIService.Instance.GetAlbumListAsync();
-            if (!retVal.Success)
+            // Load album list if not done already
+            if (!albumListRetrieved)
             {
-                LoadingView.ErrorText = retVal.ErrorMessage;
-                LoadingView.ShowRetryScreen();
+                var albumStatus = await APIService.Instance.GetAlbumListAsync();
+                if (!albumStatus.Success)
+                {
+                    // Failure
+                    LoadingView.ErrorText = albumStatus.ErrorMessage;
+                    LoadingView.ShowRetryScreen();
+                    return;
+                }
+                else
+                {
+                    albumListRetrieved = true;
+                }
             }
-            else
+
+            // Load group list if now done already
+            if (!groupListRetrieved)
             {
-                // This should execute only once
+                var groupStatus = await APIService.Instance.GetGroupListAsync(StorageService.Instance.CurrentUser.ResourceId);
+                if (!groupStatus.Success)
+                {
+                    // Failure
+                    LoadingView.ErrorText = groupStatus.ErrorMessage;
+                    LoadingView.ShowRetryScreen();
+                    return;
+                }
+                else
+                {
+                    groupListRetrieved = true;
+                }
+            }
+            
+            // Check whether both albums and groups have been retrieved
+            if (albumListRetrieved && groupListRetrieved)
+            {
+                // Remove loading screen and fill data context
                 LoadingView.Destroy();
                 ContainerView.Visibility = Visibility.Visible;
                 AlbumGridView.AlbumList = StorageService.Instance.AlbumList;
+
+                List<FlickrGroup> groups = new List<FlickrGroup>();
+                foreach(var groupId in StorageService.Instance.CurrentUser.GroupIds)
+                {
+                    var group = StorageService.Instance.GroupCache[groupId];
+                    groups.Add(group);
+                }
+
+                GroupGridView.GroupList = groups;
             }
         }
 
@@ -54,6 +97,20 @@ namespace Indulged.UI.Dashboard
             // Update album count
             int albumCount = StorageService.Instance.AlbumList.Count;
             AlbumHeaderView.Title = albumCount.ToString();
+        }
+
+        private void OnGroupListUpdated(object sender, StorageEventArgs e)
+        {
+            var currentUser = StorageService.Instance.CurrentUser;
+            // Ignore all other users
+            if (e.UserId != currentUser.ResourceId)
+            {
+                return;
+            }
+
+            // Update group count
+            int groupCount = currentUser.GroupIds.Count;
+            GroupHeaderView.Title = groupCount.ToString();
         }
 
         private void UserControl_Unloaded(object sender, RoutedEventArgs e)

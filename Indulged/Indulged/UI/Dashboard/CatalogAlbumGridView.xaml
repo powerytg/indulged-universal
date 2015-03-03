@@ -16,6 +16,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
             <!--Header renderer-->
@@ -34,6 +35,24 @@
                                                    Margin="1"/>
                 </Grid>                
             </Grid>
+            
+            <!--View all button-->
+            <Button x:Name="ViewAllButton" Style="{StaticResource RoundedTransparentButtonStyle}"
+                Background="#91aaba" MinHeight="24" Padding="4"
+                Grid.Row="2" VerticalAlignment="Center" Margin="15, 10, 0, 0"
+                Click="ViewAllButton_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">                        
+                        <TextBlock FontSize="14" Foreground="#03be90"
+                                   Text="View all albums" FontStyle="Italic"
+                                   VerticalAlignment="Center"/>
+                    
+                        <Image Source="/Assets/Common/Next.png"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="6, 0, 0, 0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
         </Grid>
         
         <!--Empty album text-->

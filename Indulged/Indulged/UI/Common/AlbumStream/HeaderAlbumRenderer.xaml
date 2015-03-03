@@ -48,7 +48,7 @@
                Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         
         <!--Title and description-->
-        <Grid x:Name="TextPanel" Grid.Row="1" MaxHeight="120">
+        <Grid x:Name="TextPanel" Grid.Row="1" MaxHeight="260">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -73,7 +73,7 @@
                        Grid.Column="0" VerticalAlignment="Top"/>
 
                 <TextBlock x:Name="DescLabel"
-                       Margin="15, 0, 25, 10" Grid.Column="1"
+                       Margin="15, 0, 25, 20" Grid.Column="1"
                        TextWrapping="Wrap" TextTrimming="WordEllipsis"
                        Foreground="#656565"  FontSize="16" FontFamily="Georgia" FontStyle="Italic"/>
 

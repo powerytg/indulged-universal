@@ -96,6 +96,11 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Themes\GroupButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\MainButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +152,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\GroupStream\GroupButtonRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\PhotoStream\CommonPhotoOverlayView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -187,6 +196,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\CatalogGroupGridView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\CatalogSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,10 +217,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dashboard\PreludeSection.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
+    <Compile Include="API\Networking\APIService.Users.cs" />
     <Compile Include="API\Networking\APIService.Album.cs" />
     <Compile Include="API\Networking\APIService.cs" />
     <Compile Include="API\Networking\APIService.Events.cs" />
@@ -325,6 +335,10 @@
     <Compile Include="UI\Common\Controls\UserAvatarView.xaml.cs">
       <DependentUpon>UserAvatarView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\GroupStream\GroupButtonRenderer.xaml.cs">
+      <DependentUpon>GroupButtonRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\GroupStream\GroupRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\CommonPhotoOverlayView.xaml.cs">
       <DependentUpon>CommonPhotoOverlayView.xaml</DependentUpon>
     </Compile>
@@ -360,6 +374,9 @@
     <Compile Include="UI\Dashboard\CatalogAlbumGridView.xaml.cs">
       <DependentUpon>CatalogAlbumGridView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dashboard\CatalogGroupGridView.xaml.cs">
+      <DependentUpon>CatalogGroupGridView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\CatalogSection.xaml.cs">
       <DependentUpon>CatalogSection.xaml</DependentUpon>
     </Compile>
@@ -379,10 +396,6 @@
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
       <DependentUpon>PreludeSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRenderer.xaml.cs">
-      <DependentUpon>DashboardAlbumRenderer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dashboard\Renderers\DashboardAlbumRendererBase.cs" />
     <Compile Include="UI\Dashboard\StreamSectionView.xaml.cs">
       <DependentUpon>StreamSectionView.xaml</DependentUpon>
     </Compile>
@@ -412,10 +425,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Common\Next.scale-240.png" />
     <Content Include="Assets\Common\PageSeperator.png" />
     <Content Include="Assets\Common\PageSeperatorLeft.png" />
     <Content Include="Assets\Common\PageSeperatorRight.png" />
     <Content Include="Assets\Common\View-Light.png" />
+    <Content Include="Assets\Dashboard\Admin.scale-240.png" />
+    <Content Include="Assets\Dashboard\Alert.scale-240.png" />
     <Content Include="Assets\Dashboard\CommentQuote.scale-240.png" />
     <Content Include="Assets\Dashboard\DarkBanner.scale-240.png" />
     <Content Include="Assets\Dashboard\DarkBubbles.scale-240.png" />
@@ -424,6 +440,7 @@
     <Content Include="Assets\Dashboard\LightBanner.scale-240.png" />
     <Content Include="Assets\Dashboard\PageCurl.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />
+    <Content Include="Assets\Dashboard\Private.scale-240.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
     <Content Include="Assets\Login\LoginLogo.png" />
     <Content Include="Assets\Login\LoginOutterRing.png" />

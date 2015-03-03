@@ -45,6 +45,7 @@ namespace Indulged.UI.Dashboard
             {
                 case 0:
                     EmptyAlbumLabel.Visibility = Visibility.Visible;
+                    ViewAllButton.Visibility = Visibility.Collapsed;
                     Renderer1.Visibility = Visibility.Collapsed;
                     Renderer2.Visibility = Visibility.Collapsed;
                     Renderer3.Visibility = Visibility.Collapsed;
@@ -71,6 +72,7 @@ namespace Indulged.UI.Dashboard
         private void layoutOneAlbums()
         {
             EmptyAlbumLabel.Visibility = Visibility.Collapsed;
+            ViewAllButton.Visibility = Visibility.Visible;
             Renderer1.Visibility = Visibility.Visible;
             Renderer2.Visibility = Visibility.Collapsed;
             Renderer3.Visibility = Visibility.Collapsed;
@@ -82,6 +84,7 @@ namespace Indulged.UI.Dashboard
         private void layoutTwoAlbums()
         {
             EmptyAlbumLabel.Visibility = Visibility.Collapsed;
+            ViewAllButton.Visibility = Visibility.Visible;
             Renderer1.Visibility = Visibility.Visible;
             Renderer2.Visibility = Visibility.Visible;
             Renderer3.Visibility = Visibility.Collapsed;
@@ -94,6 +97,7 @@ namespace Indulged.UI.Dashboard
         private void layoutThreeAlbums()
         {
             EmptyAlbumLabel.Visibility = Visibility.Collapsed;
+            ViewAllButton.Visibility = Visibility.Visible;
             Renderer1.Visibility = Visibility.Visible;
             Renderer2.Visibility = Visibility.Visible;
             Renderer3.Visibility = Visibility.Visible;
@@ -114,6 +118,7 @@ namespace Indulged.UI.Dashboard
         private void layoutFourAlbums()
         {
             EmptyAlbumLabel.Visibility = Visibility.Collapsed;
+            ViewAllButton.Visibility = Visibility.Visible;
             Renderer1.Visibility = Visibility.Visible;
             Renderer2.Visibility = Visibility.Visible;
             Renderer3.Visibility = Visibility.Visible;
@@ -137,6 +142,11 @@ namespace Indulged.UI.Dashboard
 
             Renderer3.SetValue(Grid.RowProperty, 0);
             Renderer4.SetValue(Grid.RowProperty, 1);
+        }
+
+        private void ViewAllButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

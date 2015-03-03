@@ -37,7 +37,23 @@
                 
                 <!--Album list-->
                 <local:CatalogAlbumGridView x:Name="AlbumGridView"/>
-            </StackPanel>            
+                
+                <!--Group header-->
+                <local:DashboardHeaderView 
+                            x:Name="GroupHeaderView"
+                            Subtitle="Flickr Groups"
+                            Margin="0, 24, 0, 12" HorizontalAlignment="Center"/>
+
+                <!--Group list-->
+                <local:CatalogGroupGridView x:Name="GroupGridView"/>
+                
+                <!--Footer-->
+                <Image Source="/Assets/Common/PageSeperator.png"
+                       HorizontalAlignment="Center"
+                       Width="180" Margin="20"/>
+
+
+            </StackPanel> 
         </ScrollViewer>
         
         <!--Loading indicator-->

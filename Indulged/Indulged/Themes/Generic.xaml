@@ -10,6 +10,7 @@
         <ResourceDictionary Source="/Themes/RoundedTransparentButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainRadioButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/GroupButtonStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

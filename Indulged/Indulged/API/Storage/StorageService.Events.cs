@@ -65,7 +65,11 @@ namespace Indulged.API.Storage
 
         public void InitializeEventListeners()
         {
+            // Albums
             APIService.Instance.AlbumListReturned += OnAlbumListReturned;
+
+            // Users
+            APIService.Instance.GroupListReturned += OnGroupListReturned;
         }
     }
 }

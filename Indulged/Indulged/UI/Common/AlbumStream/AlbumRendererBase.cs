@@ -15,7 +15,7 @@ namespace Indulged.UI.Common.AlbumStream
         "Album",
         typeof(FlickrAlbum),
         typeof(AlbumRendererBase),
-        new PropertyMetadata(null, OAlbumPropertyChanged));
+        new PropertyMetadata(null, OnAlbumPropertyChanged));
 
         public FlickrAlbum Album
         {
@@ -23,7 +23,7 @@ namespace Indulged.UI.Common.AlbumStream
             set { SetValue(AlbumProperty, value); }
         }
 
-        protected static void OAlbumPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        protected static void OnAlbumPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var target = (AlbumRendererBase)sender;
             target.OnAlbumChanged();

@@ -11,5 +11,9 @@ namespace Indulged.API.Networking
     {
         public EventHandler<APIEventArgs> AlbumListReturned;
         public EventHandler<APIEventArgs> AlbumListFailedReturn;
+
+        public EventHandler<APIEventArgs> GroupListReturned;
+        public EventHandler<APIEventArgs> GroupListFailedReturn;
+
     }
 }

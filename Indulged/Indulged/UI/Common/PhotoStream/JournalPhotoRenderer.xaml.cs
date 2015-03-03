@@ -42,7 +42,7 @@ namespace Indulged.UI.Common.PhotoStream
 
             if (StorageService.Instance.UserCache.ContainsKey(PhotoSource.UserId))
             {
-                AuthorLabel.Text = StorageService.Instance.UserCache[PhotoSource.UserId].Name.ToUpper();
+                AuthorLabel.Text = StorageService.Instance.UserCache[PhotoSource.UserId].Name;
             }
 
             if (PhotoSource.Title.Length == 0)

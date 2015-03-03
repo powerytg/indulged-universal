@@ -22,7 +22,7 @@ namespace Indulged.UI.Common.AlbumStream
 {
     public sealed partial class HeaderAlbumRenderer : AlbumRendererBase
     {
-        private double overlayThreshold = 30;
+        private double overlayThreshold = 60;
 
         /// <summary>
         /// Constructor
@@ -69,7 +69,7 @@ namespace Indulged.UI.Common.AlbumStream
         {
             if (DescPanel.Visibility == Visibility.Collapsed)
             {
-                LayoutTextOnTopOfImage();
+                LayoutTextOnOverImage();
                 return;
             }
 
@@ -80,7 +80,7 @@ namespace Indulged.UI.Common.AlbumStream
             double textHeight = TitleLabel.ActualHeight + DescLabel.ActualHeight;
             if (textHeight < overlayThreshold)
             {
-                LayoutTextOnTopOfImage();
+                LayoutTextOnOverImage();
             }
             else
             {
@@ -88,13 +88,14 @@ namespace Indulged.UI.Common.AlbumStream
             }
         }
 
-        private void LayoutTextOnTopOfImage()
+        private void LayoutTextOnOverImage()
         {
+            LayoutRoot.RowDefinitions.Clear();
+
             TextPanel.Background = new SolidColorBrush(Color.FromArgb(0x99, 0, 0, 0));
-            TextPanel.SetValue(Grid.RowProperty, 0);
             TextPanel.VerticalAlignment = VerticalAlignment.Bottom;
 
-            // Left align title
+            // Left align title if description is missing
             if (DescPanel.Visibility == Visibility.Collapsed)
             {
                 TitleLabel.TextAlignment = TextAlignment.Left;
@@ -108,6 +109,11 @@ namespace Indulged.UI.Common.AlbumStream
 
         private void LayoutTextBelowImage()
         {
+            LayoutRoot.RowDefinitions.Clear();
+            LayoutRoot.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
+            LayoutRoot.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
+
+            ImageView.SetValue(Grid.RowProperty, 0);
             TextPanel.SetValue(Grid.RowProperty, 1);
             TextPanel.ClearValue(FrameworkElement.VerticalAlignmentProperty);
         }
@@ -132,9 +138,5 @@ namespace Indulged.UI.Common.AlbumStream
             VisualStateManager.GoToState(this, "Normal", false);
         }
 
-        private void ImageView_ImageOpened(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

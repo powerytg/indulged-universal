@@ -18,8 +18,10 @@ namespace Indulged.API.Storage
         private void OnGroupListReturned(object sender, APIEventArgs e)
         {
             // Find the user
-            if (!UserCache.ContainsKey(e.UserId))
+            if (!UserCache.ContainsKey(e.UserId)) 
+            {
                 return;
+            }
 
             var user = UserCache[e.UserId];
 

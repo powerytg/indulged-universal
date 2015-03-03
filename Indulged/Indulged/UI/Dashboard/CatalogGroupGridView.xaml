@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="Indulged.UI.Dashboard.CatalogGroupGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Dashboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel x:Name="GroupContainer" Orientation="Vertical"
+                    Margin="15, 0, 15, 0" Grid.Row="0">
+
+        </StackPanel>
+
+        <!--View all button-->
+        <Button x:Name="ViewAllButton" Style="{StaticResource RoundedTransparentButtonStyle}"
+                Background="#91aaba" MinHeight="24" Padding="4"
+                Grid.Row="1" VerticalAlignment="Center" Margin="15, 10, 0, 0"
+                Click="ViewAllButton_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FontSize="14" Foreground="#03be90"
+                                   Text="View all groups" FontStyle="Italic"
+                                   VerticalAlignment="Center"/>
+
+                    <Image Source="/Assets/Common/Next.png"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="6, 0, 0, 0"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        
+        <!--Empty album text-->
+        <TextBlock x:Name="EmptyGroupLabel" 
+                           Text="You don't have any groups"
+                           Foreground="#444444" FontSize="18" TextAlignment="Center"
+                           Margin="30" Visibility="Collapsed"/>
+
+    </Grid>
+
+</UserControl>
