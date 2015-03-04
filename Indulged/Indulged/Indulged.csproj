@@ -176,22 +176,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Common\PhotoStream\JournalPhotoTileRenderer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Common\PhotoStream\PhotoTileRenderer3.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Dashboard\CatalogAlbumGridView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,6 +276,7 @@
     <Compile Include="API\Storage\StorageService.Users.cs" />
     <Compile Include="API\Utils\DateTimeUtils.cs" />
     <Compile Include="API\Utils\NumericUtils.cs" />
+    <Compile Include="API\Utils\RandomUtils.cs" />
     <Compile Include="API\Utils\StringUtils.cs" />
     <Compile Include="API\Utils\UrlUtils.cs" />
     <Compile Include="App.xaml.cs">
@@ -325,6 +310,7 @@
     </Compile>
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
+    <Compile Include="UI\Common\Controls\MagazineView.cs" />
     <Compile Include="UI\Common\Controls\ModalPopup.cs" />
     <Compile Include="UI\Common\Controls\RetryLoadingView.xaml.cs">
       <DependentUpon>RetryLoadingView.xaml</DependentUpon>
@@ -351,24 +337,13 @@
     <Compile Include="UI\Common\PhotoStream\CommonStreamListView.xaml.cs">
       <DependentUpon>CommonStreamListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\PhotoStream\Factories\PhotoTileLayoutGeneratorBase.cs" />
     <Compile Include="UI\Common\PhotoStream\JournalPhotoRenderer.xaml.cs">
       <DependentUpon>JournalPhotoRenderer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Common\PhotoStream\JournalPhotoTileRenderer.xaml.cs">
-      <DependentUpon>JournalPhotoTileRenderer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Common\PhotoStream\PhotoRendererBase.cs" />
-    <Compile Include="UI\Common\PhotoStream\PhotoTileFactory.cs" />
-    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer1.xaml.cs">
-      <DependentUpon>PhotoTileRenderer1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer2.xaml.cs">
-      <DependentUpon>PhotoTileRenderer2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Common\PhotoStream\PhotoTileRenderer3.xaml.cs">
-      <DependentUpon>PhotoTileRenderer3.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
+    <Compile Include="UI\Common\PhotoStream\Factories\PhotoTileFactory.cs" />
+    <Compile Include="UI\Common\PhotoStream\Factories\MagazineLayoutGenerator.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
     <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
     <Compile Include="UI\Dashboard\CatalogAlbumGridView.xaml.cs">

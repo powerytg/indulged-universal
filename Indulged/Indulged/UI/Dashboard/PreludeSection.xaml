@@ -14,7 +14,6 @@
     <stream:CommonStreamListView x:Name="PhotoListView">
         <stream:CommonStreamListView.Header>
             <Grid>
-                <!--Logo and stream selector-->
                 <StackPanel Orientation="Vertical">
                     <Image Source="/Assets/Dashboard/DarkBanner.png"
                        Grid.Row="0"/>
@@ -26,7 +25,6 @@
                     Loaded="SelectorView_Loaded"/>
                 </StackPanel>
                 
-                <!--Bubble decorations-->
                 <Image Source="/Assets/Dashboard/DarkBubbles.png"
                        Stretch="Uniform" Height="140"
                        HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -34,5 +32,5 @@
             </Grid>
         </stream:CommonStreamListView.Header>
     </stream:CommonStreamListView>
-    
+
 </UserControl>

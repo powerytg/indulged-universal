@@ -1,19 +1,7 @@
 ﻿using Indulged.API.Storage;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -29,35 +17,35 @@ namespace Indulged.UI.Common.PhotoStream
             this.InitializeComponent();
         }
 
-        protected override void OnPhotoSourceChanged()
+        protected override void OnPhotoChanged()
         {
-            base.OnPhotoSourceChanged();
+            base.OnPhotoChanged();
 
-            if (PhotoSource == null)
+            if (Photo == null)
             {
                 return;
             }
 
-            ImageView.Source = new BitmapImage(new Uri(PhotoSource.GetImageUrl(), UriKind.Absolute));
+            ImageView.Source = new BitmapImage(new Uri(Photo.GetImageUrl(), UriKind.Absolute));
 
-            if (StorageService.Instance.UserCache.ContainsKey(PhotoSource.UserId))
+            if (StorageService.Instance.UserCache.ContainsKey(Photo.UserId))
             {
-                AuthorLabel.Text = StorageService.Instance.UserCache[PhotoSource.UserId].Name;
+                AuthorLabel.Text = StorageService.Instance.UserCache[Photo.UserId].Name;
             }
 
-            if (PhotoSource.Title.Length == 0)
+            if (Photo.Title.Length == 0)
             {
                 TitleLabel.Text = "Untitled";
             }
             else
             {
-                TitleLabel.Text = PhotoSource.Title;
-            }            
+                TitleLabel.Text = Photo.Title;
+            }
 
-            if (PhotoSource.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(PhotoSource.Description))
+            if (Photo.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(Photo.Description))
             {
                 DescPanel.Visibility = Visibility.Visible;
-                DescLabel.Text = PhotoSource.Description;
+                DescLabel.Text = Photo.Description;
             }
             else
             {
@@ -65,26 +53,5 @@ namespace Indulged.UI.Common.PhotoStream
             }
         }
 
-        private void PhotoRendererBase_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            bool result = VisualStateManager.GoToState(this, "Pressed", false);
-        }
-
-        private void PhotoRendererBase_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            VisualStateManager.GoToState(this, "Normal", false);
-        }
-
-        private void PhotoRendererBase_PointerCanceled(object sender, PointerRoutedEventArgs e)
-        {
-            VisualStateManager.GoToState(this, "Normal", false);
-        }
-
-        private void PhotoRendererBase_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
-        {
-            VisualStateManager.GoToState(this, "Normal", false);
-        }
-
-        
     }
 }

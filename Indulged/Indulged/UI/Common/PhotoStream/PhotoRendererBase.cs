@@ -1,9 +1,4 @@
 ﻿using Indulged.API.Storage.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -11,25 +6,25 @@ namespace Indulged.UI.Common.PhotoStream
 {
     public class PhotoRendererBase : UserControl
     {
-        public static readonly DependencyProperty PhotoSourceProperty = DependencyProperty.Register(
-        "PhotoSource",
+        public static readonly DependencyProperty PhotoProperty = DependencyProperty.Register(
+        "Photo",
         typeof(FlickrPhoto),
         typeof(PhotoRendererBase),
-        new PropertyMetadata(null, OPhotoSourcePropertyChanged));
+        new PropertyMetadata(null, OnPhotoPropertyChanged));
 
-        public FlickrPhoto PhotoSource
+        public FlickrPhoto Photo
         {
-            get { return (FlickrPhoto)GetValue(PhotoSourceProperty); }
-            set { SetValue(PhotoSourceProperty, value); }
+            get { return (FlickrPhoto)GetValue(PhotoProperty); }
+            set { SetValue(PhotoProperty, value); }
         }
 
-        private static void OPhotoSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnPhotoPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var target = (PhotoRendererBase)sender;
-            target.OnPhotoSourceChanged();
+            target.OnPhotoChanged();
         }
 
-        protected virtual void OnPhotoSourceChanged()
+        protected virtual void OnPhotoChanged()
         {
         }
     }

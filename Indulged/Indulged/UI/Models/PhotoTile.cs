@@ -9,26 +9,32 @@ namespace Indulged.UI.Models
 {
     public class PhotoTile
     {
-        public List<FlickrPhoto> Photos { get; set; }
+        public enum LayoutStyle
+        {
+            Magazine,
+            Journal
+        }
 
-        public bool ShowAsJournal { get; set; }
+        public FlickrPhoto Photo { get; set; }
+        public LayoutStyle Style;
+        public int RowSpan { get; set; }
+        public int ColSpan { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         public PhotoTile()
         {
-            Photos = new List<FlickrPhoto>();
         }
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="photos"></param>
-        public PhotoTile(List<FlickrPhoto> photos)
+        /// <param name="photo"></param>
+        public PhotoTile(FlickrPhoto photo, LayoutStyle layoutStyle)
         {
-            Photos = new List<FlickrPhoto>();
-            Photos.AddRange(photos);
+            Photo = photo;
+            Style = layoutStyle;
         }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using Indulged.API.Networking;
 using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
-using Indulged.UI.Common.PhotoStream;
+using Indulged.UI.Common.PhotoStream.Factories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace Indulged.UI.Models
@@ -81,9 +78,9 @@ namespace Indulged.UI.Models
 
                 var newPhotos = StorageService.Instance.OnPhotoStreamReturned(stream, retVal.Result);
 
-                //var tiles = factory.GeneratePhotoTiles(newPhotos);
+                var tiles = factory.GenerateMagazineTiles(newPhotos);
                 //var tiles = factory.GenerateLinearPhotoTiles(newPhotos);
-                var tiles = factory.GenerateJournalPhotoTiles(newPhotos);
+                //var tiles = factory.GenerateJournalPhotoTiles(newPhotos);
                 foreach (var tile in tiles)
                 {
                     this.Add(tile);

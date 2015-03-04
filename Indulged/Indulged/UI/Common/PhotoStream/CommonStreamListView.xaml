@@ -8,34 +8,31 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    DataFetchSize="1" 
-    ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
+    DataFetchSize="1" >
+    
+    <!--ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">-->
+    
+    <local:StreamListViewBase.ItemsPanel>
+        <ItemsPanelTemplate>
+            <VariableSizedWrapGrid x:Name="InnerGrid"
+                                   Orientation="Horizontal"
+                                   Loaded="InnerGrid_Loaded"/>
+        </ItemsPanelTemplate>
+    </local:StreamListViewBase.ItemsPanel>
 
-    <local:StreamListViewBase.ItemTemplateSelector>
+    <local:StreamListViewBase.ItemTemplateSelector>        
         <local:PhotoTileRendererSelector>
-            <local:PhotoTileRendererSelector.Renderer1>
+            <local:PhotoTileRendererSelector.JournalPhotoRenderer>
                 <DataTemplate>
-                    <local:PhotoTileRenderer1 PhotoTileSource="{Binding}"/>
+                    <local:JournalPhotoRenderer Photo="{Binding Photo}"/>
                 </DataTemplate>
-            </local:PhotoTileRendererSelector.Renderer1>
+            </local:PhotoTileRendererSelector.JournalPhotoRenderer>
 
-            <local:PhotoTileRendererSelector.Renderer2>
+            <local:PhotoTileRendererSelector.MagazinePhotoRenderer>
                 <DataTemplate>
-                    <local:PhotoTileRenderer2 PhotoTileSource="{Binding}"/>
+                    <local:CommonPhotoRenderer Photo="{Binding Photo}" Margin="2"/>
                 </DataTemplate>
-            </local:PhotoTileRendererSelector.Renderer2>
-
-            <local:PhotoTileRendererSelector.Renderer3>
-                <DataTemplate>
-                    <local:PhotoTileRenderer3 PhotoTileSource="{Binding}" FontFamily="Global User Interface"/>
-                </DataTemplate>
-            </local:PhotoTileRendererSelector.Renderer3>
-
-            <local:PhotoTileRendererSelector.JournalRenderer>
-                <DataTemplate>
-                    <local:JournalPhotoTileRenderer PhotoTileSource="{Binding}"/>
-                </DataTemplate>
-            </local:PhotoTileRendererSelector.JournalRenderer>
+            </local:PhotoTileRendererSelector.MagazinePhotoRenderer>            
         </local:PhotoTileRendererSelector>
     </local:StreamListViewBase.ItemTemplateSelector>
 

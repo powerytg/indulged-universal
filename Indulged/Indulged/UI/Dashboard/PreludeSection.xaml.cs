@@ -84,7 +84,6 @@ namespace Indulged.UI.Dashboard
                 SelectorView.StreamSelectionChanged -= OnStreamSelectionChanged;
                 SelectorView.StreamSelectionChanged += OnStreamSelectionChanged;
             }
-
         }
 
     }

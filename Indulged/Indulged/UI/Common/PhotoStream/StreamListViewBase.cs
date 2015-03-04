@@ -1,15 +1,11 @@
 ﻿using Indulged.API.Storage.Models;
+using Indulged.UI.Common.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace Indulged.UI.Common.PhotoStream
 {
-    public partial class StreamListViewBase : ListView
+    public partial class StreamListViewBase : MagazineView
     {
         // Events
         public EventHandler LoadingStarted;
@@ -19,7 +15,7 @@ namespace Indulged.UI.Common.PhotoStream
         "Stream",
         typeof(FlickrPhotoStream),
         typeof(StreamListViewBase),
-        new PropertyMetadata(null, OStreamPropertyChanged));
+        new PropertyMetadata(null, OnStreamPropertyChanged));
 
         public FlickrPhotoStream Stream
         {
@@ -27,7 +23,7 @@ namespace Indulged.UI.Common.PhotoStream
             set { SetValue(StreamProperty, value); }
         }
 
-        private static void OStreamPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnStreamPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var target = (StreamListViewBase)sender;
             target.OnStreamChanged();

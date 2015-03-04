@@ -23,7 +23,7 @@ namespace Indulged.UI.Common.PhotoStream
     {
         public enum PhotoOverlayLayoutMode
         {
-            Mini, Overlay, Full
+            Mini, Overlay
         }
 
         private static SolidColorBrush transparentBrush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
@@ -83,9 +83,6 @@ namespace Indulged.UI.Common.PhotoStream
                 case PhotoOverlayLayoutMode.Mini:
                     LayoutInMiniMode();
                     break;
-                case PhotoOverlayLayoutMode.Full:
-                    LayoutInFullMode();
-                    break;
                 case PhotoOverlayLayoutMode.Overlay:
                     LayoutInOverlayMode();
                     break;
@@ -117,42 +114,7 @@ namespace Indulged.UI.Common.PhotoStream
                 StatView.Visibility = Visibility.Collapsed;
             }
         }
-
-        private void LayoutInFullMode()
-        {
-            LayoutRoot.Background = solidBrush;
-
-            if (ShouldShowTitle())
-            {
-                TitleLabel.Text = PhotoSource.Title;
-                TitleLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                TitleLabel.Visibility = Visibility.Collapsed;
-            }
-
-            if (ShouldShowDescription())
-            {
-                DescLabel.Text = PhotoSource.Description;
-                DescLabel.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                DescLabel.Visibility = Visibility.Collapsed;
-            }
-
-            if (PhotoSource.CommentCount > 0 || PhotoSource.ViewCount > 0)
-            {
-                StatView.PhotoSource = PhotoSource;
-                StatView.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                StatView.Visibility = Visibility.Collapsed;
-            }
-        }
-
+        
         private void LayoutInOverlayMode()
         {
             LayoutRoot.Background = semiTransparentBrush;

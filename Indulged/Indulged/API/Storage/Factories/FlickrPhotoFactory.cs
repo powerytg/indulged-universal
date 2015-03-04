@@ -68,13 +68,23 @@ namespace Indulged.API.Storage.Factories
             JToken widthValue;
             if (json.TryGetValue("o_width", out widthValue))
             {
-                photo.Width = int.Parse(json["o_width"].ToString());
+                photo.OriginalWidth = int.Parse(json["o_width"].ToString());
             }
 
             JToken heightValue;
             if (json.TryGetValue("o_height", out heightValue))
             {
-                photo.Height = int.Parse(json["o_height"].ToString());
+                photo.OriginalHeight = int.Parse(json["o_height"].ToString());
+            }
+
+            if (json.TryGetValue("width_l", out widthValue))
+            {
+                photo.LargeWidth = int.Parse(json["width_l"].ToString());
+            }
+
+            if (json.TryGetValue("height_l", out heightValue))
+            {
+                photo.LargeHeight = int.Parse(json["height_l"].ToString());
             }
 
             if (json.TryGetValue("width_m", out widthValue))
