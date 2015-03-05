@@ -12,61 +12,67 @@ namespace Indulged.UI.Common.PhotoStream.Factories
         private int maxRowSpanForTwoImages = 5;
         private int defaultRowSpanForThreeImages = 4;
         private float maxRatio = 0.65f;
+        private float minRatio = 0.33f;
 
         private Random randomGenerator = new Random();
 
-        public override void GenerateLayoutWeightForTiles(List<PhotoTile> tiles)
+        public override void GenerateLayout(PhotoTile tile)
         {
-            if (tiles.Count == 1)
+            if (tile.Photos.Count == 1)
             {
-                LayoutOneMagazineTile(tiles);
+                LayoutOnePhoto(tile);
             }
-            else if(tiles.Count == 2)
+            else if (tile.Photos.Count == 2)
             {
-                LayoutTwoMagazineTiles(tiles);
+                LayoutTwoPhotos(tile);
             }
-            else if(tiles.Count == 3)
+            else if (tile.Photos.Count == 3)
             {
-                LayoutThreeMagazineTiles(tiles);
+                LayoutThreePhotos(tile);
             }
         }
 
-        private void LayoutOneMagazineTile(List<PhotoTile> tiles)
+        private void LayoutOnePhoto(PhotoTile tile)
         {
             // If there's only one tile, then the tile will use all the width and as much as heights needed
-            var tile = tiles[0];
-            tile.ColSpan = MAX_COL_COUNT;
-            if (tile.Photo.Height != 0)
+            PhotoTileLayoutMetadata layout = new PhotoTileLayoutMetadata();
+            var photo = tile.Photos[0];
+            layout.ColSpan = MAX_COL_COUNT;
+            if (photo.Height != 0)
             {
-                tile.RowSpan = Math.Min(MAX_ROW_COUNT, (int)(tile.Photo.Height / cellSize));
+                layout.RowSpan = Math.Min(MAX_ROW_COUNT, (int)(photo.Height / cellSize));
             }
             else
             {
-                tile.RowSpan = defaultRowSpanForSingleImage;
+                layout.RowSpan = defaultRowSpanForSingleImage;
             }
+
+            tile.LayoutConfigurations = new List<PhotoTileLayoutMetadata> { layout };
         }
 
-        private void LayoutTwoMagazineTiles(List<PhotoTile> tiles)
+        private void LayoutTwoPhotos(PhotoTile tile)
         {
             // For two tiles, use the minimal number of rows, and then distribute the cols
-            var tile1 = tiles[0];
-            var tile2 = tiles[1];
+            var photo1 = tile.Photos[0];
+            var photo2 = tile.Photos[1];
+            var layout1 = new PhotoTileLayoutMetadata();
+            var layout2 = new PhotoTileLayoutMetadata();
 
             // Row span
             int tile1RowSpan;
             int tile2RowSpan;
-            if (tile1.Photo.Height != 0)
+            if (photo1.Height != 0)
             {
-                tile1RowSpan = Math.Min(MAX_ROW_COUNT, (int)(tile1.Photo.Height / cellSize));
+                tile1RowSpan = Math.Min(MAX_ROW_COUNT, (int)(photo1.Height / cellSize));
             }
             else
             {
                 tile1RowSpan = defaultRowSpanForTwoImages;
             }
 
-            if (tile2.Photo.Height != 0)
+            if (photo2.Height != 0)
             {
-                tile2RowSpan = Math.Min(MAX_ROW_COUNT, (int)(tile2.Photo.Height / cellSize));
+                tile2RowSpan = Math.Min(MAX_ROW_COUNT, (int)(photo2.Height / cellSize));
             }
             else
             {
@@ -75,13 +81,13 @@ namespace Indulged.UI.Common.PhotoStream.Factories
 
             var rowSpan = Math.Min(tile1RowSpan, tile2RowSpan);
             rowSpan = Math.Min(maxRowSpanForTwoImages, rowSpan);
-            tile1.RowSpan = rowSpan;
-            tile2.RowSpan = rowSpan;
+            layout1.RowSpan = rowSpan;
+            layout2.RowSpan = rowSpan;
             
             // Col span
-            if (tile1.Photo.Width != 0 && tile2.Photo.Width != 0)
+            if (photo1.Width != 0 && photo2.Width != 0)
             {
-                float ratio = (float)tile1.Photo.Width / (float)(tile1.Photo.Width + tile2.Photo.Width);
+                float ratio = (float)photo1.Width / (float)(photo1.Width + photo2.Width);
 
                 // Jitter and constraint
                 if (ratio == 0.5)
@@ -90,55 +96,80 @@ namespace Indulged.UI.Common.PhotoStream.Factories
                 }
 
                 ratio = Math.Min(ratio, maxRatio);
+                ratio = Math.Max(ratio, minRatio);
 
-                tile1.ColSpan = (int)Math.Ceiling(ratio * MAX_COL_COUNT);
-                tile2.ColSpan = MAX_COL_COUNT - tile1.ColSpan + 1;
+                layout1.ColSpan = (int)Math.Ceiling(ratio * MAX_COL_COUNT);
+                layout2.ColSpan = MAX_COL_COUNT - layout1.ColSpan;
+                layout2.Col = layout1.ColSpan;
             }
+
+            tile.LayoutConfigurations = new List<PhotoTileLayoutMetadata> { layout1, layout2 };
         }
 
-        private void LayoutThreeMagazineTiles(List<PhotoTile> tiles)
+        private void LayoutThreePhotos(PhotoTile tile)
         {
             // For three photos, one will be on the left, and two on right
-            var tile1 = tiles[0];
-            var tile2 = tiles[1];
-            var tile3 = tiles[2];
+            var photo1 = tile.Photos[0];
+            var photo2 = tile.Photos[1];
+            var photo3 = tile.Photos[2];
+
+            var layout1 = new PhotoTileLayoutMetadata();
+            var layout2 = new PhotoTileLayoutMetadata();
+            var layout3 = new PhotoTileLayoutMetadata();
 
             // Col span
-            if (tile1.Photo.Width != 0 && tile2.Photo.Width != 0 && tile3.Photo.Width != 0)
+            if (photo1.Width != 0 && photo2.Width != 0 && photo3.Width != 0)
             {
-                float rightSizeWidth = (float)Math.Max(tile2.Photo.Width, tile3.Photo.Width);
-                float ratio = (float)tile1.Photo.Width / (float)(tile1.Photo.Width + rightSizeWidth);
-                tile1.ColSpan = (int)Math.Ceiling(ratio * MAX_COL_COUNT);
-                tile2.ColSpan = MAX_COL_COUNT - tile1.ColSpan;
-                tile3.ColSpan = tile2.ColSpan;
+                float rightSizeWidth = (float)Math.Max(photo2.Width, photo3.Width);
+                float ratio = (float)photo1.Width / (float)(photo1.Width + rightSizeWidth);
+
+                // Restrain and jitter the ratio
+                ratio = Math.Min(ratio, maxRatio);
+                ratio = Math.Max(ratio, minRatio);
+                if (ratio == 0.5)
+                {
+                    ratio = randomGenerator.NextFloat(0.35f, 0.65f);
+                }
+
+                layout1.ColSpan = (int)Math.Ceiling(ratio * MAX_COL_COUNT);
+                layout2.ColSpan = MAX_COL_COUNT - layout1.ColSpan + 1;
+                layout3.ColSpan = layout2.ColSpan;
+
+                layout2.Col = layout1.ColSpan;
+                layout3.Col = layout2.Col;
             }
 
             // Row span
             var maxHeight = 0;
-            maxHeight = Math.Max(maxHeight, tile1.Photo.Height);
-            maxHeight = Math.Max(maxHeight, tile2.Photo.Height);
-            maxHeight = Math.Max(maxHeight, tile3.Photo.Height);
+            maxHeight = Math.Max(maxHeight, photo1.Height);
+            maxHeight = Math.Max(maxHeight, photo2.Height);
+            maxHeight = Math.Max(maxHeight, photo3.Height);
             if (maxHeight == 0)
             {
-                tile1.RowSpan = defaultRowSpanForThreeImages;
+                layout1.RowSpan = defaultRowSpanForThreeImages;
             }
             else
             {
-                tile1.RowSpan = (int)Math.Ceiling(maxHeight / cellSize);
-                tile1.RowSpan = Math.Min(tile1.RowSpan, MAX_ROW_COUNT);
+                layout1.RowSpan = (int)Math.Ceiling(maxHeight / cellSize);
+                layout1.RowSpan = Math.Min(layout1.RowSpan, MAX_ROW_COUNT);
             }
 
-            if (tile2.Photo.Height != 0 && tile3.Photo.Height != 0)
+            if (photo2.Height != 0 && photo3.Height != 0)
             {
-                float ratio = (float)tile2.Photo.Height / (float)(tile2.Photo.Width + tile3.Photo.Height);
-                tile2.RowSpan = (int) Math.Ceiling(tile1.RowSpan * ratio);
+                float ratio = (float)photo2.Height / (float)(photo2.Width + photo3.Height);
+                ratio = Math.Min(ratio, maxRatio);
+                ratio = Math.Max(ratio, minRatio);
+                layout2.RowSpan = (int)Math.Ceiling(layout1.RowSpan * ratio);
             }
             else
             {
-                tile2.RowSpan = (int)Math.Ceiling(tile1.RowSpan * 0.5f);
+                layout2.RowSpan = (int)Math.Ceiling(layout1.RowSpan * 0.5f);
             }
 
-            tile3.RowSpan = tile1.RowSpan - tile2.RowSpan;
+            layout3.RowSpan = layout1.RowSpan - layout2.RowSpan;
+            layout3.Row = layout2.RowSpan;
+
+            tile.LayoutConfigurations = new List<PhotoTileLayoutMetadata> { layout1, layout2, layout3 };
         }
 
         

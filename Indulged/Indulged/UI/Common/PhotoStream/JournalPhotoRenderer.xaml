@@ -1,4 +1,4 @@
-﻿<local:PhotoRendererBase
+﻿<local:PhotoTileRendererBase
     x:Class="Indulged.UI.Common.PhotoStream.JournalPhotoRenderer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -12,7 +12,7 @@
     <Grid x:Name="LayoutRoot" Background="#151515">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
@@ -21,22 +21,8 @@
                HorizontalAlignment="Center" VerticalAlignment="Center"
                Grid.Row="0"/>
 
-        <!--Image overlays-->
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top">
-            
-            <TextBlock x:Name="AuthorLabel"
-                       Foreground="White" FontStyle="Italic" FontSize="14"
-                       TextWrapping="Wrap" VerticalAlignment="Top"
-                       Margin="0, 3, 10, 3"/>
-            
-            <Image Source="/Assets/Dashboard/PageCurl.png"
-                   Width="33"/>
-            
-        </StackPanel>
-        
         <!--Title and description-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" MaxHeight="300">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -46,7 +32,8 @@
             <TextBlock x:Name="TitleLabel"
                        Grid.Row="0" HorizontalAlignment="Center"
                        Margin="25, 10, 25, 10" 
-                       TextWrapping="Wrap" TextAlignment="Center"
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis" MaxLines="3"
+                       TextAlignment="Center"
                        Foreground="White" FontWeight="Thin" FontSize="28"/>
 
             <!--Description-->
@@ -57,13 +44,14 @@
                 </Grid.ColumnDefinitions>
                 
                 <Image Source="/Assets/Dashboard/CommentQuote.png" 
-                       Margin="15, 0, 0, 0"
+                       Margin="15, 0, 0, 0" Width="36"
                        Grid.Column="0" VerticalAlignment="Top"/>
                 
                 <TextBlock x:Name="DescLabel"
                        Margin="15, 0, 25, 10" Grid.Column="1"
-                       TextWrapping="Wrap"
-                       Foreground="#656565"  FontSize="16" FontFamily="Georgia" FontStyle="Italic"/>
+                       TextWrapping="Wrap" TextTrimming="WordEllipsis"
+                       Foreground="#656565"  
+                       FontSize="16" FontFamily="Georgia" FontStyle="Italic"/>
 
             </Grid>
         </Grid>
@@ -74,4 +62,4 @@
                Width="180" Margin="20"/>
         
     </Grid>
-</local:PhotoRendererBase>
+</local:PhotoTileRendererBase>

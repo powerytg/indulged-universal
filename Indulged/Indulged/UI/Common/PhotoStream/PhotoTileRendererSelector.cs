@@ -6,20 +6,21 @@ namespace Indulged.UI.Common.PhotoStream
 {
     public class PhotoTileRendererSelector : DataTemplateSelector
     {
-        public DataTemplate MagazinePhotoRenderer { get; set; }
-        public DataTemplate JournalPhotoRenderer { get; set; }
+        public DataTemplate MagazineRenderer { get; set; }
+        public DataTemplate JournalRenderer { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             var tile = item as PhotoTile;
-            switch (tile.Style)
+            if (tile.Style == PhotoTile.LayoutStyle.Journal)
             {
-                case PhotoTile.LayoutStyle.Journal:
-                    return JournalPhotoRenderer;
-                case PhotoTile.LayoutStyle.Magazine:
-                    return MagazinePhotoRenderer;
+                return JournalRenderer;
             }
-
+            else if (tile.Style == PhotoTile.LayoutStyle.Magazine)
+            {
+                return MagazineRenderer;
+            }
+            
             return base.SelectTemplateCore(item, container);
         }
     }

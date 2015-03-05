@@ -15,25 +15,17 @@ namespace Indulged.UI.Models
             Journal
         }
 
-        public FlickrPhoto Photo { get; set; }
+        public List<FlickrPhoto> Photos { get; set; }
         public LayoutStyle Style;
-        public int RowSpan { get; set; }
-        public int ColSpan { get; set; }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public PhotoTile()
-        {
-        }
+        public List<PhotoTileLayoutMetadata> LayoutConfigurations;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="photo"></param>
-        public PhotoTile(FlickrPhoto photo, LayoutStyle layoutStyle)
+        public PhotoTile(List<FlickrPhoto> photos, LayoutStyle layoutStyle)
         {
-            Photo = photo;
+            Photos = photos;
             Style = layoutStyle;
         }
     }

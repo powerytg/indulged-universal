@@ -7,45 +7,51 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace Indulged.UI.Common.PhotoStream
 {
-    public sealed partial class JournalPhotoRenderer : PhotoRendererBase
+    public sealed partial class JournalPhotoRenderer : PhotoTileRendererBase
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        public JournalPhotoRenderer()
+        public JournalPhotoRenderer() : base()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnPhotoChanged()
+        protected override void LayoutCells(double containerWidth)
         {
-            base.OnPhotoChanged();
-
-            if (Photo == null)
+            if (PhotoTileSource == null)
             {
                 return;
             }
 
-            ImageView.Source = new BitmapImage(new Uri(Photo.GetImageUrl(), UriKind.Absolute));
+            base.LayoutCells(containerWidth);
 
-            if (StorageService.Instance.UserCache.ContainsKey(Photo.UserId))
+            var photo = PhotoTileSource.Photos[0];
+            if (photo.Height != 0)
             {
-                AuthorLabel.Text = StorageService.Instance.UserCache[Photo.UserId].Name;
+                ImageView.Height = Math.Min(photo.Height, 400);
+            }
+            else
+            {
+                ImageView.Height = 340;
             }
 
-            if (Photo.Title.Length == 0)
+            ImageView.Source = new BitmapImage(new Uri(photo.GetImageUrl(), UriKind.Absolute));
+
+
+            if (photo.Title.Length == 0)
             {
                 TitleLabel.Text = "Untitled";
             }
             else
             {
-                TitleLabel.Text = Photo.Title;
-            }
+                TitleLabel.Text = photo.Title;
+            }         
 
-            if (Photo.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(Photo.Description))
+            if (photo.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(photo.Description))
             {
                 DescPanel.Visibility = Visibility.Visible;
-                DescLabel.Text = Photo.Description;
+                DescLabel.Text = photo.Description;
             }
             else
             {

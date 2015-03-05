@@ -164,15 +164,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Common\PhotoStream\CommonPhotoStatView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UI\Common\PhotoStream\CommonStreamListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Common\PhotoStream\JournalPhotoRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\PhotoStream\MagazinePhotoRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -331,9 +331,6 @@
     <Compile Include="UI\Common\PhotoStream\CommonPhotoRenderer.xaml.cs">
       <DependentUpon>CommonPhotoRenderer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Common\PhotoStream\CommonPhotoStatView.xaml.cs">
-      <DependentUpon>CommonPhotoStatView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Common\PhotoStream\CommonStreamListView.xaml.cs">
       <DependentUpon>CommonStreamListView.xaml</DependentUpon>
     </Compile>
@@ -344,6 +341,10 @@
     <Compile Include="UI\Common\PhotoStream\PhotoRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\Factories\PhotoTileFactory.cs" />
     <Compile Include="UI\Common\PhotoStream\Factories\MagazineLayoutGenerator.cs" />
+    <Compile Include="UI\Common\PhotoStream\MagazinePhotoRenderer.xaml.cs">
+      <DependentUpon>MagazinePhotoRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\PhotoStream\PhotoTileRendererBase.cs" />
     <Compile Include="UI\Common\PhotoStream\PhotoTileRendererSelector.cs" />
     <Compile Include="UI\Common\PhotoStream\StreamListViewBase.cs" />
     <Compile Include="UI\Dashboard\CatalogAlbumGridView.xaml.cs">
@@ -391,6 +392,7 @@
     </Compile>
     <Compile Include="API\Utils\EventUtils.cs" />
     <Compile Include="API\Utils\TypeUtils.cs" />
+    <Compile Include="UI\Models\PhotoTileLayoutMetadata.cs" />
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
   </ItemGroup>

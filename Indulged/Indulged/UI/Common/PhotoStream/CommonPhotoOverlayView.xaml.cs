@@ -104,15 +104,6 @@ namespace Indulged.UI.Common.PhotoStream
             }
 
             DescLabel.Visibility = Visibility.Collapsed;
-            if (PhotoSource.CommentCount > 0 || PhotoSource.ViewCount > 0)
-            {
-                StatView.PhotoSource = PhotoSource;
-                StatView.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                StatView.Visibility = Visibility.Collapsed;
-            }
         }
         
         private void LayoutInOverlayMode()
@@ -139,15 +130,6 @@ namespace Indulged.UI.Common.PhotoStream
                 DescLabel.Visibility = Visibility.Collapsed;
             }
 
-            if (PhotoSource.CommentCount > 0 || PhotoSource.ViewCount > 0)
-            {
-                StatView.PhotoSource = PhotoSource;
-                StatView.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                StatView.Visibility = Visibility.Collapsed;
-            }
         }
 
         private bool ShouldShowTitle()
@@ -184,7 +166,7 @@ namespace Indulged.UI.Common.PhotoStream
 
         public static bool IsTextInBlackList(string text)
         {
-            string lowcaseText = text.ToLower();
+            string lowcaseText = text.ToLower().Trim();
             if (lowcaseText.StartsWith("untitled")
                 || lowcaseText.StartsWith("img")
                 || lowcaseText.StartsWith("http")

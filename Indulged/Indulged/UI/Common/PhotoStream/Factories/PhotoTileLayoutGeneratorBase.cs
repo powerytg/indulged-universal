@@ -25,6 +25,6 @@ namespace Indulged.UI.Common.PhotoStream.Factories
         /// Create RowSpan and ColSpan for photo tiles
         /// </summary>
         /// <param name="tiles"></param>
-        public abstract void GenerateLayoutWeightForTiles(List<PhotoTile> tiles);
+        public abstract void GenerateLayout(PhotoTile tile);
     }
 }

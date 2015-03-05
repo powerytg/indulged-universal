@@ -8,31 +8,22 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    DataFetchSize="1" >
-    
-    <!--ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">-->
-    
-    <local:StreamListViewBase.ItemsPanel>
-        <ItemsPanelTemplate>
-            <VariableSizedWrapGrid x:Name="InnerGrid"
-                                   Orientation="Horizontal"
-                                   Loaded="InnerGrid_Loaded"/>
-        </ItemsPanelTemplate>
-    </local:StreamListViewBase.ItemsPanel>
+    DataFetchSize="1"    
+    ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
 
     <local:StreamListViewBase.ItemTemplateSelector>        
         <local:PhotoTileRendererSelector>
-            <local:PhotoTileRendererSelector.JournalPhotoRenderer>
+            <local:PhotoTileRendererSelector.JournalRenderer>
                 <DataTemplate>
-                    <local:JournalPhotoRenderer Photo="{Binding Photo}"/>
+                    <local:JournalPhotoRenderer PhotoTileSource="{Binding}"/>
                 </DataTemplate>
-            </local:PhotoTileRendererSelector.JournalPhotoRenderer>
+            </local:PhotoTileRendererSelector.JournalRenderer>
 
-            <local:PhotoTileRendererSelector.MagazinePhotoRenderer>
+            <local:PhotoTileRendererSelector.MagazineRenderer>
                 <DataTemplate>
-                    <local:CommonPhotoRenderer Photo="{Binding Photo}" Margin="2"/>
+                    <local:MagazinePhotoRenderer PhotoTileSource="{Binding}"/>
                 </DataTemplate>
-            </local:PhotoTileRendererSelector.MagazinePhotoRenderer>            
+            </local:PhotoTileRendererSelector.MagazineRenderer>
         </local:PhotoTileRendererSelector>
     </local:StreamListViewBase.ItemTemplateSelector>
 

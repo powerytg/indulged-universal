@@ -24,52 +24,54 @@ namespace Indulged.UI.Common.PhotoStream.Factories
 
         public List<PhotoTile> GenerateMagazineTiles(List<FlickrPhoto> photos)
         {
-            List<PhotoTile> tiles = new List<PhotoTile>();
-            foreach (var photo in photos)
-            {
-                var tile = new PhotoTile(photo, PhotoTile.LayoutStyle.Magazine);
-                tiles.Add(tile);
-            }
+            List<PhotoTile> result = new List<PhotoTile>();
 
             // Randomly slice the photo into groups
-            int min = 2;
-            int max = 2;
+            int min = 1;
+            int max = 4;
             int position = 0;
+            PhotoTile tile;
 
             while (position < photos.Count)
             {
                 int ranNum = randomGenerator.Next(min, max);
-                List<PhotoTile> group = new List<PhotoTile>();
+                List<FlickrPhoto> group = new List<FlickrPhoto>();
 
                 if (position + ranNum >= photos.Count)
                 {
                     for (int i = position; i < photos.Count; i++)
                     {
-                        group.Add(tiles[i]);
+                        group.Add(photos[i]);
                     }
 
-                    layoutGenerator.GenerateLayoutWeightForTiles(group);
+                    tile = new PhotoTile(group, PhotoTile.LayoutStyle.Magazine);
+                    layoutGenerator.GenerateLayout(tile);
+                    result.Add(tile);                    
                     break;
                 }
 
                 for (int i = position; i < position + ranNum; i++)
                 {
-                    group.Add(tiles[i]);
+                    group.Add(photos[i]);
                 }
 
-                layoutGenerator.GenerateLayoutWeightForTiles(group);
+                tile = new PhotoTile(group, PhotoTile.LayoutStyle.Magazine);
+                layoutGenerator.GenerateLayout(tile);
+                result.Add(tile);
+                
                 position += ranNum;
             }
 
-            return tiles;
+            return result;
         }
-        /*
+        
         public List<PhotoTile> GenerateLinearPhotoTiles(List<FlickrPhoto> photos)
         {
             List<PhotoTile> result = new List<PhotoTile>();
             foreach (var photo in photos)
             {
-                var tile = new PhotoTile(new List<FlickrPhoto> { photo });
+                var tile = new PhotoTile(new List<FlickrPhoto> { photo }, PhotoTile.LayoutStyle.Magazine);
+                layoutGenerator.GenerateLayout(tile);
                 result.Add(tile);
             }
 
@@ -81,13 +83,12 @@ namespace Indulged.UI.Common.PhotoStream.Factories
             List<PhotoTile> result = new List<PhotoTile>();
             foreach (var photo in photos)
             {
-                var tile = new PhotoTile(new List<FlickrPhoto> { photo });
-                tile.ShowAsJournal = true;
+                var tile = new PhotoTile(new List<FlickrPhoto> { photo }, PhotoTile.LayoutStyle.Journal);
                 result.Add(tile);
             }
 
             return result;
         }
-         */
+         
     }
 }

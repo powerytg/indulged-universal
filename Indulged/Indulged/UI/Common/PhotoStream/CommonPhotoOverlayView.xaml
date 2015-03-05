@@ -13,22 +13,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Title view -->
         <TextBlock x:Name="TitleLabel"  FontWeight="Medium"
                        TextTrimming="WordEllipsis"  TextWrapping="Wrap"
-                       Foreground="#ffffff" FontSize="18" TextAlignment="Left" 
-                       Grid.Row="0" Margin="5, 0, 5, 5" VerticalAlignment="Top" />
+                       Foreground="#ffffff" FontSize="14" TextAlignment="Left" 
+                       Grid.Row="0" Margin="5, 0, 10, 5" VerticalAlignment="Top" />
 
         <TextBlock x:Name="DescLabel" 
                        TextTrimming="WordEllipsis"  TextWrapping="Wrap"
-                       Foreground="#cacaca" FontSize="14" FontWeight="Light" TextAlignment="Left" 
-                       Grid.Row="1" Margin="5, 0, 5, 2" VerticalAlignment="Top"/>
-
-        <!-- Stat view -->
-        <local:CommonPhotoStatView x:Name="StatView"
-                                            Grid.Row="2" Margin="5, 0, 5, 5" VerticalAlignment="Bottom"/>
+                       Foreground="#cacaca" FontSize="13" FontWeight="Light" TextAlignment="Left" 
+                       Grid.Row="1" Margin="5, 0, 8, 2" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using Indulged.PolKit;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -57,7 +58,6 @@ namespace Indulged.UI.Common.PhotoStream
             OverlayView.ClearValue(FrameworkElement.MaxWidthProperty);
             OverlayView.ClearValue(FrameworkElement.MaxHeightProperty);
             OverlayView.ClearValue(FrameworkElement.HorizontalAlignmentProperty);
-            OverlayView.ClearValue(FrameworkElement.VerticalAlignmentProperty);
 
             int textLength = Photo.Title.Length + Photo.Description.Length;
 
@@ -82,7 +82,6 @@ namespace Indulged.UI.Common.PhotoStream
         {
             OverlayView.LayoutMode = CommonPhotoOverlayView.PhotoOverlayLayoutMode.Mini;
             OverlayView.HorizontalAlignment = HorizontalAlignment.Left;
-            OverlayView.VerticalAlignment = VerticalAlignment.Bottom;
         }
 
         private void LayoutOverlayInOverlayModeVertically()
@@ -90,9 +89,31 @@ namespace Indulged.UI.Common.PhotoStream
             double screenSize = Window.Current.Bounds.Width;
             OverlayView.LayoutMode = CommonPhotoOverlayView.PhotoOverlayLayoutMode.Overlay;
             OverlayView.HorizontalAlignment = HorizontalAlignment.Stretch;
-            OverlayView.VerticalAlignment = VerticalAlignment.Bottom;
-            OverlayView.MaxHeight = ImageView.ActualHeight * 0.4;
+            OverlayView.MaxHeight = ActualHeight * 0.4;
         }
 
+        #region Pressed state
+
+        private void PhotoRendererBase_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            bool result = VisualStateManager.GoToState(this, "Pressed", false);
+        }
+
+        private void PhotoRendererBase_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void PhotoRendererBase_PointerCanceled(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void PhotoRendererBase_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        #endregion
     }
 }

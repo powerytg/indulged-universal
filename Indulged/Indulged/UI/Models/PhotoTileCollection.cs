@@ -5,6 +5,7 @@ using Indulged.UI.Common.PhotoStream.Factories;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.UI.Xaml.Data;
 
@@ -17,7 +18,7 @@ namespace Indulged.UI.Models
         public EventHandler LoadingComplete;
 
         private int page = 1;
-        private int maxPage = 8;
+        private int maxPage = 10;
 
         private PhotoTileFactory factory;
         private FlickrPhotoStream stream;
@@ -78,9 +79,9 @@ namespace Indulged.UI.Models
 
                 var newPhotos = StorageService.Instance.OnPhotoStreamReturned(stream, retVal.Result);
 
-                var tiles = factory.GenerateMagazineTiles(newPhotos);
+                //var tiles = factory.GenerateMagazineTiles(newPhotos);
                 //var tiles = factory.GenerateLinearPhotoTiles(newPhotos);
-                //var tiles = factory.GenerateJournalPhotoTiles(newPhotos);
+                var tiles = factory.GenerateJournalPhotoTiles(newPhotos);
                 foreach (var tile in tiles)
                 {
                     this.Add(tile);

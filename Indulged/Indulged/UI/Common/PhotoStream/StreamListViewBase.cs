@@ -1,11 +1,11 @@
 ﻿using Indulged.API.Storage.Models;
-using Indulged.UI.Common.Controls;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Indulged.UI.Common.PhotoStream
 {
-    public partial class StreamListViewBase : MagazineView
+    public partial class StreamListViewBase : ListView
     {
         // Events
         public EventHandler LoadingStarted;
