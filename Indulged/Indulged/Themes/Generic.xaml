@@ -4,6 +4,7 @@
     xmlns:local="using:Indulged.Themes">
     
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Themes/MainControlStyle.xaml"/>
         <ResourceDictionary Source="/Themes/ModalPopupStyle.xaml"/>
         <ResourceDictionary Source="/Themes/PhotoListViewStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainPivotStyle.xaml"/>

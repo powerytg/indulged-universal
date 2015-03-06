@@ -32,9 +32,6 @@ namespace Indulged
 {
     public sealed partial class PivotPage : Page
     {
-        private const string FirstGroupName = "FirstGroup";
-        private const string SecondGroupName = "SecondGroup";
-
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
@@ -81,12 +78,8 @@ namespace Indulged
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-1");
-            this.DefaultViewModel[FirstGroupName] = sampleDataGroup;
-
             // Events
             StorageService.Instance.PhotoStreamUpdated += OnPhotoStreamUpdated;
         }
@@ -103,53 +96,6 @@ namespace Indulged
         {
             // Events
             StorageService.Instance.PhotoStreamUpdated -= OnPhotoStreamUpdated;
-        }
-
-        /// <summary>
-        /// Adds an item to the list when the app bar button is clicked.
-        /// </summary>
-        private void AddAppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            string groupName = this.MainPivot.SelectedIndex == 0 ? FirstGroupName : SecondGroupName;
-            var group = this.DefaultViewModel[groupName] as SampleDataGroup;
-            var nextItemId = group.Items.Count + 1;
-            var newItem = new SampleDataItem(
-                string.Format(CultureInfo.InvariantCulture, "Group-{0}-Item-{1}", this.MainPivot.SelectedIndex + 1, nextItemId),
-                string.Format(CultureInfo.CurrentCulture, this.resourceLoader.GetString("NewItemTitle"), nextItemId),
-                string.Empty,
-                string.Empty,
-                this.resourceLoader.GetString("NewItemDescription"),
-                string.Empty);
-
-            group.Items.Add(newItem);
-
-            // Scroll the new item into view.
-            var container = this.MainPivot.ContainerFromIndex(this.MainPivot.SelectedIndex) as ContentControl;
-            var listView = container.ContentTemplateRoot as ListView;
-            listView.ScrollIntoView(newItem, ScrollIntoViewAlignment.Leading);
-        }
-
-        /// <summary>
-        /// Invoked when an item within a section is clicked.
-        /// </summary>
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            // Navigate to the appropriate destination page, configuring the new page
-            // by passing required information as a navigation parameter
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
-        }
-
-        /// <summary>
-        /// Loads the content for the second pivot item when it is scrolled into view.
-        /// </summary>
-        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            var sampleDataGroup = await SampleDataSource.GetGroupAsync("Group-2");
-            this.DefaultViewModel[SecondGroupName] = sampleDataGroup;
         }
 
         #region NavigationHelper registration
@@ -200,6 +146,35 @@ namespace Indulged
             {
                 DashboardThemeManager.Instance.SelectedTheme = DashboardThemes.Dark;
             }
+        }
+
+        private void PreludeStyleButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Choose display style from magazine, banner, or journal
+            var contentView = new PreludeStreamStyleDialog();
+            var dialog = ModalPopup.Show(contentView, "Choose Display Style", new List<string> { "Confirm", "Cancel" });
+            dialog.DismissWithButtonClick += (s, evt) =>
+            {
+                if (evt.ButtonIndex == 0)
+                {
+                    var selectedStyle = contentView.SelectedStyle;
+
+                    if (selectedStyle != PolKit.PolicyKit.Instance.PreludeLayoutStyle)
+                    {
+                        PolKit.PolicyKit.Instance.PreludeLayoutStyle = selectedStyle;
+                    }
+                }
+            };
+        }
+
+        /// <summary>
+        /// Show "Choose Stream" dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StreamSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreludeView.ShowStreamSelectionDialog();
         }
 
     }

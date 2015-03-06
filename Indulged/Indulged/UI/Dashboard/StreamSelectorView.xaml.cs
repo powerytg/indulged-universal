@@ -29,6 +29,11 @@ namespace Indulged.UI.Dashboard
 
         private void SelectorButton_Click(object sender, RoutedEventArgs e)
         {
+            ShowStreamSelectionDialog();
+        }
+
+        public void ShowStreamSelectionDialog()
+        {
             var contentView = new StreamSelectorDialog();
             var dialog = ModalPopup.Show(contentView, "Choose Stream", new List<string> { "Confirm", "Cancel" });
             dialog.DismissWithButtonClick += (s, evt) =>
@@ -45,5 +50,6 @@ namespace Indulged.UI.Dashboard
                 }
             };
         }
+
     }
 }

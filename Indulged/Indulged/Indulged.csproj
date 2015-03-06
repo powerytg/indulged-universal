@@ -83,10 +83,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <Page Include="ItemPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="PivotPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +98,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\MainButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\MainControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -200,6 +201,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Dashboard\PreludeStreamStyleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dashboard\PreludeSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,9 +292,6 @@
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="DataModel\SampleDataSource.cs" />
-    <Compile Include="ItemPage.xaml.cs">
-      <DependentUpon>ItemPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PivotPage.xaml.cs">
       <DependentUpon>PivotPage.xaml</DependentUpon>
     </Compile>
@@ -367,6 +369,9 @@
     </Compile>
     <Compile Include="UI\Dashboard\DashboardThemeManager.cs" />
     <Compile Include="UI\Dashboard\DashboardThemes.cs" />
+    <Compile Include="UI\Dashboard\PreludeStreamStyleDialog.xaml.cs">
+      <DependentUpon>PreludeStreamStyleDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dashboard\Events\DashboardThemeChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\Events\StreamSelectionChangedEventArgs.cs" />
     <Compile Include="UI\Dashboard\PreludeSection.xaml.cs">
@@ -395,6 +400,7 @@
     <Compile Include="UI\Models\PhotoTileLayoutMetadata.cs" />
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
+    <Compile Include="UI\Models\StreamLayoutStyle.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -406,6 +412,7 @@
     <Content Include="Assets\Common\PageSeperator.png" />
     <Content Include="Assets\Common\PageSeperatorLeft.png" />
     <Content Include="Assets\Common\PageSeperatorRight.png" />
+    <Content Include="Assets\Common\RadioButton.scale-240.png" />
     <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\Admin.scale-240.png" />
     <Content Include="Assets\Dashboard\Alert.scale-240.png" />

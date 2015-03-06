@@ -60,6 +60,14 @@
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckBackground">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="SelectedBackground">
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                                         </ObjectAnimationUsingKeyFrames>
 
@@ -81,6 +89,9 @@
                             <Grid VerticalAlignment="Top">
                                 <Ellipse x:Name="CheckBackground" Fill="Black" HorizontalAlignment="Left" Height="25.5" IsHitTestVisible="False" Stroke="#55ffffff" StrokeThickness="{ThemeResource PhoneStrokeThickness}" VerticalAlignment="Center" Width="25.5"/>
                                 <Ellipse x:Name="CheckMark" Fill="#00bff3" HorizontalAlignment="Center" Height="12.5" IsHitTestVisible="False" Visibility="Collapsed" VerticalAlignment="Center" Width="12.5"/>
+                                <Image x:Name="SelectedBackground" Source="/Assets/Common/RadioButton.png" Width="25.5"
+                                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                                       Visibility="Collapsed"/>
                                 <TextBlock/>
                             </Grid>
                             <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>

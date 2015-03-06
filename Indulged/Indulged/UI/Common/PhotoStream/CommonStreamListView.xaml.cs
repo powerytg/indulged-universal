@@ -8,6 +8,25 @@ namespace Indulged.UI.Common.PhotoStream
 {
     public sealed partial class CommonStreamListView : StreamListViewBase
     {
+        private string displayStyle;
+        public string DisplayStyle
+        {
+            get
+            {
+                return displayStyle;
+            }
+
+            set
+            {
+                if (displayStyle != value)
+                {
+                    displayStyle = value;
+                    ds.DisplayStyle = displayStyle;
+                }
+                
+            }
+        }
+
         /// <summary>
         /// Data source
         /// </summary>

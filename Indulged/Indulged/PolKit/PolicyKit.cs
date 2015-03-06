@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Indulged.UI.Models;
 
 namespace Indulged.PolKit
 {
@@ -62,6 +63,7 @@ namespace Indulged.PolKit
                 if (_useBlurredBackground != value)
                 {
                     _useBlurredBackground = value;
+                    SaveSettings();
 
                     var evt = new PolicyChangedEventArgs();
                     evt.PolicyName = PolicyConstants.UseBlurredBackground;
@@ -70,6 +72,28 @@ namespace Indulged.PolKit
             }
         }
 
+        // Prelude stream layout style
+        private string _preludeLayoutStyle = StreamLayoutStyle.Journal;
+        public string PreludeLayoutStyle
+        {
+            get
+            {
+                return _preludeLayoutStyle;
+            }
+
+            set
+            {
+                if (_preludeLayoutStyle != value)
+                {
+                    _preludeLayoutStyle = value;
+                    SaveSettings();
+
+                    var evt = new PolicyChangedEventArgs();
+                    evt.PolicyName = PolicyConstants.PreludeStreamLayoutStyle;
+                    PolicyChanged.DispatchEvent(this, evt);
+                }
+            }
+        }
 
         // Show extra overlay on Prelude's photo tiles
         private bool _showOverlayOnPreludeTiles = true;
@@ -85,6 +109,7 @@ namespace Indulged.PolKit
                 if (_showOverlayOnPreludeTiles != value)
                 {
                     _showOverlayOnPreludeTiles = value;
+                    SaveSettings();
 
                     var evt = new PolicyChangedEventArgs();
                     evt.PolicyName = PolicyConstants.ShowOverlayOnPreludeTiles;

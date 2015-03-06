@@ -1,0 +1,44 @@
+﻿<UserControl
+    x:Class="Indulged.UI.Dashboard.PreludeStreamStyleDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Dashboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <StackPanel Orientation="Vertical" Margin="20, 0, 20, 8">
+        <RadioButton x:Name="JournalButton" GroupName="DisplayStyle"
+                     Style="{StaticResource MainRadioButtonStyle}"
+                     Checked="JournalButton_Checked">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Journal style"/>
+                <TextBlock Text="Clean, unclusterd layout with each photo revealing as much information as possible" 
+                           Style="{StaticResource RadioButtonDescription}"/>
+            </StackPanel>
+        </RadioButton>
+        
+        <RadioButton x:Name="MagazineButton" GroupName="DisplayStyle"
+                     Style="{StaticResource MainRadioButtonStyle}"
+                     Checked="MagazineButton_Checked">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Magazine style"/>
+                <TextBlock Text="Photos are dynamically arranged. Each row may contain multiple items" 
+                           Style="{StaticResource RadioButtonDescription}"/>
+            </StackPanel>
+        </RadioButton>
+        
+        <RadioButton x:Name="LinearButton" GroupName="DisplayStyle"
+                     Style="{StaticResource MainRadioButtonStyle}"
+                     Checked="LinearButton_Checked">
+            <RadioButton.Content>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Large banner"/>
+                    <TextBlock Text="One photo per row" Style="{StaticResource RadioButtonDescription}"/>
+                </StackPanel>
+            </RadioButton.Content>
+        </RadioButton>
+    </StackPanel>
+</UserControl>

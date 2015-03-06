@@ -13,6 +13,25 @@ namespace Indulged.UI.Models
 {
     public class PhotoTileCollection : ObservableCollection<PhotoTile>, ISupportIncrementalLoading
     {
+        protected string displayStyle;
+        public string DisplayStyle
+        {
+            get
+            {
+                return displayStyle;
+            }
+
+            set
+            {
+                if (displayStyle != value)
+                {
+                    displayStyle = value;
+                    Reflow();
+                }
+
+            }
+        }
+
         // Events
         public EventHandler LoadingStarted;
         public EventHandler LoadingComplete;
@@ -78,10 +97,7 @@ namespace Indulged.UI.Models
                 }
 
                 var newPhotos = StorageService.Instance.OnPhotoStreamReturned(stream, retVal.Result);
-
-                //var tiles = factory.GenerateMagazineTiles(newPhotos);
-                //var tiles = factory.GenerateLinearPhotoTiles(newPhotos);
-                var tiles = factory.GenerateJournalPhotoTiles(newPhotos);
+                var tiles = GenerateTiles(newPhotos);
                 foreach (var tile in tiles)
                 {
                     this.Add(tile);
@@ -100,5 +116,49 @@ namespace Indulged.UI.Models
                 };
             });
         }
+
+        private List<PhotoTile> GenerateTiles(List<FlickrPhoto> photos)
+        {
+            if (displayStyle == StreamLayoutStyle.Journal)
+            {
+                return factory.GenerateJournalPhotoTiles(photos);
+            }
+            else if (displayStyle == StreamLayoutStyle.Magazine)
+            {
+                return factory.GenerateMagazineTiles(photos);
+            }
+            else if (displayStyle == StreamLayoutStyle.Linear)
+            {
+                return factory.GenerateLinearPhotoTiles(photos);
+            }
+
+            // Shouldn't ever reach here!
+            return new List<PhotoTile>();
+        }
+
+        private void Reflow()
+        {
+            // Ignore if there're no items
+            if (Count == 0)
+            {
+                return;
+            }
+
+            var photos = new List<FlickrPhoto>();
+            foreach (var tile in Items)
+            {
+                photos.AddRange(tile.Photos);
+            }
+
+            // Re-generate tiles
+            Clear();
+            var tiles = GenerateTiles(photos);
+            foreach (var tile in tiles)
+            {
+                this.Add(tile);
+            }
+
+        }
+
     }
 }

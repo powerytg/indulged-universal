@@ -48,12 +48,25 @@ namespace Indulged.UI.Dashboard
         {
             this.InitializeComponent();
 
+            // Initialize stream display style
+            PhotoListView.DisplayStyle = PolKit.PolicyKit.Instance.PreludeLayoutStyle;
+
             // Initialize stream
             CurrentStream = StorageService.Instance.DiscoveryStream;
 
             // Events
             PhotoListView.LoadingStarted += OnLoadingStarted;
-            PhotoListView.LoadingComplete += OnLoadingComplete;            
+            PhotoListView.LoadingComplete += OnLoadingComplete;
+            PolKit.PolicyKit.Instance.PolicyChanged += OnPolicyChanged;
+        }
+
+        private void OnPolicyChanged(object sender, PolKit.Events.PolicyChangedEventArgs e)
+        {
+            if (e.PolicyName == PolKit.PolicyConstants.PreludeStreamLayoutStyle)
+            {
+                // Stream layout style changed
+                PhotoListView.DisplayStyle = PolKit.PolicyKit.Instance.PreludeLayoutStyle;
+            }
         }
 
         private async void OnLoadingStarted(object sender, EventArgs e)
@@ -84,6 +97,11 @@ namespace Indulged.UI.Dashboard
                 SelectorView.StreamSelectionChanged -= OnStreamSelectionChanged;
                 SelectorView.StreamSelectionChanged += OnStreamSelectionChanged;
             }
+        }
+
+        public void ShowStreamSelectionDialog()
+        {
+            SelectorView.ShowStreamSelectionDialog();
         }
 
     }
