@@ -1,6 +1,8 @@
 ﻿using Indulged.PolKit;
+using Indulged.UI.Detail;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -92,6 +94,12 @@ namespace Indulged.UI.Common.PhotoStream
             OverlayView.MaxHeight = ActualHeight * 0.4;
         }
 
+        private void PhotoRendererBase_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(DetailPage), Photo.ResourceId);
+        }
+
         #region Pressed state
 
         private void PhotoRendererBase_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -115,5 +123,6 @@ namespace Indulged.UI.Common.PhotoStream
         }
 
         #endregion
+
     }
 }

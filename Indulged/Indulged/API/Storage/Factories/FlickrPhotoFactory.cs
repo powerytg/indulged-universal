@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 
 using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
+using System.Globalization;
 
 namespace Indulged.API.Storage.Factories
 {
@@ -95,6 +96,23 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("height_m", out heightValue))
             {
                 photo.MediumHeight = int.Parse(json["height_m"].ToString());
+            }
+
+            JToken dateValue;
+            if (json.TryGetValue("datetaken", out dateValue))
+            {
+                var flickrPattern = "yyyy-MM-dd HH:mm:ss";
+                string dateString = json["datetaken"].ToString();
+                DateTime parsedDate;
+                if (DateTime.TryParseExact(dateString, flickrPattern, null, DateTimeStyles.None, out parsedDate))
+                {
+                    photo.DateTaken = parsedDate.ToString("MMMM dd, yyyy");
+                }
+                else
+                {
+                    photo.DateTaken = dateString;
+                }
+
             }
 
             // Tags

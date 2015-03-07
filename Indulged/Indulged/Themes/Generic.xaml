@@ -12,6 +12,7 @@
         <ResourceDictionary Source="/Themes/MainRadioButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/GroupButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/DetailPageStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

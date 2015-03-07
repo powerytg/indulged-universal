@@ -11,7 +11,8 @@
     PointerPressed="PhotoRendererBase_PointerPressed"
     PointerReleased="PhotoRendererBase_PointerReleased"
     PointerCanceled="PhotoRendererBase_PointerCanceled"
-    PointerCaptureLost="PhotoRendererBase_PointerCaptureLost">
+    PointerCaptureLost="PhotoRendererBase_PointerCaptureLost"
+    Tapped="PhotoRendererBase_Tapped">
     
     <Grid x:Name="LayoutRoot" Background="#444"
           SizeChanged="LayoutRoot_SizeChanged">

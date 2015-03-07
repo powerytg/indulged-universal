@@ -7,9 +7,33 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    PointerPressed="PhotoRendererBase_PointerPressed"
+    PointerReleased="PhotoRendererBase_PointerReleased"
+    PointerCanceled="PhotoRendererBase_PointerCanceled"
+    PointerCaptureLost="PhotoRendererBase_PointerCaptureLost"
+    Tapped="PhotoTileRendererBase_Tapped">
 
     <Grid x:Name="LayoutRoot" Background="#151515">
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="CommonStates">
+                <VisualStateGroup.Transitions>
+                    <VisualTransition From="Pressed" To="Normal">
+                        <Storyboard>
+                            <PointerUpThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                        </Storyboard>
+                    </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Normal"/>
+                <VisualState x:Name="Pressed">
+                    <Storyboard>
+                        <PointerDownThemeAnimation Storyboard.TargetName="LayoutRoot"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>

@@ -1,0 +1,71 @@
+﻿<local:DetailSectionBase
+    x:Class="Indulged.UI.Detail.Sections.BasicInfoSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Detail.Sections"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel x:Name="LayoutRoot" Orientation="Vertical">
+        <StackPanel.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </StackPanel.ChildrenTransitions>
+        
+        <!--Title-->
+        <TextBlock x:Name="TitleLabel" 
+                   Foreground="White" 
+                   FontSize="38" FontWeight="Light" 
+                   TextWrapping="Wrap"
+                   Margin="12, 20, 50, 5"/>
+
+        <TextBlock x:Name="DateLabel"
+                   Style="{StaticResource DetailDescription}"
+                   Margin="12, 0, 0, 0"/>
+
+        <!--Photo-->
+        <Image x:Name="ImageView"
+               Margin="0, 12, 0, 12"
+               Tapped="ImageView_Tapped"/>
+
+        <!--Author-->
+        <TextBlock x:Name="AuthorLabel"
+                Foreground="White" FontSize="14" FontWeight="Bold"
+                Margin="15, 0, 15, 4"/>
+
+        <TextBlock x:Name="StatLabel"
+                   Style="{StaticResource DetailDescription}"
+                   Foreground="White"
+                   Margin="15, 0, 15, 12"/>
+
+        <!--Description-->
+        <TextBlock x:Name="DescLabel" 
+                   Style="{StaticResource DetailDescription}"
+                   FontSize="18" FontWeight="Thin"
+                   TextWrapping="Wrap"
+                   Margin="{StaticResource DetailMargin}" />
+
+        <Button x:Name="LicenseButton"
+                Margin="{StaticResource DetailMargin}"
+                Background="#91aaba"
+                Style="{StaticResource RoundedTransparentButtonStyle}"
+                Click="LicenseButton_Click">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Ellipse x:Name="LicenseIcon" 
+                             Fill="#6b8eac"
+                             Width="12" Height="12" VerticalAlignment="Center"
+                             Margin="0, 0, 8, 0"/>
+                    <TextBlock x:Name="LicenseLabel" FontSize="14"
+                               Foreground="#6b8eac"/>
+                </StackPanel>
+            </Button.Content>
+            
+        </Button>
+
+    </StackPanel>
+</local:DetailSectionBase>

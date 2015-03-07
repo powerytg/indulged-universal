@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="Indulged.UI.Detail.DetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Detail"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:sections="using:Indulged.UI.Detail.Sections"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="Black">
+
+    <Grid x:Name="LayoutRoot">
+        <!--Blurred background-->
+        <common:BlurredBackgroundView x:Name="BackgroundView"/>
+
+        <Grid x:Name="ContentRoot">
+            <Grid.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                </TransitionCollection>
+            </Grid.ChildrenTransitions>
+            
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <!--Header-->
+                    <Image Source="/Assets/Dashboard/DarkBanner.png"
+                       Grid.Row="0"/>
+
+                    <!--Basic info-->
+                    <sections:BasicInfoSection x:Name="BasicSectionView"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>        
+    </Grid>
+</Page>

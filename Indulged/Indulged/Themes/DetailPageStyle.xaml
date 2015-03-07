@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.Themes">
+
+    <Style x:Key="DetailDescription" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#9c9c9c"/>
+        <Setter Property="FontSize" Value="14"/>
+    </Style>
+    
+    <Thickness x:Key="DetailMargin">15, 0, 15, 12</Thickness>
+    
+</ResourceDictionary>

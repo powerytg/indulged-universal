@@ -11,7 +11,7 @@ namespace Indulged.API.Networking
         public static int PerPage = 20;
 
         // Common extra parameters
-        public static string CommonPhotoExtraParameters = "description,views,tags,license,owner_name,o_dims,url_m";
+        public static string CommonPhotoExtraParameters = "description,date_taken,views,tags,license,owner_name,o_dims,url_m";
 
         private static volatile APIService instance;
         private static object syncRoot = new Object();

@@ -37,6 +37,7 @@ namespace Indulged.API.Storage.Models
         public string LicenseId { get; set; }
         public List<string> Tags { get; set; }
         public bool IsFavourite { get; set; }
+        public string DateTaken { get; set; }
 
         public int OriginalWidth { get; set; }
         public int OriginalHeight { get; set; }

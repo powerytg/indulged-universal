@@ -15,4 +15,7 @@
         <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
     
+    <!--Make page content full screen-->
+    <Thickness x:Key="FullScreenBackgroundMargin">0, -32, 0, 0</Thickness>
+    
 </ResourceDictionary>

@@ -23,8 +23,7 @@
 
     <Grid Margin="0">
         <!--Background-->
-        <dashboard:DashboardBackgroundView x:Name="BackgroundView"
-                                           Margin="0, -32, 0, 0"/>
+        <dashboard:DashboardBackgroundView x:Name="BackgroundView"/>
 
         <Pivot x:Uid="Pivot" x:Name="MainPivot"
                Style="{StaticResource MainPivotStyle}"

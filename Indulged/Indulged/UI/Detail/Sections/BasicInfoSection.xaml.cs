@@ -1,0 +1,106 @@
+﻿using Indulged.API.Storage;
+using System;
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
+
+// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
+
+namespace Indulged.UI.Detail.Sections
+{
+    public sealed partial class BasicInfoSection : DetailSectionBase
+    {
+        private static SolidColorBrush createCCBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0x8e, 0x56));
+        private static SolidColorBrush noCCBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x03, 0xbe, 0x90));
+        private static SolidColorBrush resrictedBrush = new SolidColorBrush(Color.FromArgb(0xff, 0xf6, 0x8e, 0x56));
+        private static SolidColorBrush unknownBrush = new SolidColorBrush(Color.FromArgb(0xff, 0x6b, 0x8e, 0xac));
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public BasicInfoSection()
+        {
+            this.InitializeComponent();
+        }
+
+        private void ImageView_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        protected override void OnPhotoChanged()
+        {
+            base.OnPhotoChanged();
+
+            if (Photo.Title.Length > 0)
+            {
+                TitleLabel.Text = Photo.Title;
+            }
+            else
+            {
+                TitleLabel.Text = "Untitled";
+            }
+
+            // Date
+            DateLabel.Text = Photo.DateTaken;            
+
+            // Image view
+            ImageView.Source = new BitmapImage(new Uri(Photo.GetImageUrl(), UriKind.Absolute));
+            
+            // Author
+            var user = StorageService.Instance.UserCache[Photo.UserId];
+            AuthorLabel.Text = user.Name;
+
+            // Stats
+            if (Photo.ViewCount == 0)
+            {
+                StatLabel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                StatLabel.Text = Photo.ViewCount.ToString() + " views";
+                StatLabel.Visibility = Visibility.Visible;
+            }
+
+            // Description
+            if (Photo.Description.Length > 0)
+            {
+                DescLabel.Text = Photo.Description;
+                DescLabel.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DescLabel.Visibility = Visibility.Collapsed;
+            }
+
+            // License
+            if (Photo.LicenseId == null){
+                LicenseButton.Content = "Unknown License";
+            }                
+            else
+            {
+                var license = PolKit.PolicyKit.Instance.Licenses[Photo.LicenseId];
+                LicenseLabel.Text = license.Name;
+            }
+        }
+
+        private async void LicenseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Photo.LicenseId == null)
+            {
+                return;
+            }
+                
+
+            var license = PolKit.PolicyKit.Instance.Licenses[Photo.LicenseId];
+            if (license.Url == null)
+            {
+                return;
+            }
+                
+            await Windows.System.Launcher.LaunchUriAsync(new Uri(license.Url, UriKind.RelativeOrAbsolute));
+        }
+    }
+}

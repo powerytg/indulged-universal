@@ -1,29 +1,15 @@
 ﻿using Indulged.API.Storage;
 using Indulged.API.Storage.Events;
+using Indulged.API.Storage.Models;
 using Indulged.Common;
-using Indulged.Data;
 using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Dashboard;
-using Indulged.UI.Login;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
@@ -36,6 +22,9 @@ namespace Indulged
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
         private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public PivotPage()
         {
             this.InitializeComponent();
@@ -78,8 +67,11 @@ namespace Indulged
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            // Make sure the status bar is hidden so we have the app running at full screen
+            await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync(); 
+
             // Events
             StorageService.Instance.PhotoStreamUpdated += OnPhotoStreamUpdated;
         }

@@ -1,6 +1,9 @@
 ﻿using Indulged.API.Storage;
+using Indulged.UI.Detail;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -57,6 +60,32 @@ namespace Indulged.UI.Common.PhotoStream
             {
                 DescPanel.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void PhotoTileRendererBase_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(DetailPage), PhotoTileSource.Photos[0].ResourceId);
+        }
+
+        private void PhotoRendererBase_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            bool result = VisualStateManager.GoToState(this, "Pressed", false);
+        }
+
+        private void PhotoRendererBase_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void PhotoRendererBase_PointerCanceled(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
+        }
+
+        private void PhotoRendererBase_PointerCaptureLost(object sender, PointerRoutedEventArgs e)
+        {
+            VisualStateManager.GoToState(this, "Normal", false);
         }
 
     }
