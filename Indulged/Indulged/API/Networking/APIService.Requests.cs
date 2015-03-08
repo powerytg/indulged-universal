@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Indulged.API.Networking
@@ -23,11 +25,7 @@ namespace Indulged.API.Networking
                 }
             }
 
-            string paramString = GenerateParamString(paramDict);
-            string signature = GenerateSignature(method, AccessTokenSecret, APIUrl, paramString);
-
             // Create the http request
-            string requestUrl = APIUrl + "?" + paramString + "&oauth_signature=" + signature;
             var retVal = new APIResponse();
 
             try
@@ -36,11 +34,17 @@ namespace Indulged.API.Networking
                 HttpResponseMessage resp = null;
                 if (method.ToUpper() == "GET")
                 {
+                    string paramString = GenerateParamString(paramDict);
+                    string signature = GenerateSignature(method, AccessTokenSecret, APIUrl, paramString);
+                    var requestUrl = APIUrl + "?" + paramString + "&oauth_signature=" + signature;
                     resp = await client.GetAsync(requestUrl);
                 }
                 else if (method.ToUpper() == "POST")
                 {
-                    resp = await client.PostAsync(requestUrl, new FormUrlEncodedContent(paramDict));
+                    // Add oauth signature to paramDict
+                    string signature = OAuthCalculateSignature("POST", APIUrl, paramDict, AccessTokenSecret);
+                    paramDict["oauth_signature"] = signature;
+                    resp = await client.PostAsync(APIUrl, new FormUrlEncodedContent(paramDict));
                 }
                 
                 // Process results
@@ -94,5 +98,6 @@ namespace Indulged.API.Networking
 
             return retVal;
         }
+
     }
 }

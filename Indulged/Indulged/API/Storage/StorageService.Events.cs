@@ -65,11 +65,18 @@ namespace Indulged.API.Storage
 
         public void InitializeEventListeners()
         {
-            // Albums
+            // Load album list
             APIService.Instance.AlbumListReturned += OnAlbumListReturned;
 
-            // Users
+            // Load group list
             APIService.Instance.GroupListReturned += OnGroupListReturned;
+
+            // Get EXIF
+            APIService.Instance.PhotoEXIFReturned += OnEXIFReturned;
+
+            // Favourite requests
+            APIService.Instance.AddToFavouriteReturned += OnAddPhotoAsFavourite;
+            APIService.Instance.RemoveFromFavouriteReturned += OnRemovePhotoFromFavourite;
         }
     }
 }

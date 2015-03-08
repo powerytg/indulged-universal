@@ -10,6 +10,16 @@
     mc:Ignorable="d"
     Background="Black">
 
+    <Page.BottomAppBar>
+        <CommandBar IsOpen="False">
+            <AppBarButton x:Name="FavButton" Label="like/unlike"
+                          Click="FavButton_Click"/>
+            <AppBarButton x:Name="CommentButton" Label="comment"
+                          Icon="Comment"/>
+
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid x:Name="LayoutRoot">
         <!--Blurred background-->
         <common:BlurredBackgroundView x:Name="BackgroundView"/>
@@ -28,7 +38,16 @@
                        Grid.Row="0"/>
 
                     <!--Basic info-->
-                    <sections:BasicInfoSection x:Name="BasicSectionView"/>
+                    <sections:BasicInfoSection x:Name="BasicSectionView"
+                                               Margin="{StaticResource DetailSectionMargin}"/>
+                    
+                    <!--EXIF-->
+                    <sections:EXIFSection x:Name="EXIFSectionView"
+                                          Margin="{StaticResource DetailSectionMargin}"/>
+                    
+                    <!--Tags-->
+                    <sections:TagSection x:Name="TagSectionView"
+                                         Margin="{StaticResource DetailSectionMargin}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>        

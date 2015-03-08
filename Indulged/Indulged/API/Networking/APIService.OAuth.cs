@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Security.Cryptography;
@@ -13,6 +14,9 @@ using Windows.Security.Cryptography.Core;
 
 namespace Indulged.API.Networking
 {
+    /// <summary>
+    /// Special thanks to Flick.Net! Some of the source code is modified from the library
+    /// </summary>
     public partial class APIService
     {
         // OAuth2 client id. This is actually the iOS app id
@@ -276,5 +280,47 @@ namespace Indulged.API.Networking
             return paramDict;
         }
 
+        private string EscapeOAuthString(string text)
+        {
+            string value = text;
+
+            value = Uri.EscapeDataString(value).Replace("+", "%20");
+
+            // UrlEncode escapes with lowercase characters (e.g. %2f) but oAuth needs %2F
+            value = Regex.Replace(value, "(%[0-9a-f][0-9a-f])", c => c.Value.ToUpper());
+
+            // these characters are not escaped by UrlEncode() but needed to be escaped
+            value = value.Replace("(", "%28").Replace(")", "%29").Replace("$", "%24").Replace("!", "%21").Replace(
+                "*", "%2A").Replace("'", "%27");
+
+            // these characters are escaped by UrlEncode() but will fail if unescaped!
+            value = value.Replace("%7E", "~");
+
+            return value;
+        }
+
+        private string OAuthCalculateSignature(string method, string url, Dictionary<string, string> parameters, string tokenSecret)
+        {
+            string baseString = "";
+            string key = consumerSecret + "&" + tokenSecret;
+            byte[] keyBytes = System.Text.Encoding.UTF8.GetBytes(key);
+
+            var sorted = parameters.OrderBy(p => p.Key);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (KeyValuePair<string, string> pair in sorted)
+            {
+                sb.Append(pair.Key);
+                sb.Append("=");
+                sb.Append(EscapeOAuthString(pair.Value));
+                sb.Append("&");
+            }
+
+            sb.Remove(sb.Length - 1, 1);
+
+            baseString = method + "&" + EscapeOAuthString(url) + "&" + EscapeOAuthString(sb.ToString());
+            string signature = Sha1Encrypt(baseString, key);
+            return signature;
+        }
     }
 }

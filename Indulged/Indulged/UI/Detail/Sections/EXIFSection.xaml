@@ -1,0 +1,25 @@
+﻿<local:DetailSectionBase
+    x:Class="Indulged.UI.Detail.Sections.EXIFSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Detail.Sections"
+    xmlns:controls="using:Indulged.UI.Detail.Controls"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <StackPanel Orientation="Vertical">
+        <!--Header-->
+        <controls:SectionHeaderView Title="EXIF Metadata"
+                                    Margin="{StaticResource DetailMargin}"/>
+        
+        <!--EXIF text-->
+        <TextBlock x:Name="EXIFLabel"
+                   TextWrapping="Wrap" Style="{StaticResource DetailDescription}"
+                   Margin="{StaticResource DetailMargin}" />
+        
+    </StackPanel>
+</local:DetailSectionBase>

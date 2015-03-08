@@ -1,4 +1,5 @@
 ﻿using Indulged.API.Storage;
+using Indulged.API.Storage.Events;
 using System;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -23,6 +24,20 @@ namespace Indulged.UI.Detail.Sections
         public BasicInfoSection()
         {
             this.InitializeComponent();
+        }
+
+        public override void AddEventListeners()
+        {
+            base.AddEventListeners();
+            StorageService.Instance.PhotoAddedAsFavourite += OnPhotoAddedToFavourite;
+            StorageService.Instance.PhotoRemovedFromFavourite += OnPhotoRemovedFromFavourite;
+        }
+
+        public override void RemoveEventListeners()
+        {
+            base.RemoveEventListeners();
+            StorageService.Instance.PhotoAddedAsFavourite -= OnPhotoAddedToFavourite;
+            StorageService.Instance.PhotoRemovedFromFavourite -= OnPhotoRemovedFromFavourite;
         }
 
         private void ImageView_Tapped(object sender, TappedRoutedEventArgs e)
@@ -64,6 +79,16 @@ namespace Indulged.UI.Detail.Sections
                 StatLabel.Visibility = Visibility.Visible;
             }
 
+            // Like icon
+            if (Photo.IsFavourite)
+            {
+                LikeIcon.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LikeIcon.Visibility = Visibility.Collapsed;
+            }
+
             // Description
             if (Photo.Description.Length > 0)
             {
@@ -91,8 +116,7 @@ namespace Indulged.UI.Detail.Sections
             if (Photo.LicenseId == null)
             {
                 return;
-            }
-                
+            }                
 
             var license = PolKit.PolicyKit.Instance.Licenses[Photo.LicenseId];
             if (license.Url == null)
@@ -102,5 +126,31 @@ namespace Indulged.UI.Detail.Sections
                 
             await Windows.System.Launcher.LaunchUriAsync(new Uri(license.Url, UriKind.RelativeOrAbsolute));
         }
+
+        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnPhotoAddedToFavourite(object sender, StorageEventArgs e)
+        {
+            if (Photo == null || e.PhotoId != Photo.ResourceId)
+            {
+                return;
+            }
+
+            LikeIcon.Visibility = Photo.IsFavourite ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void OnPhotoRemovedFromFavourite(object sender, StorageEventArgs e)
+        {
+            if (Photo == null || e.PhotoId != Photo.ResourceId)
+            {
+                return;
+            }
+
+            LikeIcon.Visibility = Photo.IsFavourite ? Visibility.Visible : Visibility.Collapsed;
+        }
+
     }
 }

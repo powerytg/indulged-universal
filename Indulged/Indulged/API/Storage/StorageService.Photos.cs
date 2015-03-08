@@ -17,7 +17,9 @@ namespace Indulged.API.Storage
         private void OnEXIFReturned(object sender, APIEventArgs e)
         {
             if (!PhotoCache.ContainsKey(e.PhotoId))
+            {
                 return;
+            }
 
             var photo = PhotoCache[e.PhotoId];
             JObject json = JObject.Parse(e.Response);

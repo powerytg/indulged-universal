@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\TagButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\RoundedTransparentButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,11 +230,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Detail\Controls\SectionHeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Detail\DetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Detail\Sections\BasicInfoSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Detail\Sections\EXIFSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Detail\Sections\TagSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -249,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
+    <Compile Include="API\Networking\APIService.Photos.cs" />
     <Compile Include="API\Networking\APIService.Users.cs" />
     <Compile Include="API\Networking\APIService.Album.cs" />
     <Compile Include="API\Networking\APIService.cs" />
@@ -399,6 +416,9 @@
     <Compile Include="UI\Dashboard\StreamSelectorView.xaml.cs">
       <DependentUpon>StreamSelectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Detail\Controls\SectionHeaderView.xaml.cs">
+      <DependentUpon>SectionHeaderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Detail\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
@@ -406,6 +426,12 @@
       <DependentUpon>BasicInfoSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Detail\Sections\DetailSectionBase.cs" />
+    <Compile Include="UI\Detail\Sections\EXIFSection.xaml.cs">
+      <DependentUpon>EXIFSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Detail\Sections\TagSection.xaml.cs">
+      <DependentUpon>TagSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -433,6 +459,7 @@
     <Content Include="Assets\Common\PageSeperatorLeft.png" />
     <Content Include="Assets\Common\PageSeperatorRight.png" />
     <Content Include="Assets\Common\RadioButton.scale-240.png" />
+    <Content Include="Assets\Common\Tag.scale-240.png" />
     <Content Include="Assets\Common\View-Light.png" />
     <Content Include="Assets\Dashboard\Admin.scale-240.png" />
     <Content Include="Assets\Dashboard\Alert.scale-240.png" />
@@ -445,6 +472,8 @@
     <Content Include="Assets\Dashboard\PageCurl.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />
     <Content Include="Assets\Dashboard\Private.scale-240.png" />
+    <Content Include="Assets\Detail\DetailSection.scale-240.png" />
+    <Content Include="Assets\Detail\Like.scale-240.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
     <Content Include="Assets\Login\LoginLogo.png" />
     <Content Include="Assets\Login\LoginOutterRing.png" />
@@ -478,6 +507,9 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\packages\WinRTXamlToolkit.WindowsPhone.1.8.1.0\lib\wpa\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

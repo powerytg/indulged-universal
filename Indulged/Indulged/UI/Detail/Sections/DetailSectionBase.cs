@@ -27,5 +27,15 @@ namespace Indulged.UI.Detail.Sections
         protected virtual void OnPhotoChanged()
         {
         }
+
+        public virtual void AddEventListeners()
+        {
+
+        }
+
+        public virtual void RemoveEventListeners()
+        {
+
+        }
     }
 }

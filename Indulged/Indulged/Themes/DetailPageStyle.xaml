@@ -4,10 +4,12 @@
     xmlns:local="using:Indulged.Themes">
 
     <Style x:Key="DetailDescription" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="#9c9c9c"/>
+        <Setter Property="Foreground" Value="#8b93a0"/>
         <Setter Property="FontSize" Value="14"/>
     </Style>
     
     <Thickness x:Key="DetailMargin">15, 0, 15, 12</Thickness>
-    
+
+    <Thickness x:Key="DetailSectionMargin">0, 0, 0, 20</Thickness>
+
 </ResourceDictionary>

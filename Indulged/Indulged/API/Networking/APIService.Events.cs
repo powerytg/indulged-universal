@@ -9,11 +9,23 @@ namespace Indulged.API.Networking
 {
     public partial class APIService
     {
+        // Load album list
         public EventHandler<APIEventArgs> AlbumListReturned;
         public EventHandler<APIEventArgs> AlbumListFailedReturn;
 
+        // Load group list
         public EventHandler<APIEventArgs> GroupListReturned;
         public EventHandler<APIEventArgs> GroupListFailedReturn;
+
+        // Get EXIF
+        public EventHandler<APIEventArgs> PhotoEXIFReturned;
+        public EventHandler<APIEventArgs> PhotoEXIFFailedReturn;
+
+        // Favourite requests
+        public EventHandler<APIEventArgs> AddToFavouriteReturned;
+        public EventHandler<APIEventArgs> AddToFavouriteFailedReturn;
+        public EventHandler<APIEventArgs> RemoveFromFavouriteReturned;
+        public EventHandler<APIEventArgs> RemoveFromFavouriteFailedReturn;
 
     }
 }

@@ -1,8 +1,12 @@
-﻿using Indulged.API.Storage;
+﻿using Indulged.API.Networking;
+using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
 using Indulged.Common;
+using Indulged.UI.Common.Controls;
+using Indulged.UI.Detail.Sections;
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -22,12 +26,20 @@ namespace Indulged.UI.Detail
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private FlickrPhoto photo;
 
+        private static SymbolIcon likeIcon = new SymbolIcon(Symbol.Like);
+        private static SymbolIcon unlikeIcon = new SymbolIcon(Symbol.Dislike);
+
+        private DetailSectionBase[] sections;
+
         /// <summary>
         /// Constructor
         /// </summary>
         public DetailPage()
         {
             this.InitializeComponent();
+
+            // Available sections
+            sections = new DetailSectionBase[] { BasicSectionView, EXIFSectionView, TagSectionView };
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -76,6 +88,15 @@ namespace Indulged.UI.Detail
 
             photo = StorageService.Instance.PhotoCache[photoId];
 
+            // Command bar icons
+            FavButton.Icon = (photo.IsFavourite) ? unlikeIcon : likeIcon;
+
+            // Do not allow liking one's own photo
+            if (photo.UserId == StorageService.Instance.CurrentUser.ResourceId)
+            {
+                FavButton.IsEnabled = false;
+            }
+
             // Background
             if (PolKit.PolicyKit.Instance.UseBlurredBackground)
             {
@@ -87,8 +108,20 @@ namespace Indulged.UI.Detail
                 BackgroundView.Visibility = Visibility.Collapsed;
             }
 
-            // Fill in sections
-            BasicSectionView.Photo = photo;
+            // Register events
+            StorageService.Instance.PhotoAddedAsFavourite += OnFavouriteStatusChanged;
+            StorageService.Instance.PhotoRemovedFromFavourite += OnFavouriteStatusChanged;
+
+            foreach (var section in sections)
+            {
+                section.AddEventListeners();
+            }
+
+            // Fill in sections     
+            foreach (var section in sections)
+            {
+                section.Photo = photo;
+            }
         }
 
         /// <summary>
@@ -102,6 +135,15 @@ namespace Indulged.UI.Detail
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             e.PageState[PAGE_STATE_PHOTO_ID] = photo.ResourceId;
+
+            // Remove all event listeners
+            StorageService.Instance.PhotoAddedAsFavourite -= OnFavouriteStatusChanged;
+            StorageService.Instance.PhotoRemovedFromFavourite -= OnFavouriteStatusChanged;
+
+            foreach (var section in sections)
+            {
+                section.RemoveEventListeners();
+            }
         }
 
         #region NavigationHelper registration
@@ -130,5 +172,65 @@ namespace Indulged.UI.Detail
         }
 
         #endregion
+
+        private void FavButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleFavourite();
+        }
+
+        private async void ToggleFavourite()
+        {
+            FavButton.IsEnabled = false;
+
+            // Show status bar progress
+            var sb = StatusBar.GetForCurrentView();
+            sb.ProgressIndicator.Text = (photo.IsFavourite) ? "Removing from favourite" : "Adding to favourite";
+            await sb.ProgressIndicator.ShowAsync();
+
+            // Sending request
+            if (photo.IsFavourite)
+            {
+                // Should remove from favourite
+                var status = await APIService.Instance.RemoveFromFavouriteAsync(photo.ResourceId);
+                if (!status.Success)
+                {
+                    OnFavRequestError(status.ErrorMessage);
+                }
+            }
+            else
+            {
+                // Should add to favourite
+                var status = await APIService.Instance.AddToFavouriteAsync(photo.ResourceId);
+                if (!status.Success)
+                {
+                    OnFavRequestError(status.ErrorMessage);
+                }
+            }
+
+        }
+
+        private async void OnFavouriteStatusChanged(object sender, API.Storage.Events.StorageEventArgs e)
+        {
+            if (photo == null || e.PhotoId != photo.ResourceId)
+            {
+                return;
+            }
+
+            var sb = StatusBar.GetForCurrentView();
+            await sb.ProgressIndicator.HideAsync();
+            FavButton.Icon = (photo.IsFavourite) ? unlikeIcon : likeIcon;
+            FavButton.IsEnabled = true;
+        }
+
+
+        private async void OnFavRequestError(string errorMessage)
+        {
+            var sb = StatusBar.GetForCurrentView();
+            await sb.ProgressIndicator.HideAsync();
+            FavButton.IsEnabled = true;
+
+            ModalPopup.Show("An error has happened: " + errorMessage, "Error", new List<string> { "Dismiss" });
+        }
+
     }
 }

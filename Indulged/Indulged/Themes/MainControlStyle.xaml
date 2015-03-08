@@ -18,4 +18,7 @@
     <!--Make page content full screen-->
     <Thickness x:Key="FullScreenBackgroundMargin">0, -32, 0, 0</Thickness>
     
+    <!--Dialog insets-->
+    <Thickness x:Key="CommonDialogMargin">50, 20, 50, 20</Thickness>
+    
 </ResourceDictionary>

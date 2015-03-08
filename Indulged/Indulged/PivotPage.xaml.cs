@@ -8,6 +8,7 @@ using Indulged.UI.Dashboard;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -28,6 +29,10 @@ namespace Indulged
         public PivotPage()
         {
             this.InitializeComponent();
+
+            // Make app full screen
+            ApplicationView.GetForCurrentView().
+            SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
 
             // Retrieve settings
             PolicyKit.Instance.RetrieveSettings();
@@ -67,11 +72,8 @@ namespace Indulged
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-            // Make sure the status bar is hidden so we have the app running at full screen
-            await Windows.UI.ViewManagement.StatusBar.GetForCurrentView().HideAsync(); 
-
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {            
             // Events
             StorageService.Instance.PhotoStreamUpdated += OnPhotoStreamUpdated;
         }

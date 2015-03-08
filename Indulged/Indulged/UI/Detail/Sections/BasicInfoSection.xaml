@@ -32,15 +32,48 @@
                Margin="0, 12, 0, 12"
                Tapped="ImageView_Tapped"/>
 
-        <!--Author-->
-        <TextBlock x:Name="AuthorLabel"
-                Foreground="White" FontSize="14" FontWeight="Bold"
-                Margin="15, 0, 15, 4"/>
+        <!--Author and stats-->
+        <Grid Margin="15, 0, 15, 12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="StatLabel"
+            <!--Fav icon-->
+            <Image x:Name="LikeIcon" Source="/Assets/Detail/Like.png"
+                   Margin="0, 0, 10, 0" Width="25"
+                   Grid.Column="0"/>
+
+            <StackPanel Orientation="Vertical"  Grid.Column="1">
+                <TextBlock x:Name="AuthorLabel"
+                Foreground="White" FontSize="14" FontWeight="Bold"
+                Margin="0, 0, 0, 4"/>
+
+                <TextBlock x:Name="StatLabel"
                    Style="{StaticResource DetailDescription}"
-                   Foreground="White"
-                   Margin="15, 0, 15, 12"/>
+                   Foreground="White"/>
+            </StackPanel>
+
+            <!--Profile button-->
+            <Button x:Name="ProfileButton" Style="{StaticResource RoundedTransparentButtonStyle}"
+                Background="#91aaba" MinHeight="24" Padding="4"
+                Grid.Column="3"
+                Click="ProfileButton_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="14" Foreground="#03be90"
+                                   Text="View profile" FontStyle="Italic"
+                                   VerticalAlignment="Center"/>
+
+                        <Image Source="/Assets/Common/Next.png"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="6, 0, 0, 0"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>        
 
         <!--Description-->
         <TextBlock x:Name="DescLabel" 
