@@ -57,22 +57,9 @@
             </StackPanel>
 
             <!--Profile button-->
-            <Button x:Name="ProfileButton" Style="{StaticResource RoundedTransparentButtonStyle}"
-                Background="#91aaba" MinHeight="24" Padding="4"
-                Grid.Column="3"
-                Click="ProfileButton_Click">
-                <Button.Content>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="14" Foreground="#03be90"
-                                   Text="View profile" FontStyle="Italic"
-                                   VerticalAlignment="Center"/>
-
-                        <Image Source="/Assets/Common/Next.png"
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="6, 0, 0, 0"/>
-                    </StackPanel>
-                </Button.Content>
-            </Button>
+            <Button x:Name="ProfileButton" Style="{StaticResource ActionButtonStyle}"
+                    Content="View profile"
+                    Grid.Column="3" Click="ProfileButton_Click"/>
         </Grid>        
 
         <!--Description-->

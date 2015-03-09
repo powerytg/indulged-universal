@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\ActionButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\TagButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Common\Controls\SimpleLoadingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Common\Controls\StatusLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,11 +246,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Detail\Dialogs\CommentComposer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Detail\Renderers\CommentDigestRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Detail\Sections\BasicInfoSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Detail\Sections\EXIFSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Detail\Sections\ReviewsSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -342,6 +362,7 @@
     </Compile>
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
+    <Compile Include="UI\Common\Controls\LoadingViewBase.cs" />
     <Compile Include="UI\Common\Controls\MagazineView.cs" />
     <Compile Include="UI\Common\Controls\ModalPopup.cs" />
     <Compile Include="UI\Common\Controls\RetryLoadingView.xaml.cs">
@@ -349,6 +370,9 @@
     </Compile>
     <Compile Include="UI\Common\Controls\SimpleLoadingView.xaml.cs">
       <DependentUpon>SimpleLoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\Controls\StatusLoadingView.xaml.cs">
+      <DependentUpon>StatusLoadingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Common\Controls\UserAvatarView.xaml.cs">
       <DependentUpon>UserAvatarView.xaml</DependentUpon>
@@ -422,12 +446,22 @@
     <Compile Include="UI\Detail\DetailPage.xaml.cs">
       <DependentUpon>DetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Detail\Dialogs\CommentComposer.xaml.cs">
+      <DependentUpon>CommentComposer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Detail\Renderers\CommentDigestRenderer.xaml.cs">
+      <DependentUpon>CommentDigestRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Detail\Renderers\CommentRendererBase.cs" />
     <Compile Include="UI\Detail\Sections\BasicInfoSection.xaml.cs">
       <DependentUpon>BasicInfoSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Detail\Sections\DetailSectionBase.cs" />
     <Compile Include="UI\Detail\Sections\EXIFSection.xaml.cs">
       <DependentUpon>EXIFSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Detail\Sections\ReviewsSection.xaml.cs">
+      <DependentUpon>ReviewsSection.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Detail\Sections\TagSection.xaml.cs">
       <DependentUpon>TagSection.xaml</DependentUpon>

@@ -77,6 +77,10 @@ namespace Indulged.API.Storage
             // Favourite requests
             APIService.Instance.AddToFavouriteReturned += OnAddPhotoAsFavourite;
             APIService.Instance.RemoveFromFavouriteReturned += OnRemovePhotoFromFavourite;
+
+            // Photo comments
+            APIService.Instance.PhotoCommentsReturned += OnPhotoCommentsReturned;
+            APIService.Instance.AddCommentReturned += OnPhotoCommentAdded;
         }
     }
 }

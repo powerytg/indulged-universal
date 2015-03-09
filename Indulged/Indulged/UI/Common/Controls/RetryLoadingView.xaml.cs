@@ -17,60 +17,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Indulged.UI.Common.Controls
 {
-    public sealed partial class RetryLoadingView : UserControl
+    public sealed partial class RetryLoadingView : LoadingViewBase
     {
         public Action LoadingAction;
 
-        /// <summary>
-        /// Title property
-        /// </summary>
-        public static readonly DependencyProperty LoadingTextProperty = DependencyProperty.Register(
-        "LoadingText",
-        typeof(string),
-        typeof(RetryLoadingView),
-        new PropertyMetadata("Loading...", OnLoadingTextPropertyChanged));
-
-        public string LoadingText
+        protected override void OnLoadingTextChanged()
         {
-            get { return (string)GetValue(LoadingTextProperty); }
-            set { SetValue(LoadingTextProperty, value); }
-        }
-
-        private static void OnLoadingTextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var target = (RetryLoadingView)sender;
-            target.OnLoadingTextChanged();
-        }
-
-        private void OnLoadingTextChanged()
-        {
+            base.OnLoadingTextChanged();
             LoadingLabel.Text = LoadingText;
-        }
-
-        /// <summary>
-        /// Error text property
-        /// </summary>
-        public static readonly DependencyProperty ErrorTextProperty = DependencyProperty.Register(
-        "ErrorText",
-        typeof(string),
-        typeof(RetryLoadingView),
-        new PropertyMetadata("An error has occurred during the operation", OnErrorTextPropertyChanged));
-
-        public string ErrorText
-        {
-            get { return (string)GetValue(ErrorTextProperty); }
-            set { SetValue(ErrorTextProperty, value); }
-        }
-
-        private static void OnErrorTextPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var target = (RetryLoadingView)sender;
-            target.OnErrorTextChanged();
-        }
-
-        private void OnErrorTextChanged()
-        {
-            LoadingLabel.Text = ErrorText;
         }
 
         /// <summary>

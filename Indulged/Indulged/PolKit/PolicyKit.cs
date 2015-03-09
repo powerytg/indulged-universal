@@ -72,6 +72,29 @@ namespace Indulged.PolKit
             }
         }
 
+        // Use clean, HTML-tag-free content for titles and descriptions
+        private bool _useCleanText = true;
+        public bool UseCleanText
+        {
+            get
+            {
+                return _useCleanText;
+            }
+
+            set
+            {
+                if (_useCleanText != value)
+                {
+                    _useCleanText = value;
+                    SaveSettings();
+
+                    var evt = new PolicyChangedEventArgs();
+                    evt.PolicyName = PolicyConstants.UseCleanText;
+                    PolicyChanged.DispatchEvent(this, evt);
+                }
+            }
+        }
+
         // Prelude stream layout style
         private string _preludeLayoutStyle = StreamLayoutStyle.Journal;
         public string PreludeLayoutStyle

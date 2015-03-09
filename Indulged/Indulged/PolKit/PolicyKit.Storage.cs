@@ -25,6 +25,9 @@ namespace Indulged.PolKit
             // Blurred background
             SaveValue(values, PolicyConstants.UseBlurredBackground, UseBlurredBackground);
 
+            // Clean text
+            SaveValue(values, PolicyConstants.UseCleanText, UseCleanText);
+
             // Prelude stream layout style
             SaveValue(values, PolicyConstants.PreludeStreamLayoutStyle, PreludeLayoutStyle);
         }
@@ -44,6 +47,12 @@ namespace Indulged.PolKit
             if (values.ContainsKey(PolicyConstants.UseBlurredBackground))
             {
                 UseBlurredBackground = bool.Parse(values[PolicyConstants.UseBlurredBackground].ToString());
+            }
+
+            // Clean text
+            if (values.ContainsKey(PolicyConstants.UseCleanText))
+            {
+                UseCleanText = bool.Parse(values[PolicyConstants.UseCleanText].ToString());
             }
 
             // Prelude stream layout style

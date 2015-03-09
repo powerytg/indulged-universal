@@ -5,20 +5,11 @@
     xmlns:local="using:Indulged.UI.Detail"
     xmlns:common="using:Indulged.UI.Common.Controls"
     xmlns:sections="using:Indulged.UI.Detail.Sections"
+    xmlns:dialogs="using:Indulged.UI.Detail.Dialogs"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Black">
-
-    <Page.BottomAppBar>
-        <CommandBar IsOpen="False">
-            <AppBarButton x:Name="FavButton" Label="like/unlike"
-                          Click="FavButton_Click"/>
-            <AppBarButton x:Name="CommentButton" Label="comment"
-                          Icon="Comment"/>
-
-        </CommandBar>
-    </Page.BottomAppBar>
     
     <Grid x:Name="LayoutRoot">
         <!--Blurred background-->
@@ -48,6 +39,15 @@
                     <!--Tags-->
                     <sections:TagSection x:Name="TagSectionView"
                                          Margin="{StaticResource DetailSectionMargin}"/>
+                    
+                    <!--Reviews-->
+                    <sections:ReviewsSection x:Name="ReviewSectionView"
+                                             Margin="{StaticResource DetailSectionMargin}"/>
+                    
+                    <!--Footer deco-->
+                    <Image Source="/Assets/Common/PageSeperator.png"
+                           HorizontalAlignment="Center"
+                           Width="180" Margin="0, 20, 0, 80"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>        

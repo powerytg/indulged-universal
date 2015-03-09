@@ -15,7 +15,7 @@ using Windows.Security.Cryptography.Core;
 namespace Indulged.API.Networking
 {
     /// <summary>
-    /// Special thanks to Flick.Net! Some of the source code is modified from the library
+    /// Special thanks to wonderful Flick.Net library! Some of the source code is modified from it
     /// </summary>
     public partial class APIService
     {

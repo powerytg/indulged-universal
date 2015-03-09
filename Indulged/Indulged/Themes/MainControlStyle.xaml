@@ -21,4 +21,10 @@
     <!--Dialog insets-->
     <Thickness x:Key="CommonDialogMargin">50, 20, 50, 20</Thickness>
     
+    <!--Flyout style-->
+    <Style x:Key="CommonFlyoutPresenterStyle" TargetType="FlyoutPresenter">
+        <!--<Setter Property="ScrollViewer.ZoomMode" Value="Enabled"/>-->
+        <Setter Property="Background" Value="#151719"/>
+    </Style>
+    
 </ResourceDictionary>

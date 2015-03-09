@@ -1,6 +1,7 @@
 ﻿using Indulged.API.Storage;
 using Indulged.UI.Detail;
 using System;
+using Windows.Data.Html;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -41,20 +42,21 @@ namespace Indulged.UI.Common.PhotoStream
 
             ImageView.Source = new BitmapImage(new Uri(photo.GetImageUrl(), UriKind.Absolute));
 
-
-            if (photo.Title.Length == 0)
+            var title = PolKit.PolicyKit.Instance.UseCleanText ? photo.CleanTitle : photo.Title;
+            if (title.Length == 0)
             {
                 TitleLabel.Text = "Untitled";
             }
             else
             {
-                TitleLabel.Text = photo.Title;
-            }         
+                TitleLabel.Text = title;
+            }
 
-            if (photo.Description.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(photo.Description))
+            var desc = PolKit.PolicyKit.Instance.UseCleanText ? photo.CleanDescription : photo.Description;
+            if (desc.Length > 0 && !CommonPhotoOverlayView.IsTextInBlackList(desc))
             {
                 DescPanel.Visibility = Visibility.Visible;
-                DescLabel.Text = photo.Description;
+                DescLabel.Text = desc;
             }
             else
             {

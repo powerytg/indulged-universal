@@ -5,6 +5,7 @@
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Themes/MainControlStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/ActionButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/ModalPopupStyle.xaml"/>
         <ResourceDictionary Source="/Themes/PhotoListViewStyle.xaml"/>
         <ResourceDictionary Source="/Themes/MainPivotStyle.xaml"/>

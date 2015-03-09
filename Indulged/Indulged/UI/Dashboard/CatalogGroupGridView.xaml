@@ -21,23 +21,13 @@
         </StackPanel>
 
         <!--View all button-->
-        <Button x:Name="ViewAllButton" Style="{StaticResource RoundedTransparentButtonStyle}"
-                Background="#91aaba" MinHeight="24" Padding="4"
+        <Button x:Name="ViewAllButton" 
+                Style="{StaticResource ActionButtonStyle}"
+                Content="View all groups"
                 Grid.Row="1" VerticalAlignment="Center" Margin="15, 10, 0, 0"
-                Click="ViewAllButton_Click">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FontSize="14" Foreground="#03be90"
-                                   Text="View all groups" FontStyle="Italic"
-                                   VerticalAlignment="Center"/>
+                Click="ViewAllButton_Click"/>
 
-                    <Image Source="/Assets/Common/Next.png"
-                               VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Margin="6, 0, 0, 0"/>
-                </StackPanel>
-            </Button.Content>
-        </Button>
-        
+
         <!--Empty album text-->
         <TextBlock x:Name="EmptyGroupLabel" 
                            Text="You don't have any groups"

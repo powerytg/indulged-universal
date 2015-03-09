@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<local:LoadingViewBase
     x:Class="Indulged.UI.Common.Controls.RetryLoadingView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,4 +28,4 @@
                 Visibility="Collapsed"/>
     </StackPanel>
 
-</UserControl>
+</local:LoadingViewBase>

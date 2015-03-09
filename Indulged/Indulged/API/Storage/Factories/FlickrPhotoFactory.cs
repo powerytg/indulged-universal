@@ -10,6 +10,7 @@ using Newtonsoft.Json.Linq;
 using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
 using System.Globalization;
+using Windows.Data.Html;
 
 namespace Indulged.API.Storage.Factories
 {
@@ -53,12 +54,19 @@ namespace Indulged.API.Storage.Factories
                 photo.CommentCount = int.Parse(json["comments"]["_content"].ToString());
             }
 
-            if(json["title"].GetType() == typeof(JValue))
+            if(json["title"].GetType() == typeof(JValue)){
                 photo.Title = json["title"].ToString();
+            }
             else
+            {
                 photo.Title = json["title"]["_content"].ToString();                
+            }
+
+            photo.CleanTitle = HtmlUtilities.ConvertToText(photo.Title);
+                
             
             photo.Description = json["description"]["_content"].ToString();
+            photo.CleanDescription = HtmlUtilities.ConvertToText(photo.Description);
 
             JToken licenseValue;
             if (json.TryGetValue("license", out licenseValue))

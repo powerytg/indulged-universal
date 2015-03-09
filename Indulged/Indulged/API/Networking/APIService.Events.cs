@@ -27,5 +27,11 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> RemoveFromFavouriteReturned;
         public EventHandler<APIEventArgs> RemoveFromFavouriteFailedReturn;
 
+        // Photo comments
+        public EventHandler<APIEventArgs> PhotoCommentsReturned;
+        public EventHandler<APIEventArgs> PhotoCommentsFailedReturn;
+        public EventHandler<APIEventArgs> AddCommentReturned;
+        public EventHandler<APIEventArgs> AddCommentFailedReturn;
+
     }
 }

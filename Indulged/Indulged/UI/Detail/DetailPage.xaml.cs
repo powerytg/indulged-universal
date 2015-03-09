@@ -3,6 +3,7 @@ using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
 using Indulged.Common;
 using Indulged.UI.Common.Controls;
+using Indulged.UI.Detail.Dialogs;
 using Indulged.UI.Detail.Sections;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,13 @@ namespace Indulged.UI.Detail
 
         private DetailSectionBase[] sections;
 
+        private CommandBar normalCommandBar;
+        private CommandBar composerCommandBar;
+        private AppBarButton FavButton;
+        private AppBarButton PostButton;
+        private CommentComposer composer;
+        private Flyout composerFlyout;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -39,11 +47,18 @@ namespace Indulged.UI.Detail
             this.InitializeComponent();
 
             // Available sections
-            sections = new DetailSectionBase[] { BasicSectionView, EXIFSectionView, TagSectionView };
+            sections = new DetailSectionBase[] { 
+                BasicSectionView, 
+                EXIFSectionView, 
+                TagSectionView, 
+                ReviewSectionView };
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            PrepareCommandBars();
+            BottomAppBar = normalCommandBar;
         }
 
         /// <summary>
@@ -231,6 +246,77 @@ namespace Indulged.UI.Detail
 
             ModalPopup.Show("An error has happened: " + errorMessage, "Error", new List<string> { "Dismiss" });
         }
+
+        private void CommentButton_Click(object sender, RoutedEventArgs e)
+        {            
+            composer = new CommentComposer();
+            composer.PhotoId = photo.ResourceId;
+            composerFlyout = new Flyout();
+            composerFlyout.Content = composer;
+            composerFlyout.ShowAt(this);
+            composerFlyout.Closed += OnComposerClosed;
+
+            // Events
+            composer.PostButtonClicked += PostButton_Click;
+
+            // Change command bar to composer mode
+            BottomAppBar = composerCommandBar;
+        }
+
+        private void OnComposerClosed(object sender, object e)
+        {
+            composer.PostButtonClicked -= PostButton_Click;
+            composer = null;
+
+            // Change back to normal command bar
+            BottomAppBar = normalCommandBar;
+        }
+
+        private void PrepareCommandBars()
+        {
+            // Normal commandbar
+            normalCommandBar = new CommandBar();
+            normalCommandBar.IsOpen = false;
+
+            FavButton = new AppBarButton() { Label = "like/unlike" };
+            FavButton.Click += FavButton_Click;
+
+            var commentButton = new AppBarButton() { Icon = new SymbolIcon(Symbol.Comment), Label = "comment" };
+            commentButton.Click += CommentButton_Click;
+
+            normalCommandBar.PrimaryCommands.Add(FavButton);
+            normalCommandBar.PrimaryCommands.Add(commentButton);
+
+            // Comment composer commandbar
+            composerCommandBar = new CommandBar();
+            composerCommandBar.IsOpen = false;
+
+            PostButton = new AppBarButton() { Label = "post comment", Icon = new SymbolIcon(Symbol.Send) };
+            PostButton.Click += PostButton_Click;
+            composerCommandBar.PrimaryCommands.Add(PostButton);
+        }
+
+        private async void PostButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Freeze "send" button
+            PostButton.IsEnabled = false;
+
+            var success = await composer.PostCommentAsync();
+            if (success)
+            {
+                // Dismiss composer
+                composerFlyout.Hide();
+
+                // Change command bar to normal mode
+                BottomAppBar = normalCommandBar;
+            }
+            else
+            {
+                // Unfreeze send button
+                PostButton.IsEnabled = true;
+            }
+        }
+
 
     }
 }

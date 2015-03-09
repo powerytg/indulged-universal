@@ -49,9 +49,10 @@ namespace Indulged.UI.Detail.Sections
         {
             base.OnPhotoChanged();
 
-            if (Photo.Title.Length > 0)
+            var title = PolKit.PolicyKit.Instance.UseCleanText ? Photo.CleanTitle : Photo.Title;
+            if (title.Length > 0)
             {
-                TitleLabel.Text = Photo.Title;
+                TitleLabel.Text = title;
             }
             else
             {
@@ -71,12 +72,11 @@ namespace Indulged.UI.Detail.Sections
             // Stats
             if (Photo.ViewCount == 0)
             {
-                StatLabel.Visibility = Visibility.Collapsed;
+                StatLabel.Text = "No view information";
             }
             else
             {
                 StatLabel.Text = Photo.ViewCount.ToString() + " views";
-                StatLabel.Visibility = Visibility.Visible;
             }
 
             // Like icon
@@ -90,9 +90,10 @@ namespace Indulged.UI.Detail.Sections
             }
 
             // Description
-            if (Photo.Description.Length > 0)
+            var desc = PolKit.PolicyKit.Instance.UseCleanText ? Photo.CleanDescription : Photo.Description;
+            if (desc.Length > 0)
             {
-                DescLabel.Text = Photo.Description;
+                DescLabel.Text = desc;
                 DescLabel.Visibility = Visibility.Visible;
             }
             else

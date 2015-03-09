@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="Indulged.UI.Detail.Dialogs.CommentComposer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Detail.Dialogs"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <StackPanel Orientation="Vertical">
+        <TextBox x:Name="MessageTextBox" AcceptsReturn="True"
+                 PlaceholderText="Write a comment"
+                 Height="80"
+                 Margin="15, 15, 15, 0"/>
+
+        <!--Status and loading view-->
+        <common:StatusLoadingView x:Name="StatusView"
+                                  LoadingText="Posting comment"
+                                  Margin="15, 15, 15, 0"
+                                  Opacity="0"/>
+        <!--Post button-->
+        <Button x:Name="SendButton" Style="{StaticResource MainButtonStyle}"
+                Content="Post Comment"
+                Margin="15, 8, 15, 20"
+                Click="SendButton_Click"/>
+               
+    </StackPanel>
+</UserControl>

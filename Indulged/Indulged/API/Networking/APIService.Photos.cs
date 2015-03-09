@@ -120,5 +120,82 @@ namespace Indulged.API.Networking
 
             return retVal;
         }
+
+        public async Task<APIResponse> GetPhotoCommentsAsync(string photoId, Action<string> success = null, Action<string> failure = null)
+        {
+            var paramDict = new Dictionary<string, string>();
+            paramDict["method"] = "flickr.photos.comments.getList";
+            paramDict["photo_id"] = photoId;
+
+            var retVal = await DispatchRequestAsync("GET", paramDict, true);
+            if (retVal.Success)
+            {
+                if (success != null)
+                {
+                    success(retVal.Result);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.PhotoId = photoId;
+                evt.Response = retVal.Result;
+                PhotoCommentsReturned.DispatchEvent(this, evt);
+            }
+            else
+            {
+                if (failure != null)
+                {
+                    failure(retVal.ErrorMessage);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.PhotoId = photoId;
+                evt.ErrorMessage = retVal.ErrorMessage;
+                PhotoCommentsFailedReturn.DispatchEvent(this, evt);
+            }
+
+            return retVal;
+        }
+
+        public async Task<APIResponse> AddCommentAsync(string photoId, string message, Action<string> success = null, Action<string> failure = null)
+        {
+            var paramDict = new Dictionary<string, string>();
+            paramDict["method"] = "flickr.photos.comments.addComment";
+            paramDict["photo_id"] = photoId;
+            paramDict["comment_text"] = message;
+
+            var retVal = await DispatchRequestAsync("POST", paramDict, true);
+            if (retVal.Success)
+            {
+                if (success != null)
+                {
+                    success(retVal.Result);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.PhotoId = photoId;
+                evt.Message = message;
+                evt.Response = retVal.Result;
+                AddCommentReturned.DispatchEvent(this, evt);
+            }
+            else
+            {
+                if (failure != null)
+                {
+                    failure(retVal.ErrorMessage);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.PhotoId = photoId;
+                evt.ErrorMessage = retVal.ErrorMessage;
+                AddCommentFailedReturn.DispatchEvent(this, evt);
+            }
+
+            return retVal;
+        }
+
     }
 }

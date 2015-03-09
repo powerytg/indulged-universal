@@ -137,5 +137,11 @@ namespace Indulged.API.Storage.Models
                 return "https://farm" + Farm + ".staticflickr.com/" + Server + "/" + ResourceId + "_" + Secret + "_z.jpg";
             }
         }
+
+        // Title string stripped out of HTML tags
+        public string CleanTitle { get; set; }
+
+        // Description string stripped out of HTML tags
+        public string CleanDescription { get; set; }
     }
 }
