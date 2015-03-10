@@ -5,6 +5,7 @@
     xmlns:local="using:Indulged.UI.Detail.Sections"
     xmlns:renderers="using:Indulged.UI.Detail.Renderers"
     xmlns:controls="using:Indulged.UI.Detail.Controls"
+    xmlns:common="using:Indulged.UI.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -17,9 +18,9 @@
                                     Margin="{StaticResource DetailMargin}"/>
 
         <!--Loading view-->
-        <TextBlock x:Name="LoadingView"
-                   TextWrapping="Wrap" Style="{StaticResource DetailDescription}"
-                   Margin="{StaticResource DetailMargin}" />
+        <common:StatusLoadingView x:Name="LoadingView"
+                                  LoadingText="Loading comments"
+                                  Margin="{StaticResource DetailMargin}"/>
 
         <renderers:CommentDigestRenderer x:Name="renderer1" Margin="{StaticResource DetailMargin}"
                                          Visibility="Collapsed"/>

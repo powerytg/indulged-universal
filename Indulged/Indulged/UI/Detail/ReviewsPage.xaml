@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Indulged.UI.Detail.ReviewsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Detail"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:renderers="using:Indulged.UI.Detail.Renderers"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{StaticResource DarkPageStyle}">
+
+    <Grid>
+        <!--Blurred background-->
+        <common:BlurredBackgroundView x:Name="BackgroundView"/>
+
+        <ListView x:Name="CommentListView"
+                  ItemContainerStyle="{StaticResource PhotoListViewItemStyle}">
+            <ListView.Header>
+                <StackPanel Orientation="Vertical">
+
+                    <!--Header-->
+                    <Image Source="/Assets/Dashboard/DarkBanner.png"/>
+
+                    <!--Title-->
+                    <TextBlock
+                        Text="Reviews"
+                        Foreground="White" 
+                        FontSize="38" FontWeight="Light" 
+                        Margin="12, 20, 50, 5"/>
+
+                    <!--Author and date-->
+                    <TextBlock x:Name="AuthorLabel"
+                        Style="{StaticResource DetailDescription}"
+                        Margin="12, 0, 0, 0"/>
+
+                    <!--Photo-->
+                    <Border BorderThickness="0, 1, 0, 1" BorderBrush="Black"
+                            Margin="0, 12, 0, 12">
+                        <Image x:Name="ImageView"/>
+                    </Border>
+                </StackPanel>
+            </ListView.Header>
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <renderers:CommentRenderer Comment="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+            <!--Footer deco-->
+            <ListView.Footer>
+                <Image Source="/Assets/Common/PageSeperator.png"
+                           HorizontalAlignment="Center"
+                           Width="180" Margin="0, 20, 0, 80"/>
+            </ListView.Footer>
+        </ListView>
+    </Grid>
+    
+    
+</Page>

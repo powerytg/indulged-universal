@@ -62,11 +62,15 @@ namespace Indulged.UI.Detail.Sections
                 return;
             }
 
+            // Show loading progress bar
+            LoadingView.ShowLoadingScreen();
+
             // Always refresh comments
             var status = await APIService.Instance.GetPhotoCommentsAsync(Photo.ResourceId);
             if (!status.Success)
             {
-                LoadingView.Text = "Cannot load comments";
+                LoadingView.ErrorText = "Cannot load comments";
+                LoadingView.ShowErrorScreen();
             }
         }
 
@@ -74,7 +78,8 @@ namespace Indulged.UI.Detail.Sections
         {
             if (Photo.Comments.Count == 0)
             {
-                LoadingView.Text = "This photo has not received comments yet";
+                LoadingView.ErrorText = "This photo has not received comments yet";
+                LoadingView.ShowErrorScreen();
             }
             else
             {
@@ -105,7 +110,8 @@ namespace Indulged.UI.Detail.Sections
 
         private void ViewAllButon_Click(object sender, RoutedEventArgs e)
         {
-
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(ReviewsPage), Photo.ResourceId);
         }
      
 

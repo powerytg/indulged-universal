@@ -10,7 +10,7 @@
     xmlns:data="using:Indulged.Data"
     mc:Ignorable="d"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
-    Background="#000">
+    Style="{StaticResource DarkPageStyle}">
     <Page.Transitions>
         <TransitionCollection>
             <NavigationThemeTransition>

@@ -250,7 +250,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Detail\Renderers\CommentRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Detail\Renderers\CommentDigestRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Detail\ReviewsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -449,10 +457,16 @@
     <Compile Include="UI\Detail\Dialogs\CommentComposer.xaml.cs">
       <DependentUpon>CommentComposer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Detail\Renderers\CommentRenderer.xaml.cs">
+      <DependentUpon>CommentRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Detail\Renderers\CommentDigestRenderer.xaml.cs">
       <DependentUpon>CommentDigestRenderer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Detail\Renderers\CommentRendererBase.cs" />
+    <Compile Include="UI\Detail\ReviewsPage.xaml.cs">
+      <DependentUpon>ReviewsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Detail\Sections\BasicInfoSection.xaml.cs">
       <DependentUpon>BasicInfoSection.xaml</DependentUpon>
     </Compile>

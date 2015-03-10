@@ -3,6 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Indulged.Themes">
 
+    <SolidColorBrush x:Key="DarkPageBackground" Color="#1c1c1c"/>
+    <SolidColorBrush x:Key="LightPageBackground" Color="#ffffff"/>
+    
+    <Style x:Key="DarkPageStyle" TargetType="Page">
+        <Setter Property="Background" Value="{StaticResource DarkPageBackground}"/>
+    </Style>
+
+    <Style x:Key="LightPageStyle" TargetType="Page">
+        <Setter Property="Background" Value="{StaticResource LightPageBackground}"/>
+    </Style>
+
     <Style x:Key="RadioButtonTitle" TargetType="TextBlock">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="13"/>

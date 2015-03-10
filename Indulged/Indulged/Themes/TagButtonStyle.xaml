@@ -69,8 +69,8 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Border x:Name="ButtonBackground" CornerRadius="16" Background="#3e3e3e"
-                                BorderThickness="1" BorderBrush="Black"
+                        <Border x:Name="ButtonBackground" CornerRadius="16"
+                                BorderThickness="1" BorderBrush="Black" Background="#3e3e3e"
                                 Margin="{ThemeResource PhoneTouchTargetOverhang}">
                             <StackPanel Orientation="Horizontal" Margin="12, 0, 12, 0">
                                 <Image Source="/Assets/Common/Tag.png" Margin="0, 0, 8, 0"

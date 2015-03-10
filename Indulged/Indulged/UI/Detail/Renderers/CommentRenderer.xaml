@@ -1,5 +1,5 @@
 ﻿<local:CommentRendererBase
-    x:Class="Indulged.UI.Detail.Renderers.CommentDigestRenderer"
+    x:Class="Indulged.UI.Detail.Renderers.CommentRenderer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Indulged.UI.Detail.Renderers"
@@ -24,7 +24,7 @@
 
             <!--Content-->
             <TextBlock x:Name="BodyTextView" 
-                   MaxLines="6" TextWrapping="Wrap" TextTrimming="WordEllipsis" 
+                   TextWrapping="Wrap" TextTrimming="WordEllipsis" 
                    Foreground="#8b93a0"
                    FontWeight="Light" FontSize="16" 
                    Margin="0, 8, 8, 0"/>

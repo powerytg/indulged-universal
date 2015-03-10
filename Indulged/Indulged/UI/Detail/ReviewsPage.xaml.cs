@@ -1,15 +1,24 @@
-﻿using Indulged.API.Networking;
-using Indulged.API.Storage;
+﻿using Indulged.API.Storage;
 using Indulged.API.Storage.Models;
 using Indulged.Common;
-using Indulged.UI.Common.Controls;
 using Indulged.UI.Detail.Dialogs;
-using Indulged.UI.Detail.Sections;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -19,21 +28,15 @@ namespace Indulged.UI.Detail
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class DetailPage : Page
+    public sealed partial class ReviewsPage : Page
     {
-        public static string PAGE_STATE_PHOTO_ID = "photoId";
-
         private NavigationHelper navigationHelper;
+        private ObservableCollection<FlickrComment> comments = new ObservableCollection<FlickrComment>();
+
         private FlickrPhoto photo;
-
-        private static SymbolIcon likeIcon = new SymbolIcon(Symbol.Like);
-        private static SymbolIcon unlikeIcon = new SymbolIcon(Symbol.Dislike);
-
-        private DetailSectionBase[] sections;
 
         private CommandBar normalCommandBar;
         private CommandBar composerCommandBar;
-        private AppBarButton FavButton;
         private AppBarButton PostButton;
         private CommentComposer composer;
         private Flyout composerFlyout;
@@ -41,16 +44,9 @@ namespace Indulged.UI.Detail
         /// <summary>
         /// Constructor
         /// </summary>
-        public DetailPage()
+        public ReviewsPage()
         {
             this.InitializeComponent();
-
-            // Available sections
-            sections = new DetailSectionBase[] { 
-                BasicSectionView, 
-                EXIFSectionView, 
-                TagSectionView, 
-                ReviewSectionView };
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -82,25 +78,19 @@ namespace Indulged.UI.Detail
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             var photoId = "";
-            if (e.PageState != null && e.PageState.ContainsKey(PAGE_STATE_PHOTO_ID))
+            if (e.PageState != null && e.PageState.ContainsKey(DetailPage.PAGE_STATE_PHOTO_ID))
             {
-                photoId = e.PageState[PAGE_STATE_PHOTO_ID] as string;
+                photoId = e.PageState[DetailPage.PAGE_STATE_PHOTO_ID] as string;
             }
             else
             {
-                photoId = e.NavigationParameter as string;    
+                photoId = e.NavigationParameter as string;
             }
 
             photo = StorageService.Instance.PhotoCache[photoId];
 
-            // Command bar icons
-            FavButton.Icon = (photo.IsFavourite) ? unlikeIcon : likeIcon;
-
-            // Do not allow liking one's own photo
-            if (photo.UserId == StorageService.Instance.CurrentUser.ResourceId)
-            {
-                FavButton.IsEnabled = false;
-            }
+            // Image
+            ImageView.Source = new BitmapImage(new Uri(photo.GetImageUrl(), UriKind.Absolute));
 
             // Background
             if (PolKit.PolicyKit.Instance.UseBlurredBackground)
@@ -113,20 +103,21 @@ namespace Indulged.UI.Detail
                 BackgroundView.Visibility = Visibility.Collapsed;
             }
 
-            // Register events
-            StorageService.Instance.PhotoAddedAsFavourite += OnFavouriteStatusChanged;
-            StorageService.Instance.PhotoRemovedFromFavourite += OnFavouriteStatusChanged;
+            // Author and date
+            var user = StorageService.Instance.UserCache[photo.UserId];
+            AuthorLabel.Text = user.Name + " · " + photo.DateTaken;
 
-            foreach (var section in sections)
+            // Data source
+            comments.Clear();
+            foreach (var comment in photo.Comments)
             {
-                section.AddEventListeners();
+                comments.Add(comment);
             }
 
-            // Fill in sections     
-            foreach (var section in sections)
-            {
-                section.Photo = photo;
-            }
+            CommentListView.ItemsSource = comments;
+
+            // Events
+            StorageService.Instance.CommentAdded += OnCommentsUpdated;
         }
 
         /// <summary>
@@ -139,106 +130,22 @@ namespace Indulged.UI.Detail
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            e.PageState[PAGE_STATE_PHOTO_ID] = photo.ResourceId;
+            e.PageState[DetailPage.PAGE_STATE_PHOTO_ID] = photo.ResourceId;
 
-            // Remove all event listeners
-            StorageService.Instance.PhotoAddedAsFavourite -= OnFavouriteStatusChanged;
-            StorageService.Instance.PhotoRemovedFromFavourite -= OnFavouriteStatusChanged;
+            // Remove event handlers
+            StorageService.Instance.CommentAdded -= OnCommentsUpdated;
+        }
 
-            foreach (var section in sections)
+        private void OnCommentsUpdated(object sender, API.Storage.Events.StorageEventArgs e)
+        {
+            foreach (var comment in e.NewComments)
             {
-                section.RemoveEventListeners();
+                comments.Add(comment);
             }
-        }
-
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method 
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Provides data for navigation methods and event
-        /// handlers that cannot cancel the navigation request.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
-        private void FavButton_Click(object sender, RoutedEventArgs e)
-        {
-            ToggleFavourite();
-        }
-
-        private async void ToggleFavourite()
-        {
-            FavButton.IsEnabled = false;
-
-            // Show status bar progress
-            var sb = StatusBar.GetForCurrentView();
-            sb.ProgressIndicator.Text = (photo.IsFavourite) ? "Removing from favourite" : "Adding to favourite";
-            await sb.ProgressIndicator.ShowAsync();
-
-            // Sending request
-            if (photo.IsFavourite)
-            {
-                // Should remove from favourite
-                var status = await APIService.Instance.RemoveFromFavouriteAsync(photo.ResourceId);
-                if (!status.Success)
-                {
-                    OnFavRequestError(status.ErrorMessage);
-                }
-            }
-            else
-            {
-                // Should add to favourite
-                var status = await APIService.Instance.AddToFavouriteAsync(photo.ResourceId);
-                if (!status.Success)
-                {
-                    OnFavRequestError(status.ErrorMessage);
-                }
-            }
-
-        }
-
-        private async void OnFavouriteStatusChanged(object sender, API.Storage.Events.StorageEventArgs e)
-        {
-            if (photo == null || e.PhotoId != photo.ResourceId)
-            {
-                return;
-            }
-
-            var sb = StatusBar.GetForCurrentView();
-            await sb.ProgressIndicator.HideAsync();
-            FavButton.Icon = (photo.IsFavourite) ? unlikeIcon : likeIcon;
-            FavButton.IsEnabled = true;
-        }
-
-
-        private async void OnFavRequestError(string errorMessage)
-        {
-            var sb = StatusBar.GetForCurrentView();
-            await sb.ProgressIndicator.HideAsync();
-            FavButton.IsEnabled = true;
-
-            ModalPopup.Show("An error has happened: " + errorMessage, "Error", new List<string> { "Dismiss" });
         }
 
         private void CommentButton_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             composer = new CommentComposer();
             composer.PhotoId = photo.ResourceId;
             composerFlyout = new Flyout();
@@ -268,13 +175,8 @@ namespace Indulged.UI.Detail
             normalCommandBar = new CommandBar();
             normalCommandBar.IsOpen = false;
 
-            FavButton = new AppBarButton() { Label = "like/unlike" };
-            FavButton.Click += FavButton_Click;
-
             var commentButton = new AppBarButton() { Icon = new SymbolIcon(Symbol.Comment), Label = "comment" };
             commentButton.Click += CommentButton_Click;
-
-            normalCommandBar.PrimaryCommands.Add(FavButton);
             normalCommandBar.PrimaryCommands.Add(commentButton);
 
             // Comment composer commandbar
@@ -307,6 +209,31 @@ namespace Indulged.UI.Detail
             }
         }
 
+        #region NavigationHelper registration
 
+        /// <summary>
+        /// The methods provided in this section are simply used to allow
+        /// NavigationHelper to respond to the page's navigation methods.
+        /// <para>
+        /// Page specific logic should be placed in event handlers for the  
+        /// <see cref="NavigationHelper.LoadState"/>
+        /// and <see cref="NavigationHelper.SaveState"/>.
+        /// The navigation parameter is available in the LoadState method 
+        /// in addition to page state preserved during an earlier session.
+        /// </para>
+        /// </summary>
+        /// <param name="e">Provides data for navigation methods and event
+        /// handlers that cannot cancel the navigation request.</param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+        #endregion
     }
 }
