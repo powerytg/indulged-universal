@@ -81,6 +81,9 @@ namespace Indulged.API.Storage
             // Photo comments
             APIService.Instance.PhotoCommentsReturned += OnPhotoCommentsReturned;
             APIService.Instance.AddCommentReturned += OnPhotoCommentAdded;
+
+            // Get user info
+            APIService.Instance.UserInfoReturned += OnUserInfoReturned;
         }
     }
 }

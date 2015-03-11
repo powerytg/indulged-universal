@@ -15,6 +15,7 @@
         <ResourceDictionary Source="/Themes/GroupButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/DetailPageStyle.xaml"/>
         <ResourceDictionary Source="/Themes/TagButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/UserProfilePageStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

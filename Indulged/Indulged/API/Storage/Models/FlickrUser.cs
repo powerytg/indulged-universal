@@ -61,5 +61,8 @@ namespace Indulged.API.Storage.Models
 
         // Whether can create more albums
         public bool CanCreateAlbum { get; set; }
+
+        // Description string stripped out of HTML tags
+        public string CleanDescription { get; set; }
     }
 }

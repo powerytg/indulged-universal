@@ -33,5 +33,10 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> AddCommentReturned;
         public EventHandler<APIEventArgs> AddCommentFailedReturn;
 
+        // Get user info
+        public EventHandler<APIEventArgs> UserInfoReturned;
+        public EventHandler<APIEventArgs> UserInfoFailedReturn;
+
+
     }
 }

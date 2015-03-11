@@ -1,8 +1,10 @@
 ﻿using Indulged.API.Storage;
 using Indulged.API.Storage.Events;
+using Indulged.UI.Profile;
 using System;
 using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -130,7 +132,8 @@ namespace Indulged.UI.Detail.Sections
 
         private void ProfileButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(UserProfilePage), Photo.UserId);
         }
 
         private void OnPhotoAddedToFavourite(object sender, StorageEventArgs e)

@@ -6,6 +6,7 @@
     <SolidColorBrush x:Key="DarkPageBackground" Color="#1c1c1c"/>
     <SolidColorBrush x:Key="LightPageBackground" Color="#ffffff"/>
     
+    <!--Page style-->
     <Style x:Key="DarkPageStyle" TargetType="Page">
         <Setter Property="Background" Value="{StaticResource DarkPageBackground}"/>
     </Style>
@@ -29,6 +30,11 @@
     <!--Make page content full screen-->
     <Thickness x:Key="FullScreenBackgroundMargin">0, -32, 0, 0</Thickness>
     
+    <!--Hub style-->
+    <Style x:Key="LightHubSectionStyle" TargetType="HubSection">
+        <Setter Property="Foreground" Value="#a9b6c9"/>
+    </Style>
+    
     <!--Dialog insets-->
     <Thickness x:Key="CommonDialogMargin">50, 20, 50, 20</Thickness>
     
@@ -37,5 +43,8 @@
         <!--<Setter Property="ScrollViewer.ZoomMode" Value="Enabled"/>-->
         <Setter Property="Background" Value="#151719"/>
     </Style>
+    
+    <!--Loading view style-->
+    <SolidColorBrush x:Key="LightLoadingColor" Color="#448ccb"/>
     
 </ResourceDictionary>

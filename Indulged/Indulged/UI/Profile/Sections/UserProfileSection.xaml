@@ -1,0 +1,82 @@
+﻿<local:UserSectionBase
+    x:Class="Indulged.UI.Profile.Sections.UserProfileSection"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Profile.Sections"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/200{StaticResource ProfileContentMargin}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <!--Loading view-->
+        <common:RetryLoadingView x:Name="LoadingView"
+                                 LoadingText="Loading profile"
+                                 ThemeColor="{StaticResource LightLoadingColor}"
+                                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
+        <!--Profile form-->
+        <ScrollViewer x:Name="ContentView" Visibility="Collapsed">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 25" >
+                    <Image x:Name="AvatarView" Width="120" Height="120" VerticalAlignment="Top" Margin="0, 0, 15, 0"/>
+                    <StackPanel VerticalAlignment="Top" >
+                        <TextBlock x:Name="NameLabel" Foreground="#32afe0" FontSize="38" FontFamily="/Assets/Fonts/BenchNine-Regular.ttf#BenchNine"
+                           TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ProLabel" Text="PRO" Foreground="#f28422" FontSize="24" FontFamily="/Assets/Fonts/BenchNine-Regular.ttf#BenchNine"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="RealNameSection" Margin="{StaticResource ProfileSectionMargin}">
+                    <TextBlock Style="{StaticResource ProfilePropertyStyle}"
+                               Text="Real Name"/>
+
+                    <TextBlock x:Name="RealNameLabel" 
+                               Style="{StaticResource ProfileValueStyle}"/>
+
+                </StackPanel>
+
+                <StackPanel x:Name="LocationSection" Margin="{StaticResource ProfileSectionMargin}">
+                    <TextBlock Style="{StaticResource ProfilePropertyStyle}"
+                               Text="Location"/>
+
+                    <TextBlock x:Name="LocationLabel" Style="{StaticResource ProfileValueStyle}"/>
+                </StackPanel>
+
+                <StackPanel x:Name="DescSection" Margin="{StaticResource ProfileSectionMargin}">
+                    <TextBlock Style="{StaticResource ProfilePropertyStyle}" 
+                               Text="Description"/>
+
+                    <TextBlock x:Name="DescLabel" Style="{StaticResource ProfileValueStyle}"/>
+                </StackPanel>
+
+                <StackPanel x:Name="ProfileUrlSection" Margin="{StaticResource ProfileSectionMargin}">
+                    <TextBlock Style="{StaticResource ProfilePropertyStyle}"
+                               Text="Profile Url"/>
+
+                    <TextBlock x:Name="ProfileUrlLabel" Style="{StaticResource ProfileValueStyle}" Foreground="#f28422" 
+                               Tapped="ProfileUrlLabel_Tapped">
+                        <Underline>
+                            <Run x:Name="ProfileUrlRun"/>
+                        </Underline>    
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel x:Name="PhotoCountSection" Margin="{StaticResource ProfileSectionMargin}">
+                    <TextBlock Style="{StaticResource ProfilePropertyStyle}"
+                               Text="Photo Count"/>
+
+                    <TextBlock x:Name="PhotoCountLabel" Style="{StaticResource ProfileValueStyle}"/>
+                </StackPanel>
+
+                <!--End deco-->
+                <Image Source="/Assets/Common/PageSeperator.png"
+                       HorizontalAlignment="Center"
+                       Width="180" Margin="20"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</local:UserSectionBase>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Data.Html;
 
 namespace Indulged.API.Storage.Factories
 {
@@ -161,6 +162,7 @@ namespace Indulged.API.Storage.Factories
             if (json.TryGetValue("description", out descValue))
             {
                 user.Description = json["description"]["_content"].ToString();
+                user.CleanDescription = HtmlUtilities.ConvertToText(user.Description);
             }
 
             JToken farmValue;

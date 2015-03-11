@@ -27,6 +27,13 @@ namespace Indulged.UI.Common.Controls
             this.InitializeComponent();
         }
 
+        protected override void OnThemeColorChanged()
+        {
+            base.OnThemeColorChanged();
+            LoadingLabel.Foreground = ThemeColor;
+            LoadingIndicator.Foreground = ThemeColor;
+        }
+
         protected override void OnLoadingTextChanged()
         {
             base.OnLoadingTextChanged();

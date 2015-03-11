@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace Indulged.UI.Common.Controls
 {
@@ -57,6 +59,31 @@ namespace Indulged.UI.Common.Controls
         }
 
         protected virtual void OnErrorTextChanged()
+        {
+        }
+
+        /// <summary>
+        /// Text and spinner foreground
+        /// </summary>
+        public static readonly DependencyProperty ThemeColorProperty = DependencyProperty.Register(
+        "ThemeColor",
+        typeof(Brush),
+        typeof(LoadingViewBase),
+        new PropertyMetadata(new SolidColorBrush(Colors.White), OnThemeColorPropertyChanged));
+
+        public Brush ThemeColor
+        {
+            get { return (Brush)GetValue(ThemeColorProperty); }
+            set { SetValue(ThemeColorProperty, value); }
+        }
+
+        private static void OnThemeColorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var target = (LoadingViewBase)sender;
+            target.OnThemeColorChanged();
+        }
+
+        protected virtual void OnThemeColorChanged()
         {
         }
     }

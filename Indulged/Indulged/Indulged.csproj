@@ -142,6 +142,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\UserProfilePageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="UI\Common\AlbumStream\CommonAlbumRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +292,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Login\SupportClasses\LoginRingButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Profile\Sections\UserProfileSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Profile\Sections\UserStreamSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Profile\UserProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -495,6 +512,16 @@
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
     <Compile Include="UI\Models\StreamLayoutStyle.cs" />
+    <Compile Include="UI\Profile\Sections\UserProfileSection.xaml.cs">
+      <DependentUpon>UserProfileSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Profile\Sections\UserSectionBase.cs" />
+    <Compile Include="UI\Profile\Sections\UserStreamSection.xaml.cs">
+      <DependentUpon>UserStreamSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
+      <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -517,6 +544,7 @@
     <Content Include="Assets\Dashboard\DotLine.png" />
     <Content Include="Assets\Dashboard\FavInStream.png" />
     <Content Include="Assets\Dashboard\LightBanner.scale-240.png" />
+    <Content Include="Assets\Dashboard\LightBannerWide.scale-240.png" />
     <Content Include="Assets\Dashboard\PageCurl.png" />
     <Content Include="Assets\Dashboard\PreludeArrow.png" />
     <Content Include="Assets\Dashboard\Private.scale-240.png" />

@@ -47,5 +47,41 @@ namespace Indulged.API.Networking
 
             return retVal;
         }
+
+        public async Task<APIResponse> GetUserInfoAsync(string userId, Action<string> success = null, Action<string> failure = null)
+        {
+            var paramDict = new Dictionary<string, string>();
+            paramDict["method"] = "flickr.people.getInfo";
+            paramDict["user_id"] = UrlUtils.Encode(userId);
+
+            var retVal = await DispatchRequestAsync("GET", paramDict, true);
+            if (retVal.Success)
+            {
+                if (success != null)
+                {
+                    success(retVal.Result);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.UserId = userId;
+                evt.Response = retVal.Result;
+                UserInfoReturned.DispatchEvent(this, evt);
+            }
+            else
+            {
+                if (failure != null)
+                {
+                    failure(retVal.ErrorMessage);
+                }
+
+                // Dispatch event
+                var evt = new APIEventArgs();
+                evt.ErrorMessage = retVal.ErrorMessage;
+                UserInfoFailedReturn.DispatchEvent(this, evt);
+            }
+
+            return retVal;
+        }
     }
 }
