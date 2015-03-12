@@ -70,6 +70,8 @@ namespace Indulged.UI.Common.PhotoStream
             // Position photo
             PhotoView1.Width = containerWidth;
             PhotoView1.Height = Height - cellMargin;
+            PhotoView1.SetValue(Canvas.TopProperty, 0);
+            PhotoView1.SetValue(Canvas.LeftProperty, 0);
 
             // Set photos
             PhotoView1.Photo = PhotoTileSource.Photos[0];
@@ -96,10 +98,13 @@ namespace Indulged.UI.Common.PhotoStream
             // Layout photos
             PhotoView1.Width = layout1.ColSpan * cellSize;
             PhotoView1.Height = Height - cellMargin;
+            PhotoView1.SetValue(Canvas.TopProperty, 0);
+            PhotoView1.SetValue(Canvas.LeftProperty, 0);
 
             PhotoView2.Width = containerWidth - PhotoView1.Width - cellMargin;
             PhotoView2.Height = PhotoView1.Height;
             PhotoView2.SetValue(Canvas.LeftProperty, PhotoView1.Width + cellMargin);
+            PhotoView2.SetValue(Canvas.TopProperty, 0);
 
             // Set photos
             PhotoView1.Photo = PhotoTileSource.Photos[0];
@@ -128,10 +133,13 @@ namespace Indulged.UI.Common.PhotoStream
             // Layout photos
             PhotoView1.Width = layout1.ColSpan * cellSize;
             PhotoView1.Height = Height - cellMargin;
+            PhotoView1.SetValue(Canvas.LeftProperty, 0);
+            PhotoView1.SetValue(Canvas.TopProperty, 0);
 
             PhotoView2.Width = layout2.ColSpan * cellSize - cellMargin;
             PhotoView2.Height = layout2.RowSpan * cellSize;
             PhotoView2.SetValue(Canvas.LeftProperty, PhotoView1.Width + cellMargin);
+            PhotoView2.SetValue(Canvas.TopProperty, 0);
 
             PhotoView3.Width = PhotoView2.Width;
             PhotoView3.Height = PhotoView1.Height - PhotoView2.Height - cellMargin;

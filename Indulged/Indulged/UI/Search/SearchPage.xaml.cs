@@ -1,31 +1,35 @@
-﻿using Indulged.API.Storage;
-using Indulged.API.Storage.Models;
+﻿using Indulged.API.Networking;
+using Indulged.API.Storage;
 using Indulged.Common;
-using Indulged.UI.Profile.Sections;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Graphics.Display;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace Indulged.UI.Profile
+namespace Indulged.UI.Search
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class UserProfilePage : Page
+    public sealed partial class SearchPage : Page
     {
-        public static string PAGE_STATE_USER_ID = "userId";
         private NavigationHelper navigationHelper;
-        private FlickrUser user;
 
-        private UserProfileSection profileSection;
-        private UserStreamSection streamSection;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public UserProfilePage()
+        public SearchPage()
         {
             this.InitializeComponent();
 
@@ -53,33 +57,18 @@ namespace Indulged.UI.Profile
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var userId = "";
-            if (e.PageState != null && e.PageState.ContainsKey(PAGE_STATE_USER_ID))
-            {
-                userId = e.PageState[PAGE_STATE_USER_ID] as string;
-            }
-            else
-            {
-                userId = e.NavigationParameter as string;
-            }
+            // Events
+            StorageService.Instance.PopularTagsUpdated += OnTagListUpdated;
 
-            user = StorageService.Instance.UserCache[userId];
-
-            // Set hub title
-            HeaderView.Title = user.Name;
-
-            // Load user photo stream
-            if (streamSection != null)
+            // Refresh popular tags
+            LoadingView.ShowLoadingScreen();
+            var status = await APIService.Instance.GetPopularTagListAsync();
+            if (!status.Success)
             {
-                streamSection.User = user;
-            }
-
-            // Load user profile
-            if (profileSection != null)
-            {
-                profileSection.User = user;
+                LoadingView.ErrorText = "Cannot load tag list: " + status.ErrorMessage;
+                LoadingView.ShowErrorScreen();
             }
         }
 
@@ -93,8 +82,17 @@ namespace Indulged.UI.Profile
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            e.PageState[PAGE_STATE_USER_ID] = user.ResourceId;
+            // Events
+            StorageService.Instance.PopularTagsUpdated -= OnTagListUpdated;
         }
+
+        private void OnTagListUpdated(object sender, API.Storage.Events.StorageEventArgs e)
+        {
+            LoadingView.Visibility = Visibility.Collapsed;
+            TagListView.ItemsSource = e.NewTags;
+            TagListView.Visibility = Visibility.Visible;
+        }
+
 
         #region NavigationHelper registration
 
@@ -122,23 +120,5 @@ namespace Indulged.UI.Profile
         }
 
         #endregion
-
-        private void StreamSection_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            streamSection = sender as UserStreamSection;
-            if (user != null)
-            {
-                streamSection.User = user;
-            }
-        }
-
-        private void UserProfileSection_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            profileSection = sender as UserProfileSection;
-            if (user != null)
-            {
-                profileSection.User = user;
-            }
-        }
     }
 }

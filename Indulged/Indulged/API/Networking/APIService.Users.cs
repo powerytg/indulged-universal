@@ -41,6 +41,7 @@ namespace Indulged.API.Networking
 
                 // Dispatch event
                 var evt = new APIEventArgs();
+                evt.UserId = userId;
                 evt.ErrorMessage = retVal.ErrorMessage;
                 GroupListFailedReturn.DispatchEvent(this, evt);
             }
@@ -77,6 +78,7 @@ namespace Indulged.API.Networking
 
                 // Dispatch event
                 var evt = new APIEventArgs();
+                evt.UserId = userId;
                 evt.ErrorMessage = retVal.ErrorMessage;
                 UserInfoFailedReturn.DispatchEvent(this, evt);
             }

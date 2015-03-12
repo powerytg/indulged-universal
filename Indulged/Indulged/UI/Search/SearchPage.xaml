@@ -1,0 +1,63 @@
+﻿<Page
+    x:Class="Indulged.UI.Search.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.Search"
+    xmlns:common="using:Indulged.UI.Common.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{StaticResource DarkPageStyle}">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!--Header-->
+        <Image x:Name="HeaderImageView" Source="/Assets/Dashboard/DarkBanner.png"
+               Grid.Row="0"/>
+        <TextBlock x:Name="TitleLabel" FontSize="48"
+                   FontStretch="Condensed" Foreground="White"
+                   Text="Search" Margin="15, 5, 0, 15"
+                   Grid.Row="1">
+        </TextBlock>
+        
+        <!--Search box-->
+        <TextBox x:Name="SearchBox" PlaceholderText="type to search"
+                 Margin="15, 0, 15, 30"
+                 Grid.Row="2"/>
+        
+        <!--Popular tags-->
+        <TextBlock Text="Popular Tags" Margin="15, 0, 15, 0"
+                   FontSize="18" FontWeight="Medium"
+                   Grid.Row="3"/>
+        
+        <Grid Margin="15" Grid.Row="4">
+            <common:StatusLoadingView x:Name="LoadingView"
+                                      LoadingText="Loading popular tags"
+                                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      Margin="0, 8, 0, 0"/>
+            
+            <ListView x:Name="TagListView"
+                      Visibility="Collapsed">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Style="{StaticResource TagButtonStyle}"
+                                Content="{Binding Name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

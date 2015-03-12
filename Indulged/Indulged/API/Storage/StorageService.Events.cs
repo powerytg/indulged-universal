@@ -84,6 +84,9 @@ namespace Indulged.API.Storage
 
             // Get user info
             APIService.Instance.UserInfoReturned += OnUserInfoReturned;
+
+            // Get popular tags
+            APIService.Instance.PopularTagListReturned += OnPopularTagListReturned;
         }
     }
 }

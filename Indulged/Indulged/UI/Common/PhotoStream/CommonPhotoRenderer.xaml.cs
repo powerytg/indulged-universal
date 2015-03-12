@@ -31,6 +31,7 @@ namespace Indulged.UI.Common.PhotoStream
 
             ImageView.Source = new BitmapImage(new Uri(Photo.GetImageUrl(), UriKind.Absolute));
             OverlayView.PhotoSource = Photo;
+            PerformLayout();
         }
 
         private void LayoutRoot_SizeChanged(object sender, SizeChangedEventArgs e)

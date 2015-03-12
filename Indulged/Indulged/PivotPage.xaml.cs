@@ -1,10 +1,10 @@
 ﻿using Indulged.API.Storage;
 using Indulged.API.Storage.Events;
-using Indulged.API.Storage.Models;
 using Indulged.Common;
 using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Dashboard;
+using Indulged.UI.Search;
 using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Resources;
@@ -159,6 +159,11 @@ namespace Indulged
         private void StreamSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             PreludeView.ShowStreamSelectionDialog();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SearchPage));
         }
 
     }

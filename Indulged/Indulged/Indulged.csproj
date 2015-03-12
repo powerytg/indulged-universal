@@ -159,6 +159,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\Controls\CommonHubHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\Controls\RetryLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,6 +311,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Search\SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
@@ -318,6 +326,7 @@
     <Compile Include="API\Networking\APIService.Requests.cs" />
     <Compile Include="API\Networking\APIService.Streams.cs" />
     <Compile Include="API\Networking\Events\APIEventArgs.cs" />
+    <Compile Include="API\Networking\APIService.Tags.cs" />
     <Compile Include="API\Storage\Events\StorageEventArgs.cs" />
     <Compile Include="API\Storage\Factories\FlickrActivityFactory.cs" />
     <Compile Include="API\Storage\Factories\FlickrGroupFactory.cs" />
@@ -384,6 +393,9 @@
     </Compile>
     <Compile Include="UI\Common\Controls\BlurredBackgroundView.xaml.cs">
       <DependentUpon>BlurredBackgroundView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\Controls\CommonHubHeader.xaml.cs">
+      <DependentUpon>CommonHubHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
@@ -521,6 +533,9 @@
     </Compile>
     <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

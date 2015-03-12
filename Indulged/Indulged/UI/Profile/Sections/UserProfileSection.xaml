@@ -21,11 +21,12 @@
         <ScrollViewer x:Name="ContentView" Visibility="Collapsed">
             <StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 25" >
-                    <Image x:Name="AvatarView" Width="120" Height="120" VerticalAlignment="Top" Margin="0, 0, 15, 0"/>
+                    <Image x:Name="AvatarView" Width="90" Height="90" VerticalAlignment="Top" Margin="0, 0, 15, 0"/>
                     <StackPanel VerticalAlignment="Top" >
-                        <TextBlock x:Name="NameLabel" Foreground="#32afe0" FontSize="38" FontFamily="/Assets/Fonts/BenchNine-Regular.ttf#BenchNine"
-                           TextWrapping="Wrap"/>
-                        <TextBlock x:Name="ProLabel" Text="PRO" Foreground="#f28422" FontSize="24" FontFamily="/Assets/Fonts/BenchNine-Regular.ttf#BenchNine"/>
+                        <TextBlock x:Name="NameLabel" Foreground="#32afe0" 
+                                   FontSize="28"
+                                   TextWrapping="Wrap"/>
+                        <TextBlock x:Name="ProLabel" Text="PRO" Foreground="#f28422" FontSize="18"/>
                     </StackPanel>
                 </StackPanel>
 

@@ -37,6 +37,9 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> UserInfoReturned;
         public EventHandler<APIEventArgs> UserInfoFailedReturn;
 
+        // Get hot tags
+        public EventHandler<APIEventArgs> PopularTagListReturned;
+        public EventHandler<APIEventArgs> PopularTagListFailedReturn;
 
     }
 }
