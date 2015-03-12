@@ -1,5 +1,6 @@
 ﻿using Indulged.API.Storage.Models;
 using Newtonsoft.Json.Linq;
+using Windows.Data.Html;
 
 namespace Indulged.API.Storage.Factories
 {
@@ -61,6 +62,11 @@ namespace Indulged.API.Storage.Factories
 
             }
 
+            if (group.Description != null)
+            {
+                group.CleanDescription = HtmlUtilities.ConvertToText(group.Description);
+            }
+            
             // Is invitation_only
             JToken invitationValue;
             if(json.TryGetValue("invitation_only", out invitationValue)){
@@ -118,7 +124,17 @@ namespace Indulged.API.Storage.Factories
             JToken privacyValue;
             if (json.TryGetValue("privacy", out privacyValue))
             {
-                int privacyId = int.Parse(json["privacy"]["_content"].ToString());
+                int privacyId;
+                if (json["privacy"].GetType() == typeof(JObject))
+                {
+                    JObject privacyObject = (JObject)json["privacy"];                    
+                    privacyId = int.Parse(json["privacy"]["_content"].ToString());
+                }
+                else
+                {
+                    privacyId = int.Parse(json["privacy"].ToString());
+                }
+
                 group.Privacy = (FlickrGroupPrivicy)privacyId;
             }
 

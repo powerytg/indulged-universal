@@ -311,7 +311,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Search\Renderers\GroupRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Search\SearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\SearchResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Sections\GroupResultSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Sections\PhotoResultSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -319,6 +335,7 @@
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
     <Compile Include="API\Networking\APIService.Photos.cs" />
+    <Compile Include="API\Networking\APIService.Search.cs" />
     <Compile Include="API\Networking\APIService.Users.cs" />
     <Compile Include="API\Networking\APIService.Album.cs" />
     <Compile Include="API\Networking\APIService.cs" />
@@ -520,6 +537,7 @@
     </Compile>
     <Compile Include="API\Utils\EventUtils.cs" />
     <Compile Include="API\Utils\TypeUtils.cs" />
+    <Compile Include="UI\Models\GroupCollection.cs" />
     <Compile Include="UI\Models\PhotoTileLayoutMetadata.cs" />
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
@@ -534,9 +552,22 @@
     <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Search\Renderers\GroupRenderer.xaml.cs">
+      <DependentUpon>GroupRenderer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Search\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Search\SearchResultPage.xaml.cs">
+      <DependentUpon>SearchResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Sections\GroupResultSection.xaml.cs">
+      <DependentUpon>GroupResultSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Sections\PhotoResultSection.xaml.cs">
+      <DependentUpon>PhotoResultSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Sections\SearchResultSectionBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

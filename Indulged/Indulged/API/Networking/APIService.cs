@@ -8,6 +8,8 @@ namespace Indulged.API.Networking
 {
     public partial class APIService
     {
+        public static string QUERY_TYPE_TEXT = "text";
+        public static string QUERY_TYPE_TAGS = "tag";
         public static int PerPage = 20;
 
         // Common extra parameters

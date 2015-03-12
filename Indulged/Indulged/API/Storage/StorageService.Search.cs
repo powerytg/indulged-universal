@@ -14,34 +14,9 @@ namespace Indulged.API.Storage
 {
     public partial class StorageService
     {
-        private void OnPhotoSearchResult(object sender, APIEventArgs e)
+        public StorageEventArgs OnGroupSearchResult(string response)
         {
-            JObject json = JObject.Parse(e.Response);
-            JObject photosetJson = (JObject)json["photos"];
-
-            int page = int.Parse(photosetJson["page"].ToString());
-            int perPage = int.Parse(photosetJson["perpage"].ToString());
-            int numTotal = int.Parse(photosetJson["total"].ToString());
-
-            List<FlickrPhoto> photos = new List<FlickrPhoto>();
-            foreach (var photoJson in photosetJson["photo"])
-            {
-                FlickrPhoto photo = FlickrPhotoFactory.PhotoWithJObject((JObject)photoJson);
-                photos.Add(photo);
-            }
-
-            var evt = new StorageEventArgs();
-            evt.SessionId = e.SessionId;
-            evt.Page = page;
-            evt.PerPage = perPage;
-            evt.TotalCount = numTotal;
-            evt.NewPhotos = photos;
-            PhotoSearchCompleted.DispatchEvent(this, evt);
-        }
-
-        private void OnGroupSearchResult(object sender, APIEventArgs e)
-        {
-            JObject json = JObject.Parse(e.Response);
+            JObject json = JObject.Parse(response);
             JObject groupJson = (JObject)json["groups"];
 
             int page = int.Parse(groupJson["page"].ToString());
@@ -55,14 +30,12 @@ namespace Indulged.API.Storage
                 groups.Add(group);
             }
 
-
             var evt = new StorageEventArgs();
-            evt.SessionId = e.SessionId;
             evt.Page = page;
             evt.PerPage = perPage;
             evt.TotalCount = numTotal;
             evt.NewGroups = groups;
-            GroupSearchCompleted.DispatchEvent(this, evt);
+            return evt;
         }
     }
 }

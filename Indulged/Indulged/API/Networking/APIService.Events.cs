@@ -37,9 +37,16 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> UserInfoReturned;
         public EventHandler<APIEventArgs> UserInfoFailedReturn;
 
-        // Get hot tags
+        // Get popular tags
         public EventHandler<APIEventArgs> PopularTagListReturned;
         public EventHandler<APIEventArgs> PopularTagListFailedReturn;
 
+        // Search photos
+        public EventHandler<APIEventArgs> PhotoSearchReturned;
+        public EventHandler<APIEventArgs> PhotoSearchFailedReturn;
+
+        // Search groups
+        public EventHandler<APIEventArgs> GroupSearchReturned;
+        public EventHandler<APIEventArgs> GroupSearchFailedReturn;
     }
 }

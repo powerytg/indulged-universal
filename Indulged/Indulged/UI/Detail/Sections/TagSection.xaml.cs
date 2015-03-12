@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Indulged.API.Networking;
+using Indulged.UI.Search;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,12 +54,28 @@ namespace Indulged.UI.Detail.Sections
                     tagButton.Style = Application.Current.Resources["TagButtonStyle"] as Style;
                     tagButton.Content = tag;
                     tagButton.Margin = new Thickness(4, 0, 4, 4);
+                    tagButton.Click += TagButton_Click;
                     TagListView.Children.Add(tagButton);
                 }
 
                 TagListView.Visibility = Visibility.Visible;
             }
         }
+
+        private void TagButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var tag = button.Content as string;
+            var frame = Window.Current.Content as Frame;
+
+            var dict = new Dictionary<string, string>();
+            dict[SearchResultPage.QUERY_KEY] = tag;
+            dict[SearchResultPage.QUERY_TYPE_KEY] = APIService.QUERY_TYPE_TAGS;
+            frame.Navigate(typeof(SearchResultPage), dict);
+
+        }
+
+
 
     }
 }

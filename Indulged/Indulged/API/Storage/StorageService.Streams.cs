@@ -40,6 +40,10 @@ namespace Indulged.API.Storage
             {
                 return OnFavouriteStreamReturned(json);
             }
+            else if (stream.StreamType == FlickrPhotoStreamType.SearchStream)
+            {
+                return OnSearchStreamResult(stream, json);
+            }
 
             // Unsupported
             return null;
@@ -118,8 +122,10 @@ namespace Indulged.API.Storage
         private List<FlickrPhoto> OnAlbumStreamUpdated(string albumId, string response)
         {
             if (!AlbumCache.ContainsKey(albumId))
+            {
                 return new List<FlickrPhoto>();
-
+            }
+                
             FlickrAlbum photoset = AlbumCache[albumId];
 
             JObject rawJson = JObject.Parse(response);
@@ -128,6 +134,8 @@ namespace Indulged.API.Storage
             int page = int.Parse(rootJson["page"].ToString());
             int numPages = int.Parse(rootJson["pages"].ToString());
             int perPage = int.Parse(rootJson["perpage"].ToString());
+
+            photoset.PhotoStream.PhotoCount = TotalCount;
 
             List<FlickrPhoto> newPhotos = new List<FlickrPhoto>();
             foreach (var entry in rootJson["photo"])
@@ -200,8 +208,10 @@ namespace Indulged.API.Storage
         private List<FlickrPhoto> OnGroupPhotoStreamReturned(string groupId, string response)
         {
             if (!GroupCache.ContainsKey(groupId))
+            {
                 return new List<FlickrPhoto>();
-
+            }
+                
             FlickrGroup group = GroupCache[groupId];
 
             JObject rawJson = JObject.Parse(response);
@@ -210,6 +220,8 @@ namespace Indulged.API.Storage
             int page = int.Parse(rootJson["page"].ToString());
             int numPages = int.Parse(rootJson["pages"].ToString());
             int perPage = int.Parse(rootJson["perpage"].ToString());
+
+            group.PhotoStream.PhotoCount = TotalCount;
 
             List<FlickrPhoto> newPhotos = new List<FlickrPhoto>();
             foreach (var entry in rootJson["photo"])
@@ -237,5 +249,36 @@ namespace Indulged.API.Storage
             return newPhotos;
         }
 
+        private List<FlickrPhoto> OnSearchStreamResult(FlickrPhotoStream stream, string response)
+        {
+            JObject json = JObject.Parse(response);
+            JObject photosetJson = (JObject)json["photos"];
+
+            int page = int.Parse(photosetJson["page"].ToString());
+            int perPage = int.Parse(photosetJson["perpage"].ToString());
+            int numTotal = int.Parse(photosetJson["total"].ToString());
+
+            stream.PhotoCount = numTotal;
+
+            List<FlickrPhoto> newPhotos = new List<FlickrPhoto>();
+            foreach (var photoJson in photosetJson["photo"])
+            {
+                FlickrPhoto photo = FlickrPhotoFactory.PhotoWithJObject((JObject)photoJson);
+                if (!stream.Photos.Contains(photo))
+                {
+                    stream.Photos.Add(photo);
+                    newPhotos.Add(photo);
+                }
+            }
+
+            var evt = new StorageEventArgs();
+            evt.Page = page;
+            evt.PerPage = perPage;
+            evt.TotalCount = numTotal;
+            evt.NewPhotos = newPhotos;
+            PhotoSearchCompleted.DispatchEvent(this, evt);
+
+            return newPhotos;
+        }
     }
 }

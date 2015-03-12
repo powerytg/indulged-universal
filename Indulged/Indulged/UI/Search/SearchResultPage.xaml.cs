@@ -1,6 +1,6 @@
 ﻿using Indulged.API.Networking;
-using Indulged.API.Storage;
 using Indulged.Common;
+using Indulged.UI.Search.Sections;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,11 +25,18 @@ namespace Indulged.UI.Search
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SearchPage : Page
+    public sealed partial class SearchResultPage : Page
     {
-        private NavigationHelper navigationHelper;
+        public static string QUERY_KEY = "query";
+        public static string QUERY_TYPE_KEY = "queryType";
 
-        public SearchPage()
+        private NavigationHelper navigationHelper;
+        private PhotoResultSection photoSection;
+        private GroupResultSection groupSection;
+        private string keyword;
+        private string queryType;
+
+        public SearchResultPage()
         {
             this.InitializeComponent();
 
@@ -57,18 +64,31 @@ namespace Indulged.UI.Search
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // Events
-            StorageService.Instance.PopularTagsUpdated += OnTagListUpdated;
+            var dict = e.NavigationParameter as Dictionary<string, string>;
+            keyword = dict[QUERY_KEY];
+            queryType = dict[QUERY_TYPE_KEY];
 
-            // Refresh popular tags
-            LoadingView.ShowLoadingScreen();
-            var status = await APIService.Instance.GetPopularTagListAsync();
-            if (!status.Success)
+            if (queryType == APIService.QUERY_TYPE_TAGS)
             {
-                LoadingView.ErrorText = "Cannot load tag list: " + status.ErrorMessage;
-                LoadingView.ShowErrorScreen();
+                HeaderView.Title = "#" + keyword;
+            }
+            else
+            {
+                HeaderView.Title = keyword;
+            }            
+
+            if (photoSection != null && photoSection.Keyword != keyword)
+            {
+                photoSection.QueryType = queryType;
+                photoSection.Keyword = keyword;
+            }
+
+            if (groupSection != null && groupSection.Keyword != keyword)
+            {
+                groupSection.QueryType = queryType;
+                groupSection.Keyword = keyword;
             }
         }
 
@@ -82,17 +102,7 @@ namespace Indulged.UI.Search
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            // Events
-            StorageService.Instance.PopularTagsUpdated -= OnTagListUpdated;
         }
-
-        private void OnTagListUpdated(object sender, API.Storage.Events.StorageEventArgs e)
-        {
-            LoadingView.Visibility = Visibility.Collapsed;
-            TagListView.ItemsSource = e.NewTags;
-            TagListView.Visibility = Visibility.Visible;
-        }
-
 
         #region NavigationHelper registration
 
@@ -121,38 +131,25 @@ namespace Indulged.UI.Search
 
         #endregion
 
-        private void SearchBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void PhotoSection_Loaded(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
+            photoSection = sender as PhotoResultSection;
+            if (keyword != null && queryType != null)
             {
-                if (SearchBox.Text.Trim().Length > 0)
-                {
-                    var dict = new Dictionary<string, string>();
-                    dict[SearchResultPage.QUERY_KEY] = SearchBox.Text.Trim();
-                    dict[SearchResultPage.QUERY_TYPE_KEY] = APIService.QUERY_TYPE_TEXT;
-                    Frame.Navigate(typeof(SearchResultPage), dict);
-
-                    if (this.Frame.CanGoBack)
-                    {
-                        this.Frame.BackStack.RemoveAt(0);
-                    }
-                }                
+                photoSection.QueryType = queryType;
+                photoSection.Keyword = keyword;
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void GroupSection_Loaded(object sender, RoutedEventArgs e)
         {
-            var button = sender as Button;
-            var tag = button.Content as string;
-            var dict = new Dictionary<string, string>();
-            dict[SearchResultPage.QUERY_KEY] = tag;
-            dict[SearchResultPage.QUERY_TYPE_KEY] = APIService.QUERY_TYPE_TAGS;
-            Frame.Navigate(typeof(SearchResultPage), dict);
-
-            if (this.Frame.CanGoBack)
+            groupSection = sender as GroupResultSection;
+            if (keyword != null && queryType != null)
             {
-                this.Frame.BackStack.RemoveAt(0);
+                groupSection.QueryType = queryType;
+                groupSection.Keyword = keyword;
             }
         }
+
     }
 }

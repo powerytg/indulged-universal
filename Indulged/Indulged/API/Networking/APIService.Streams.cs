@@ -59,6 +59,18 @@ namespace Indulged.API.Networking
                 paramDict["method"] = "flickr.favorites.getList";
                 paramDict["user_id"] = StorageService.Instance.CurrentUser.ResourceId;
             }
+            else if (stream.StreamType == FlickrPhotoStreamType.SearchStream)
+            {
+                paramDict["method"] = "flickr.photos.search";
+                if (stream.QueryType == APIService.QUERY_TYPE_TAGS)
+                {
+                    paramDict["tags"] = UrlUtils.Encode(stream.Query);
+                }
+                else if (stream.QueryType == APIService.QUERY_TYPE_TEXT)
+                {
+                    paramDict["text"] = UrlUtils.Encode(stream.Query);
+                }
+            }
 
             var retVal = await DispatchRequestAsync("GET", paramDict, true); 
             if (retVal.Success)

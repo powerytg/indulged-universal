@@ -36,6 +36,7 @@
         <!--Search box-->
         <TextBox x:Name="SearchBox" PlaceholderText="type to search"
                  Margin="15, 0, 15, 30"
+                 KeyDown="SearchBox_KeyDown"
                  Grid.Row="2"/>
         
         <!--Popular tags-->
@@ -54,7 +55,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Button Style="{StaticResource TagButtonStyle}"
-                                Content="{Binding Name}"/>
+                                Content="{Binding Name}"
+                                Click="Button_Click"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

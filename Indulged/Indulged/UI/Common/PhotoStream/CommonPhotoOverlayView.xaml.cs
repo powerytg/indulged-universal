@@ -81,6 +81,7 @@ namespace Indulged.UI.Common.PhotoStream
         private void LayoutInMiniMode()
         {
             LayoutRoot.Background = transparentBrush;
+            TitleLabel.MaxLines = 2;
 
             if (ShouldShowTitle())
             {
@@ -99,6 +100,7 @@ namespace Indulged.UI.Common.PhotoStream
         private void LayoutInOverlayMode()
         {
             LayoutRoot.Background = semiTransparentBrush;
+            TitleLabel.ClearValue(TextBlock.MaxLinesProperty);
 
             if (ShouldShowTitle())
             {

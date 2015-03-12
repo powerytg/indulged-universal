@@ -76,5 +76,7 @@ namespace Indulged.API.Storage.Models
             }
         }
 
+        public string CleanDescription { get; set; }
+
     }
 }

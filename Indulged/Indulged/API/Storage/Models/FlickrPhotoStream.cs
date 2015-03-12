@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Indulged.API.Storage.Models
 {
-    public enum FlickrPhotoStreamType { DiscoveryStream, FavouriteStream, UserStream, ContactStream, GroupStream, AlbumStream };
+    public enum FlickrPhotoStreamType { DiscoveryStream, FavouriteStream, UserStream, ContactStream, GroupStream, AlbumStream, SearchStream };
 
     public class FlickrPhotoStream
     {
@@ -20,6 +20,9 @@ namespace Indulged.API.Storage.Models
         public string AlbumId { get; set; }
         public string GroupId { get; set; }
         public string UserId { get; set; }
+
+        public string Query { get; set; }
+        public string QueryType { get; set; }
 
         /// <summary>
         /// Constructor
