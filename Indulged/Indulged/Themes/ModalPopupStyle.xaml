@@ -54,7 +54,7 @@
                             </Rectangle>
 
                             <!-- Button area -->
-                            <StackPanel x:Name="ButtonContainer" Orientation="Horizontal" Margin="20, 30, 20, 20" Height="46"
+                            <StackPanel x:Name="ButtonContainer" Orientation="Horizontal" Margin="10, 30, 10, 20" Height="46"
                                     HorizontalAlignment="Center"  Grid.Row="3">
                                 <StackPanel.RenderTransform>
                                     <CompositeTransform/>

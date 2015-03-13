@@ -15,33 +15,20 @@ namespace Indulged.API.Storage
     public partial class StorageService
     {
         // Group list retrieved for a user
-        private void OnGroupListReturned(object sender, APIEventArgs e)
-        {
-            // Find the user
-            if (!UserCache.ContainsKey(e.UserId)) 
-            {
-                return;
-            }
-
-            var user = UserCache[e.UserId];
-
-            JObject rawJson = JObject.Parse(e.Response);
+        public void OnCurrentUserGroupListReturned(string response)
+        {            
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["groups"];
 
             List<FlickrGroup> result = new List<FlickrGroup>();
-            user.GroupIds = new List<string>();
+            CurrentUser.GroupIds = new List<string>();
             foreach (var entry in rootJson["group"])
             {
                 JObject json = (JObject)entry;
                 FlickrGroup group = FlickrGroupFactory.GroupWithJObject(json);
-                user.GroupIds.Add(group.ResourceId);
+                CurrentUser.GroupIds.Add(group.ResourceId);
                 result.Add(group);
             }
-
-            // Dispatch event
-            var evt = new StorageEventArgs();
-            evt.UserId = e.UserId;
-            GroupListUpdated.DispatchEvent(this, evt);
         }
 
         // User info returned

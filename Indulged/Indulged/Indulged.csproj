@@ -287,6 +287,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Group\Dialogs\GroupInfoDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\GroupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Login\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -335,6 +343,7 @@
   <ItemGroup>
     <Compile Include="API\Networking\APIResponse.cs" />
     <Compile Include="API\Networking\APIService.Photos.cs" />
+    <Compile Include="API\Networking\APIService.Groups.cs" />
     <Compile Include="API\Networking\APIService.Search.cs" />
     <Compile Include="API\Networking\APIService.Users.cs" />
     <Compile Include="API\Networking\APIService.Album.cs" />
@@ -526,6 +535,12 @@
     <Compile Include="UI\Detail\Sections\TagSection.xaml.cs">
       <DependentUpon>TagSection.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Group\Dialogs\GroupInfoDialog.xaml.cs">
+      <DependentUpon>GroupInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\GroupPage.xaml.cs">
+      <DependentUpon>GroupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -596,6 +611,8 @@
     <Content Include="Assets\Dashboard\Private.scale-240.png" />
     <Content Include="Assets\Detail\DetailSection.scale-240.png" />
     <Content Include="Assets\Detail\Like.scale-240.png" />
+    <Content Include="Assets\Group\NoThrottleIcon.scale-240.png" />
+    <Content Include="Assets\Group\ThrottleIcon.scale-240.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
     <Content Include="Assets\Login\LoginLogo.png" />
     <Content Include="Assets\Login\LoginOutterRing.png" />
@@ -620,9 +637,7 @@
       <SubType>Designer</SubType>
     </PRIResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Fonts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="API\Networking\APIService.OAuth.cs" />
   </ItemGroup>

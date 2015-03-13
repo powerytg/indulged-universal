@@ -70,6 +70,9 @@ namespace Indulged.UI.Dashboard
                 else
                 {
                     groupListRetrieved = true;
+
+                    // Update group list for the current user
+                    StorageService.Instance.OnCurrentUserGroupListReturned(groupStatus.Result);
                 }
             }
             

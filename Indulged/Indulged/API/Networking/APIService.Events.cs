@@ -48,5 +48,10 @@ namespace Indulged.API.Networking
         // Search groups
         public EventHandler<APIEventArgs> GroupSearchReturned;
         public EventHandler<APIEventArgs> GroupSearchFailedReturn;
+
+        // Get group info
+        public EventHandler<APIEventArgs> GroupInfoReturned;
+        public EventHandler<APIEventArgs> GroupInfoFailedReturn;
+
     }
 }

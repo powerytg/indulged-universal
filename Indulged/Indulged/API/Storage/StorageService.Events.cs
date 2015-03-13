@@ -68,9 +68,6 @@ namespace Indulged.API.Storage
             // Load album list
             APIService.Instance.AlbumListReturned += OnAlbumListReturned;
 
-            // Load group list
-            APIService.Instance.GroupListReturned += OnGroupListReturned;
-
             // Get EXIF
             APIService.Instance.PhotoEXIFReturned += OnEXIFReturned;
 
@@ -87,6 +84,9 @@ namespace Indulged.API.Storage
 
             // Get popular tags
             APIService.Instance.PopularTagListReturned += OnPopularTagListReturned;
+
+            // Get group info
+            APIService.Instance.GroupInfoReturned += OnGroupInfoReturned;
         }
     }
 }

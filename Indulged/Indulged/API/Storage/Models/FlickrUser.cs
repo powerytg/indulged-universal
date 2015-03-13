@@ -38,11 +38,15 @@ namespace Indulged.API.Storage.Models
             get
             {
                 if (Farm == null || Server == null || ResourceId == null)
+                {
                     return "https://www.flickr.com/images/buddyicon.gif";
+                }
 
                 if (Farm != null && int.Parse(Farm) == 0)
+                {
                     return "https://www.flickr.com/images/buddyicon.gif";
-
+                }
+                    
                 return "https://farm" + Farm + ".staticflickr.com/" + Server + "/buddyicons/" + ResourceId + ".jpg";
             }
         }

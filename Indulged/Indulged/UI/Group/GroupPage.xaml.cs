@@ -1,6 +1,4 @@
-﻿using Indulged.API.Networking;
-using Indulged.API.Storage;
-using Indulged.Common;
+﻿using Indulged.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,16 +18,17 @@ using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace Indulged.UI.Search
+namespace Indulged.UI.Group
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SearchPage : Page
+    public sealed partial class GroupPage : Page
     {
         private NavigationHelper navigationHelper;
+        private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public SearchPage()
+        public GroupPage()
         {
             this.InitializeComponent();
 
@@ -47,6 +46,15 @@ namespace Indulged.UI.Search
         }
 
         /// <summary>
+        /// Gets the view model for this <see cref="Page"/>.
+        /// This can be changed to a strongly typed view model.
+        /// </summary>
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
+
+        /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
         /// </summary>
@@ -57,19 +65,8 @@ namespace Indulged.UI.Search
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // Events
-            StorageService.Instance.PopularTagsUpdated += OnTagListUpdated;
-
-            // Refresh popular tags
-            LoadingView.ShowLoadingScreen();
-            var status = await APIService.Instance.GetPopularTagListAsync();
-            if (!status.Success)
-            {
-                LoadingView.ErrorText = "Cannot load tag list: " + status.ErrorMessage;
-                LoadingView.ShowErrorScreen();
-            }
         }
 
         /// <summary>
@@ -82,17 +79,7 @@ namespace Indulged.UI.Search
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            // Events
-            StorageService.Instance.PopularTagsUpdated -= OnTagListUpdated;
         }
-
-        private void OnTagListUpdated(object sender, API.Storage.Events.StorageEventArgs e)
-        {
-            LoadingView.Visibility = Visibility.Collapsed;
-            TagListView.ItemsSource = e.NewTags;
-            TagListView.Visibility = Visibility.Visible;
-        }
-
 
         #region NavigationHelper registration
 
@@ -120,29 +107,5 @@ namespace Indulged.UI.Search
         }
 
         #endregion
-
-        private void SearchBox_KeyDown(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                if (SearchBox.Text.Trim().Length > 0)
-                {
-                    var dict = new Dictionary<string, string>();
-                    dict[SearchResultPage.QUERY_KEY] = SearchBox.Text.Trim();
-                    dict[SearchResultPage.QUERY_TYPE_KEY] = APIService.QUERY_TYPE_TEXT;
-                    Frame.Navigate(typeof(SearchResultPage), dict);
-                }                
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            var tag = button.Content as string;
-            var dict = new Dictionary<string, string>();
-            dict[SearchResultPage.QUERY_KEY] = tag;
-            dict[SearchResultPage.QUERY_TYPE_KEY] = APIService.QUERY_TYPE_TAGS;
-            Frame.Navigate(typeof(SearchResultPage), dict);
-        }
     }
 }

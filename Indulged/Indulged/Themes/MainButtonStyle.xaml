@@ -4,7 +4,7 @@
     xmlns:local="using:Indulged.Themes">
 
     <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
-    <FontWeight x:Key="PhoneButtonFontWeight">Semibold</FontWeight>
+    <FontWeight x:Key="PhoneButtonFontWeight">Medium</FontWeight>
     <x:Double x:Key="PhoneButtonMinHeight">57.5</x:Double>
     <x:Double x:Key="PhoneButtonMinWidth">109</x:Double>
     <Thickness x:Key="PhoneTouchTargetOverhang">0,9.5</Thickness>

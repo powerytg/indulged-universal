@@ -1,9 +1,7 @@
-﻿using Indulged.UI.Common.Controls.Events;
+﻿using Indulged.API.Utils;
+using Indulged.UI.Common.Controls.Events;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Core;
@@ -11,14 +9,10 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
-using Indulged.API.Utils;
 
 // The Templated Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -253,7 +247,7 @@ namespace Indulged.UI.Common.Controls
                     var button = new Button();
                     button.Content = buttonTitle;
                     button.Style = Application.Current.Resources["MainButtonStyle"] as Style;
-                    button.Margin = new Thickness(20, 0, 20, 0);
+                    button.Margin = new Thickness(10, 0, 10, 0);
                     button.HorizontalAlignment = HorizontalAlignment.Right;
                     buttonContainer.Children.Add(button);
                     button.Click += OnButtonClick;
@@ -263,7 +257,7 @@ namespace Indulged.UI.Common.Controls
             {
                 foreach (var button in Buttons)
                 {
-                    button.Margin = new Thickness(20, 0, 20, 0);
+                    button.Margin = new Thickness(10, 0, 10, 0);
                     button.HorizontalAlignment = HorizontalAlignment.Right;
                     buttonContainer.Children.Add(button);
                     button.Click += OnButtonClick;
