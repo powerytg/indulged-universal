@@ -156,37 +156,37 @@ namespace Indulged.UI.Group.Dialogs
         }
 
         private void JoinGroup()
-        {/*
+        {
             if (Group.Rules != null && Group.Rules.Length > 0)
             {
-                var rulesView = new GroupRulesView();
-                rulesView.GroupSource = Group;
+                var rulesView = new GroupRulesDialog();
+                rulesView.Group = Group;
                 rulesView.PopupContainer = _popupContainer;
 
-                _popupContainer.ReplaceContentWith(AppResources.GroupRulesText, rulesView, rulesView.Buttons);
+                _popupContainer.ReplaceContentWith("Group Rules", rulesView, rulesView.Buttons);
             }
             else
             {
                 if (Group.IsInvitationOnly)
                 {
-                    var requestView = new GroupJoinRequestView();
+                    var requestView = new GroupJoinRequestDialog();
                     requestView.Group = Group;
                     requestView.PopupContainer = _popupContainer;
 
-                    _popupContainer.ReplaceContentWith(AppResources.GroupInvitationRequestText, requestView, requestView.Buttons);
+                    _popupContainer.ReplaceContentWith("Join Request", requestView, requestView.Buttons);
                 }
                 else
                 {
-                    var statusView = new GroupJoiningStatusView();
+                    var statusView = new GroupJoinStatusDialog();
                     statusView.Group = Group;
                     statusView.PopupContainer = _popupContainer;
 
-                    _popupContainer.ReplaceContentWith(AppResources.GroupJoiningText, statusView, statusView.Buttons, () =>
+                    _popupContainer.ReplaceContentWith("Join Group", statusView, statusView.Buttons, () =>
                     {
                         statusView.BeginJoinGroup();
                     });
                 }
-            }*/
+            }
         }
     }
 }

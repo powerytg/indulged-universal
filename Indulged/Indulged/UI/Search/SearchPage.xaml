@@ -41,7 +41,7 @@
         
         <!--Popular tags-->
         <TextBlock Text="Popular Tags" Margin="15, 0, 15, 0"
-                   FontSize="18" FontWeight="Medium"
+                   FontSize="18" FontWeight="Medium" Foreground="White"
                    Grid.Row="3"/>
         
         <Grid Margin="15" Grid.Row="4">

@@ -87,6 +87,9 @@ namespace Indulged.API.Storage
 
             // Get group info
             APIService.Instance.GroupInfoReturned += OnGroupInfoReturned;
+
+            // Join group
+            APIService.Instance.GroupJoinReturned += OnGroupJoined;
         }
     }
 }

@@ -53,5 +53,11 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> GroupInfoReturned;
         public EventHandler<APIEventArgs> GroupInfoFailedReturn;
 
+        // Join group
+        public EventHandler<APIEventArgs> GroupJoinReturned;
+        public EventHandler<APIEventArgs> GroupJoinFailedReturn;
+        public EventHandler<APIEventArgs> GroupJoinRequestReturned;
+        public EventHandler<APIEventArgs> GroupJoinRequestFailedReturn;
+
     }
 }

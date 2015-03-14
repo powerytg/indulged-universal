@@ -291,6 +291,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Group\Dialogs\GroupJoinRequestDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Dialogs\GroupJoinRequestStatusDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Dialogs\GroupJoinStatusDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Dialogs\GroupRulesDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Group\GroupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -537,6 +553,18 @@
     </Compile>
     <Compile Include="UI\Group\Dialogs\GroupInfoDialog.xaml.cs">
       <DependentUpon>GroupInfoDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Dialogs\GroupJoinRequestDialog.xaml.cs">
+      <DependentUpon>GroupJoinRequestDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Dialogs\GroupJoinRequestStatusDialog.xaml.cs">
+      <DependentUpon>GroupJoinRequestStatusDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Dialogs\GroupJoinStatusDialog.xaml.cs">
+      <DependentUpon>GroupJoinStatusDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Dialogs\GroupRulesDialog.xaml.cs">
+      <DependentUpon>GroupRulesDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Group\GroupPage.xaml.cs">
       <DependentUpon>GroupPage.xaml</DependentUpon>

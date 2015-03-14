@@ -60,5 +60,15 @@ namespace Indulged.UI.Common.Controls
             }
         }
 
+        public void ShowLoadingCompleteScreen()
+        {
+            LoadingIndicator.Visibility = Visibility.Collapsed;
+
+            if (LoadingText != null)
+            {
+                LoadingLabel.Text = LoadingText;
+            }
+        }
+
     }
 }
