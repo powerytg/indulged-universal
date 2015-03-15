@@ -1,19 +1,10 @@
-﻿using Indulged.Common;
+﻿using Indulged.API.Storage;
+using Indulged.API.Storage.Models;
+using Indulged.Common;
+using Indulged.UI.Group.Sections;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
@@ -25,8 +16,12 @@ namespace Indulged.UI.Group
     /// </summary>
     public sealed partial class GroupPage : Page
     {
+        public static string PAGE_STATE_GROUP_ID = "groupId";
+
         private NavigationHelper navigationHelper;
-        private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private GroupPhotoStreamSection streamSection;
+        private GroupDiscussionSection discussionSection;
+        private FlickrGroup group;
 
         public GroupPage()
         {
@@ -46,15 +41,6 @@ namespace Indulged.UI.Group
         }
 
         /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
-        /// <summary>
         /// Populates the page with content passed during navigation.  Any saved state is also
         /// provided when recreating a page from a prior session.
         /// </summary>
@@ -67,6 +53,27 @@ namespace Indulged.UI.Group
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            var groupId = "";
+            if (e.PageState != null && e.PageState.ContainsKey(PAGE_STATE_GROUP_ID))
+            {
+                groupId = e.PageState[PAGE_STATE_GROUP_ID] as string;
+            }
+            else
+            {
+                groupId = e.NavigationParameter as string;
+            }
+
+            group = StorageService.Instance.GroupCache[groupId];
+
+            if (streamSection != null)
+            {
+                streamSection.Group = group;
+            }
+
+            if (discussionSection != null)
+            {
+                discussionSection.Group = group;
+            }
         }
 
         /// <summary>
@@ -79,6 +86,7 @@ namespace Indulged.UI.Group
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            e.PageState[PAGE_STATE_GROUP_ID] = group.ResourceId;
         }
 
         #region NavigationHelper registration
@@ -107,5 +115,23 @@ namespace Indulged.UI.Group
         }
 
         #endregion
+
+        private void StreamSection_Loaded(object sender, RoutedEventArgs e)
+        {
+            streamSection = sender as GroupPhotoStreamSection;
+            if (group != null)
+            {
+                streamSection.Group = group;
+            }
+        }
+
+        private void DiscussionSection_Loaded(object sender, RoutedEventArgs e)
+        {
+            discussionSection = sender as GroupDiscussionSection;
+            if (group != null)
+            {
+                discussionSection.Group = group;
+            }
+        }
     }
 }

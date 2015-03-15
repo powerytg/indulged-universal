@@ -311,6 +311,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Group\Sections\GroupDiscussionSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Sections\GroupPhotoStreamSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Login\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -569,6 +577,13 @@
     <Compile Include="UI\Group\GroupPage.xaml.cs">
       <DependentUpon>GroupPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Group\Sections\GroupDiscussionSection.xaml.cs">
+      <DependentUpon>GroupDiscussionSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Sections\GroupPhotoStreamSection.xaml.cs">
+      <DependentUpon>GroupPhotoStreamSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Sections\GroupSectionBase.cs" />
     <Compile Include="UI\Login\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
