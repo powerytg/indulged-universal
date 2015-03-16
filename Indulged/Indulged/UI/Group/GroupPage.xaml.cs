@@ -23,6 +23,9 @@ namespace Indulged.UI.Group
         private GroupDiscussionSection discussionSection;
         private FlickrGroup group;
 
+        private CommandBar normalCommandBar;
+        private CommandBar composerCommandBar;
+
         public GroupPage()
         {
             this.InitializeComponent();
@@ -65,15 +68,24 @@ namespace Indulged.UI.Group
 
             group = StorageService.Instance.GroupCache[groupId];
 
+            // Title
+            HeaderView.Title = group.Name;
+
             if (streamSection != null)
             {
+                streamSection.AddEventListeners();
                 streamSection.Group = group;
             }
 
             if (discussionSection != null)
             {
+                discussionSection.AddEventListeners();
                 discussionSection.Group = group;
             }
+
+            // Command bar
+            PrepareCommandBars();
+            BottomAppBar = normalCommandBar;
         }
 
         /// <summary>
@@ -87,6 +99,16 @@ namespace Indulged.UI.Group
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
             e.PageState[PAGE_STATE_GROUP_ID] = group.ResourceId;
+
+            if (streamSection != null)
+            {
+                streamSection.RemoveEventListeners();
+            }
+
+            if (discussionSection != null)
+            {
+                discussionSection.RemoveEventListeners();
+            }
         }
 
         #region NavigationHelper registration
@@ -133,5 +155,45 @@ namespace Indulged.UI.Group
                 discussionSection.Group = group;
             }
         }
+
+        private void PrepareCommandBars()
+        {
+            // Photo stream commandbar
+            normalCommandBar = new CommandBar();
+            normalCommandBar.IsOpen = false;
+
+            var addPhotoButton = new AppBarButton() { Icon = new SymbolIcon(Symbol.Add), Label = "add photo" };
+            addPhotoButton.Click += AddPhotoButton_Click;
+
+            var addTopicButton = new AppBarButton() { Icon = new SymbolIcon(Symbol.Comment), Label = "add topic" };
+            addTopicButton.Click += AddTopicButton_Click;
+
+            normalCommandBar.PrimaryCommands.Add(addPhotoButton);
+            normalCommandBar.PrimaryCommands.Add(addTopicButton);
+
+            // Comment composer commandbar
+            composerCommandBar = new CommandBar();
+            composerCommandBar.IsOpen = false;
+
+            var postButton = new AppBarButton() { Label = "post topic", Icon = new SymbolIcon(Symbol.Send) };
+            postButton.Click += PostButton_Click;
+            composerCommandBar.PrimaryCommands.Add(postButton);
+        }
+
+        private void PostButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddTopicButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddPhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

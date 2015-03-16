@@ -18,67 +18,31 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Indulged.UI.Common.Controls
 {
-    public sealed partial class CommonHubHeader : UserControl
-    {
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
-        "Title",
-        typeof(string),
-        typeof(CommonHubHeader),
-        new PropertyMetadata("", OnTitlePropertyChanged));
-
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
-
-        private static void OnTitlePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var target = (CommonHubHeader)sender;
-            target.OnTitleChanged();
-        }
-
-        private void OnTitleChanged()
-        {
-            TitleLabel.Text = Title;
-        }
-
-        public static readonly DependencyProperty ThemeProperty = DependencyProperty.Register(
-        "Theme",
-        typeof(string),
-        typeof(CommonHubHeader),
-        new PropertyMetadata("Light", OnThemePropertyChanged));
-
-        public string Theme
-        {
-            get { return (string)GetValue(ThemeProperty); }
-            set { SetValue(ThemeProperty, value); }
-        }
-
-        private static void OnThemePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var target = (CommonHubHeader)sender;
-            target.OnThemeChanged();
-        }
-
-        private void OnThemeChanged()
-        {
-            if (Theme == "Light")
-            {
-                HeaderImageView.Source = new BitmapImage(new Uri("/Assets/LightBannerWide.png", UriKind.Relative));
-            }
-            else
-            {
-
-            }
-        }
-
+    public sealed partial class CommonHubHeader : CommonHeaderBase
+    {        
         /// <summary>
         /// Constructor
         /// </summary>
         public CommonHubHeader()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnTitleChanged()
+        {
+            TitleLabel.Text = Title;
+        }
+
+        protected override void OnThemeChanged()
+        {
+            if (Theme == "Light")
+            {
+                HeaderImageView.Source = new BitmapImage(new Uri("ms-appx:///Assets/Dashboard/LightBannerWide.png"));
+            }
+            else
+            {
+
+            }
         }
     }
 }

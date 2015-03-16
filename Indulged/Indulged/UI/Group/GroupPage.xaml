@@ -18,13 +18,14 @@
             </TransitionCollection>
         </Grid.ChildrenTransitions>
 
-        <Hub>
+        <Hub x:Name="MainHub">
             <Hub.Header>
                 <common:CommonHubHeader x:Name="HeaderView"/>
             </Hub.Header>
 
             <!--Photo stream section-->
             <HubSection Header="Photo Stream"
+                        Tag="StreamSection"
                         Style="{StaticResource LightHubSectionStyle}">
                 <DataTemplate>
                     <section:GroupPhotoStreamSection x:Name="StreamSection"
@@ -33,6 +34,7 @@
             </HubSection>
 
             <HubSection Header="Discussions" 
+                        Tag="DiscussionSection"
                         Style="{StaticResource LightHubSectionStyle}">
                 <DataTemplate>
                     <section:GroupDiscussionSection x:Name="DiscussionSection"

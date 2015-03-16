@@ -163,6 +163,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Common\Controls\CommonPageHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Common\Controls\RetryLoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,7 +311,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Group\GroupListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Group\GroupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Renderers\GroupRenderer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Group\Renderers\TopicDigestRenderer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -444,8 +460,12 @@
     <Compile Include="UI\Common\Controls\BlurredBackgroundView.xaml.cs">
       <DependentUpon>BlurredBackgroundView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Common\Controls\CommonHeaderBase.cs" />
     <Compile Include="UI\Common\Controls\CommonHubHeader.xaml.cs">
       <DependentUpon>CommonHubHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Common\Controls\CommonPageHeader.xaml.cs">
+      <DependentUpon>CommonPageHeader.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Common\Controls\Events\ModalPopupEventArgs.cs" />
     <Compile Include="UI\Common\Controls\IModalPopupContent.cs" />
@@ -574,9 +594,19 @@
     <Compile Include="UI\Group\Dialogs\GroupRulesDialog.xaml.cs">
       <DependentUpon>GroupRulesDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Group\GroupListPage.xaml.cs">
+      <DependentUpon>GroupListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Group\GroupPage.xaml.cs">
       <DependentUpon>GroupPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Group\Renderers\GroupRenderer.xaml.cs">
+      <DependentUpon>GroupRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Renderers\TopicDigestRenderer.xaml.cs">
+      <DependentUpon>TopicDigestRenderer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Group\Renderers\TopicRendererBase.cs" />
     <Compile Include="UI\Group\Sections\GroupDiscussionSection.xaml.cs">
       <DependentUpon>GroupDiscussionSection.xaml</DependentUpon>
     </Compile>
@@ -595,6 +625,7 @@
     </Compile>
     <Compile Include="API\Utils\EventUtils.cs" />
     <Compile Include="API\Utils\TypeUtils.cs" />
+    <Compile Include="UI\Models\TopicCollection.cs" />
     <Compile Include="UI\Models\GroupCollection.cs" />
     <Compile Include="UI\Models\PhotoTileLayoutMetadata.cs" />
     <Compile Include="UI\Models\PhotoTile.cs" />
@@ -654,7 +685,11 @@
     <Content Include="Assets\Dashboard\Private.scale-240.png" />
     <Content Include="Assets\Detail\DetailSection.scale-240.png" />
     <Content Include="Assets\Detail\Like.scale-240.png" />
+    <Content Include="Assets\Group\AdminWhite.scale-240.png" />
+    <Content Include="Assets\Group\AlertWhite.scale-240.png" />
+    <Content Include="Assets\Group\Comment.scale-240.png" />
     <Content Include="Assets\Group\NoThrottleIcon.scale-240.png" />
+    <Content Include="Assets\Group\PrivateWhite.scale-240.png" />
     <Content Include="Assets\Group\ThrottleIcon.scale-240.png" />
     <Content Include="Assets\Login\LoginInnerRing.png" />
     <Content Include="Assets\Login\LoginLogo.png" />

@@ -46,5 +46,9 @@ namespace Indulged.API.Storage.Models
                 replies = value;
             }
         }
+
+        public string CleanSubject { get; set; }
+        public string CleanMessage { get; set; }
+
     }
 }

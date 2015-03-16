@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Indulged.API.Utils;
+using Windows.Data.Html;
 
 namespace Indulged.API.Storage.Factories
 {
@@ -35,9 +36,17 @@ namespace Indulged.API.Storage.Factories
 
             // Subject
             topic.Subject = json["subject"].ToString();
+            if (topic.Subject != null)
+            {
+                topic.CleanSubject = HtmlUtilities.ConvertToText(topic.Subject);
+            }
 
             // Message
             topic.Message = json["message"]["_content"].ToString();
+            if (topic.Message != null)
+            {
+                topic.CleanMessage = HtmlUtilities.ConvertToText(topic.Message);
+            }
 
             // Replies
             topic.CanReply = (json["can_reply"].ToString() == "1");

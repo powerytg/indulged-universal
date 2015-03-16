@@ -59,5 +59,28 @@ namespace Indulged.API.Networking
         public EventHandler<APIEventArgs> GroupJoinRequestReturned;
         public EventHandler<APIEventArgs> GroupJoinRequestFailedReturn;
 
+        // Add/remove photo to group
+        public EventHandler<APIEventArgs> GroupAddPhotoReturned;
+        public EventHandler<APIEventArgs> GroupAddPhotoFailedReturn;
+        public EventHandler<APIEventArgs> GroupRemovePhotoReturned;
+        public EventHandler<APIEventArgs> GroupRemovePhotoFailedReturn;
+
+        // Get group topics
+        public EventHandler<APIEventArgs> GroupTopicsReturned;
+        public EventHandler<APIEventArgs> GroupTopicsFailedReturn;
+
+        // Add group topic
+        public EventHandler<APIEventArgs> GroupAddTopicReturned;
+        public EventHandler<APIEventArgs> GroupAddTopicFailedReturn;
+
+        // Get topic replies
+        public EventHandler<APIEventArgs> TopicRepliesReturned;
+        public EventHandler<APIEventArgs> TopicRepliesFailedReturn;
+
+        // Add topic reply
+        public EventHandler<APIEventArgs> AddTopicReplyReturned;
+        public EventHandler<APIEventArgs> AddTopicReplyFailedReturn;
+
+
     }
 }

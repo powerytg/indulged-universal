@@ -30,19 +30,23 @@ namespace Indulged.API.Storage
             GroupInfoUpdated.DispatchEvent(this, evt);
         }
        
-        private void OnGroupTopicsReturned(object sender, APIEventArgs e)
+        public List<FlickrTopic> OnGroupTopicsReturned(string groupId, string response)
         {
-            if (!GroupCache.ContainsKey(e.GroupId))
-                return;
+            if (!GroupCache.ContainsKey(groupId))
+            {
+                return new List<FlickrTopic>();
+            }
 
-            FlickrGroup group = GroupCache[e.GroupId];
+            FlickrGroup group = GroupCache[groupId];
 
-            JObject rawJson = JObject.Parse(e.Response);
+            JObject rawJson = JObject.Parse(response);
             JObject rootJson = (JObject)rawJson["topics"];
             int TotalCount = int.Parse(rootJson["total"].ToString());
             int page = int.Parse(rootJson["page"].ToString());
             int numPages = int.Parse(rootJson["pages"].ToString());
             int perPage = int.Parse(rootJson["per_page"].ToString());
+
+            group.TopicCount = TotalCount;
 
             List<FlickrTopic> newTopics = new List<FlickrTopic>();
             if (TotalCount > 0)
@@ -69,6 +73,8 @@ namespace Indulged.API.Storage
             evt.PerPage = perPage;
             evt.NewTopics = newTopics;
             GroupTopicsUpdated.DispatchEvent(this, evt);
+
+            return newTopics;
         }
 
         private void OnTopicAdded(object sender, APIEventArgs e)

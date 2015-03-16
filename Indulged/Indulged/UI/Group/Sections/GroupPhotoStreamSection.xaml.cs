@@ -16,6 +16,11 @@ namespace Indulged.UI.Group.Sections
         protected override void OnGroupChanged()
         {
             base.OnGroupChanged();
+
+            if (Group != null)
+            {
+                StreamListView.Stream = Group.PhotoStream;
+            }
         }
 
         public override void AddEventListeners()

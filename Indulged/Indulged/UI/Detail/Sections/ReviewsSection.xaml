@@ -20,7 +20,8 @@
         <!--Loading view-->
         <common:StatusLoadingView x:Name="LoadingView"
                                   LoadingText="Loading comments"
-                                  Margin="{StaticResource DetailMargin}"/>
+                                  Margin="{StaticResource DetailMargin}"
+                                  ThemeColor="#8b93a0"/>
 
         <renderers:CommentDigestRenderer x:Name="renderer1" Margin="{StaticResource DetailMargin}"
                                          Visibility="Collapsed"/>

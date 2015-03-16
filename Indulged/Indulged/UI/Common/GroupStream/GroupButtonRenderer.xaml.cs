@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Indulged.UI.Group;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,6 +40,12 @@ namespace Indulged.UI.Common.GroupStream
                 AdminIcon.Visibility = Group.IsAdmin ? Visibility.Visible : Visibility.Collapsed;
                 PrivateIcon.Visibility = Group.IsInvitationOnly ? Visibility.Visible : Visibility.Collapsed;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            frame.Navigate(typeof(GroupPage), Group.ResourceId);
         }
 
         
