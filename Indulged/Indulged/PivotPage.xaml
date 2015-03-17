@@ -58,6 +58,7 @@
     <Page.BottomAppBar>
         <CommandBar x:Name="MainCommandBar" IsOpen="False" ClosedDisplayMode="Minimal">
             <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="CameraButton" x:Name="CameraButton" Label="take photo" Click="CameraButton_Click"/>
                 <AppBarButton x:Uid="StreamSelectionButton" x:Name="StreamSelectionButton" Label="choose stream" Click="StreamSelectionButton_Click" />
                 <AppBarButton x:Uid="PreludeStyleButton" x:Name="PreludeStyleButton" Label="change display style" Click="PreludeStyleButton_Click" />
                 <AppBarButton x:Uid="SearchButton" x:Name="SearchButton" Label="search" Click="SearchButton_Click"/>

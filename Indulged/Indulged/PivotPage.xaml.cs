@@ -4,6 +4,7 @@ using Indulged.Common;
 using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Dashboard;
+using Indulged.UI.ProCam;
 using Indulged.UI.Search;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,10 @@ namespace Indulged
             // Make app full screen
             ApplicationView.GetForCurrentView().
             SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+
+            // Make status bar white
+            StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            statusBar.ForegroundColor = Windows.UI.Colors.White;
 
             // Retrieve settings
             PolicyKit.Instance.RetrieveSettings();
@@ -164,6 +169,11 @@ namespace Indulged
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(SearchPage));
+        }
+
+        private void CameraButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ProCamPage));
         }
 
     }

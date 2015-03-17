@@ -347,6 +347,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProCam\ProCamPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Profile\Sections\UserProfileSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -631,6 +635,11 @@
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
     <Compile Include="UI\Models\StreamLayoutStyle.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.Devices.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.Orientation.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.xaml.cs">
+      <DependentUpon>ProCamPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Profile\Sections\UserProfileSection.xaml.cs">
       <DependentUpon>UserProfileSection.xaml</DependentUpon>
     </Compile>
@@ -731,6 +740,7 @@
     <Compile Include="API\Networking\APIService.Storage.cs" />
     <None Include="Help\Nokia Imaging SDK.chm" />
     <None Include="packages.config" />
+    <Compile Include="UI\ProCam\ProCamPage.Core.cs" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
