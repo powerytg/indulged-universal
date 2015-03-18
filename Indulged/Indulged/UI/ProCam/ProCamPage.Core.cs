@@ -39,6 +39,21 @@ namespace Indulged.UI.ProCam
                     await captureManager.StartPreviewAsync();
                     isPreviewing = true;
 
+                    // Initial orientation
+                    rotWidth = CameraView.Height;
+                    rotHeight = CameraView.Width;
+
+                    if (currentCamera == frontCamera)
+                    {
+                        reversePreviewRotation = true;
+                    }
+                    else
+                    {
+                        reversePreviewRotation = false;
+                    }
+
+                    OnOrientationChanged();
+
                     // Hide loading view
                     LoadingView.Visibility = Visibility.Collapsed;
                     CameraView.Visibility = Visibility.Visible;

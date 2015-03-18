@@ -29,6 +29,9 @@ namespace Indulged.UI.ProCam
         public ProCamPage()
         {
             this.InitializeComponent();
+
+            // Disable auto rotation (which gives a strange animation)
+            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
         }
 
         /// <summary>
@@ -59,7 +62,8 @@ namespace Indulged.UI.ProCam
 
         private void DisplayInfo_OrientationChanged(DisplayInformation sender, object args)
         {
-            
+            currentOrientation = sender.CurrentOrientation;
+            OnOrientationChanged();
         }
     }
 }

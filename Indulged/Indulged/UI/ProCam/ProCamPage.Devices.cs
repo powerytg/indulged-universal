@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Indulged.UI.ProCam.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Media.Devices;
 
 namespace Indulged.UI.ProCam
 {
@@ -14,6 +16,8 @@ namespace Indulged.UI.ProCam
         private DeviceInformation frontCamera;
         private DeviceInformation backCamera;
         private DeviceInformation currentCamera;
+
+        private List<SceneMode> availableSceneModes;
 
         private async Task<bool> EnumerateCamerasAsync()
         {
@@ -58,5 +62,45 @@ namespace Indulged.UI.ProCam
 
             return true;
         }
+
+        private async void EnumerateSceneModeAsync()
+        {
+            try
+            {
+                availableSceneModes = new List<SceneMode>();
+                var sceneModes = captureManager.VideoDeviceController.SceneModeControl.SupportedModes;
+                
+                // We only support a limit number of modes. Too many modes can be annoying and confusing
+                foreach (var mode in sceneModes)
+                {
+                    switch (mode)
+                    {
+                        case Windows.Media.Devices.CaptureSceneMode.Auto:
+                            availableSceneModes.Add(new SceneMode("Auto", mode));
+                            break;
+                        case Windows.Media.Devices.CaptureSceneMode.Portrait:
+                            availableSceneModes.Add(new SceneMode("Portrait", mode));
+                            break;
+                        case Windows.Media.Devices.CaptureSceneMode.Landscape:
+                            availableSceneModes.Add(new SceneMode("Landscape", mode));
+                            break;
+                        case Windows.Media.Devices.CaptureSceneMode.Night:
+                            availableSceneModes.Add(new SceneMode("Night", mode));
+                            break;
+                        case Windows.Media.Devices.CaptureSceneMode.Macro:
+                            availableSceneModes.Add(new SceneMode("Macro", mode));
+                            break;
+                        case Windows.Media.Devices.CaptureSceneMode.Sport:
+                            availableSceneModes.Add(new SceneMode("Sport", mode));
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
     }
 }
