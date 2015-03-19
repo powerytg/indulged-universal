@@ -54,6 +54,17 @@ namespace Indulged.UI.ProCam
 
                     OnOrientationChanged();
 
+                    // Get supported ev values
+                    EnumerateEVValues();
+                    if (!evSupported)
+                    {
+                        EVDialer.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        EVDialer.SupportedValues = supportedEVValues;
+                    }
+
                     // Hide loading view
                     LoadingView.Visibility = Visibility.Collapsed;
                     CameraView.Visibility = Visibility.Visible;

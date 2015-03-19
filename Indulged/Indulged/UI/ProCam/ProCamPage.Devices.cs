@@ -18,6 +18,8 @@ namespace Indulged.UI.ProCam
         private DeviceInformation currentCamera;
 
         private List<SceneMode> availableSceneModes;
+        private List<float> supportedEVValues;
+        private bool evSupported;
 
         private async Task<bool> EnumerateCamerasAsync()
         {
@@ -63,7 +65,7 @@ namespace Indulged.UI.ProCam
             return true;
         }
 
-        private async void EnumerateSceneModeAsync()
+        private void EnumerateSceneMode()
         {
             try
             {
@@ -99,6 +101,34 @@ namespace Indulged.UI.ProCam
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
+            }
+        }
+
+        private void EnumerateEVValues()
+        {
+            // EV
+            supportedEVValues = new List<float>();
+            var ec = captureManager.VideoDeviceController.ExposureCompensationControl;
+            evSupported = ec.Supported;
+
+            if (evSupported)
+            {
+                var minEV = ec.Min;
+                var maxEV = ec.Max;
+                float step = (float)Math.Max(0.3, ec.Step);
+
+                for (float i = minEV; i <= maxEV; i += step)
+                {
+                    supportedEVValues.Add(i);
+                }
+
+                // Make sure 0 is inside the range!
+                if (!supportedEVValues.Contains(0))
+                {
+                    supportedEVValues.Add(0);
+                    supportedEVValues.Sort();
+                }
+
             }
         }
 

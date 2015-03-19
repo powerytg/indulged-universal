@@ -347,6 +347,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProCam\Controls\EVDialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProCam\ProCamPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -635,11 +639,16 @@
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
     <Compile Include="UI\Models\StreamLayoutStyle.cs" />
+    <Compile Include="UI\ProCam\Controls\EVDialControl.xaml.cs">
+      <DependentUpon>EVDialControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\Models\SceneMode.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Devices.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Orientation.cs" />
     <Compile Include="UI\ProCam\ProCamPage.xaml.cs">
       <DependentUpon>ProCamPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProCam\Utils\EVUtils.cs" />
     <Compile Include="UI\Profile\Sections\UserProfileSection.xaml.cs">
       <DependentUpon>UserProfileSection.xaml</DependentUpon>
     </Compile>
@@ -705,6 +714,54 @@
     <Content Include="Assets\Login\LoginOutterRing.png" />
     <Content Include="Assets\Login\LoginTitle.png" />
     <Content Include="Assets\Logo.scale-240.png" />
+    <Content Include="Assets\ProCam\ArrowDown.png" />
+    <Content Include="Assets\ProCam\ArrowLeft.png" />
+    <Content Include="Assets\ProCam\ArrowRight.png" />
+    <Content Include="Assets\ProCam\BottomToolbar.png" />
+    <Content Include="Assets\ProCam\EVDial.png" />
+    <Content Include="Assets\ProCam\EVHighlight.png" />
+    <Content Include="Assets\ProCam\EVHUDTitle.png" />
+    <Content Include="Assets\ProCam\EV\EV-1.png" />
+    <Content Include="Assets\ProCam\EV\EV-10.png" />
+    <Content Include="Assets\ProCam\EV\EV-2.png" />
+    <Content Include="Assets\ProCam\EV\EV-3.png" />
+    <Content Include="Assets\ProCam\EV\EV-4.png" />
+    <Content Include="Assets\ProCam\EV\EV-5.png" />
+    <Content Include="Assets\ProCam\EV\EV-6.png" />
+    <Content Include="Assets\ProCam\EV\EV-7.png" />
+    <Content Include="Assets\ProCam\EV\EV-8.png" />
+    <Content Include="Assets\ProCam\EV\EV-9.png" />
+    <Content Include="Assets\ProCam\EV\EV0.png" />
+    <Content Include="Assets\ProCam\EV\EV1.png" />
+    <Content Include="Assets\ProCam\EV\EV2.png" />
+    <Content Include="Assets\ProCam\EV\EV3.png" />
+    <Content Include="Assets\ProCam\EV\EV4.png" />
+    <Content Include="Assets\ProCam\EV\EV5.png" />
+    <Content Include="Assets\ProCam\EV\EV6.png" />
+    <Content Include="Assets\ProCam\EV\EV7.png" />
+    <Content Include="Assets\ProCam\FlashAuto.png" />
+    <Content Include="Assets\ProCam\FlashOff.png" />
+    <Content Include="Assets\ProCam\FlashOn.png" />
+    <Content Include="Assets\ProCam\FocusRect.png" />
+    <Content Include="Assets\ProCam\FrontCamera.png" />
+    <Content Include="Assets\ProCam\HUDListHighlight.png" />
+    <Content Include="Assets\ProCam\ISODial.png" />
+    <Content Include="Assets\ProCam\ISOHighlight.png" />
+    <Content Include="Assets\ProCam\ISOHUDTitle.png" />
+    <Content Include="Assets\ProCam\ISOTick.png" />
+    <Content Include="Assets\ProCam\Logo.png" />
+    <Content Include="Assets\ProCam\MainCamera.png" />
+    <Content Include="Assets\ProCam\OSDArrow.png" />
+    <Content Include="Assets\ProCam\OSDOff.png" />
+    <Content Include="Assets\ProCam\OSDOn.png" />
+    <Content Include="Assets\ProCam\Shutter.png" />
+    <Content Include="Assets\ProCam\TopToolbar.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonLeft.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonLeftActive.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonMiddle.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonMiddleActive.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonRight.png" />
+    <Content Include="Assets\ProCam\UI\CapsuleButtonRightActive.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
@@ -738,6 +795,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Networking\APIService.Storage.cs" />
+    <None Include="Assets\ProCam\EV\Thumbs.db" />
+    <None Include="Assets\ProCam\UI\Thumbs.db" />
     <None Include="Help\Nokia Imaging SDK.chm" />
     <None Include="packages.config" />
     <Compile Include="UI\ProCam\ProCamPage.Core.cs" />
