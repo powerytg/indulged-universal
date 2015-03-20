@@ -347,7 +347,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProCam\Controls\CamSwitchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProCam\Controls\EVDialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\Controls\FocusRect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\Controls\ISODialControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\EVHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\ISOHUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -639,16 +659,36 @@
     <Compile Include="UI\Models\PhotoTile.cs" />
     <Compile Include="UI\Models\PhotoTileCollection.cs" />
     <Compile Include="UI\Models\StreamLayoutStyle.cs" />
+    <Compile Include="UI\ProCam\Controls\CamSwitchControl.xaml.cs">
+      <DependentUpon>CamSwitchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProCam\Controls\EVDialControl.xaml.cs">
       <DependentUpon>EVDialControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProCam\Controls\FocusRect.xaml.cs">
+      <DependentUpon>FocusRect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\Controls\ISODialControl.xaml.cs">
+      <DependentUpon>ISODialControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\HUD\EVHUD.xaml.cs">
+      <DependentUpon>EVHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\HUD\ISOHUD.xaml.cs">
+      <DependentUpon>ISOHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\Models\ProCamConstraints.cs" />
     <Compile Include="UI\ProCam\Models\SceneMode.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.OSD.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Devices.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.Events.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Orientation.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.UI.cs" />
     <Compile Include="UI\ProCam\ProCamPage.xaml.cs">
       <DependentUpon>ProCamPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProCam\Utils\EVUtils.cs" />
+    <Compile Include="UI\ProCam\Utils\ISOUtils.cs" />
     <Compile Include="UI\Profile\Sections\UserProfileSection.xaml.cs">
       <DependentUpon>UserProfileSection.xaml</DependentUpon>
     </Compile>

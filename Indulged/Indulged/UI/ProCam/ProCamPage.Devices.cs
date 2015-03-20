@@ -21,6 +21,10 @@ namespace Indulged.UI.ProCam
         private List<float> supportedEVValues;
         private bool evSupported;
 
+        private List<uint> _supportedISOFixtures = new List<uint> { 100, 125, 160, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 12800, 25600 };
+        private List<uint> supportedISOValues;
+        private bool isoSupported;
+
         private async Task<bool> EnumerateCamerasAsync()
         {
             availableCameras = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
@@ -110,7 +114,7 @@ namespace Indulged.UI.ProCam
             supportedEVValues = new List<float>();
             var ec = captureManager.VideoDeviceController.ExposureCompensationControl;
             evSupported = ec.Supported;
-
+            
             if (evSupported)
             {
                 var minEV = ec.Min;
@@ -119,7 +123,10 @@ namespace Indulged.UI.ProCam
 
                 for (float i = minEV; i <= maxEV; i += step)
                 {
-                    supportedEVValues.Add(i);
+                    if (i < maxEV)
+                    {
+                        supportedEVValues.Add(i);
+                    }                    
                 }
 
                 // Make sure 0 is inside the range!
@@ -129,6 +136,28 @@ namespace Indulged.UI.ProCam
                     supportedEVValues.Sort();
                 }
 
+            }
+        }
+
+        private void EnumerateISOValues()
+        {
+            // ISO
+            supportedISOValues = new List<uint>();
+            var isoControl = captureManager.VideoDeviceController.IsoSpeedControl;
+            isoSupported = isoControl.Supported;
+            
+            if (isoSupported)
+            {
+                // Add "auto" as base
+                supportedISOValues.Add(ProCamConstraints.PROCAM_AUTO_ISO);
+
+                for (uint iso = isoControl.Min; iso <= isoControl.Max; iso++)
+                {
+                    if (_supportedISOFixtures.Contains(iso))
+                    {
+                        supportedISOValues.Add(iso);
+                    }                    
+                }
             }
         }
 

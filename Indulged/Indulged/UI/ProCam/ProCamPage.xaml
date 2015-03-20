@@ -19,9 +19,54 @@
         <!--Media capture-->
         <CaptureElement x:Name="CameraView" Visibility="Collapsed"/>
 
-        <controls:EVDialControl x:Name="EVDialer" 
+        <!--Camera switch-->
+        <controls:CamSwitchControl x:Name="CameraSwitchButton" 
+                                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                   Margin="20, 0, 15, 180">
+            <controls:CamSwitchControl.RenderTransform>
+                <TranslateTransform x:Name="CameraSwitchButtonTranslate"/>
+            </controls:CamSwitchControl.RenderTransform>
+        </controls:CamSwitchControl>
+
+        <!--Landscape mode shutter-->
+        <Button x:Name="LandscapeShutterButton" Visibility="Collapsed" 
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Style="{StaticResource RoundedTransparentButtonStyle}" 
+                    Margin="0, 0, 20, 20" Click="OnShutterButtonClick">
+            <Button.Content>
+                <Image Source="/Assets/ProCam/Shutter.png" Width="150"/>
+            </Button.Content>
+
+            <Button.RenderTransform>
+                <TranslateTransform x:Name="LandscapeShutterButtonTranslate"/>
+            </Button.RenderTransform>
+        </Button>
+
+        <!--Bottom toolbar-->
+        <Grid x:Name="BottomToolbar" Height="212" VerticalAlignment="Bottom">
+            <Image x:Name="BottomToolbarBackground" Source="/Assets/ProCam/BottomToolbar.png" Stretch="Fill" Opacity="0.85"
+                   IsHitTestVisible="False" />
+
+            <!--ISO-->
+            <controls:ISODialControl x:Name="ISODialer" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                    Margin="20, 0, 0, 20" />
+
+            <!--Shutter-->
+            <Button x:Name="PortraitShutterButton" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Style="{StaticResource RoundedTransparentButtonStyle}" 
+                    Click="OnShutterButtonClick" >
+                <Button.Content>
+                    <Image Source="/Assets/ProCam/Shutter.png" Width="150"/>
+                </Button.Content>
+            </Button>
+
+            <!--EXP Comp-->
+            <controls:EVDialControl x:Name="EVDialer" 
                                     HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                     Margin="0, 0, 20, 20" />
-
-    </Grid>
+        </Grid>
+        
+    </Grid>    
 </Page>

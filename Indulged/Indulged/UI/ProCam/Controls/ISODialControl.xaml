@@ -1,0 +1,52 @@
+﻿<UserControl
+    x:Class="Indulged.UI.ProCam.Controls.ISODialControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProCam.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="Dialer" Width="90" Height="90" 
+              IsHitTestVisible="False" Grid.Column="0">
+
+            <Grid.RenderTransform>
+                <RotateTransform x:Name="DialerTransform" CenterX="45" CenterY="45"/>
+            </Grid.RenderTransform>
+
+            <Image Source="/Assets/ProCam/ISODial.png" IsHitTestVisible="False"
+               Grid.Column="1">
+            </Image>
+
+            <!--Ticks-->
+            <Image x:Name="ISOTickView"
+               Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Source="/Assets/ProCam/ISOTick.png" />
+        </Grid>
+
+        <!--Unmovable arrow-->
+        <Image Source="/Assets/ProCam/ArrowRight.png" IsHitTestVisible="False"
+               Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Width="12" />
+
+        <!--This invisle canvas captures manipulation events-->
+        <Canvas x:Name="GestureCaptureCanvas" 
+                Background="Black" Opacity="0" 
+                IsHitTestVisible="True" ManipulationMode="All"
+                Grid.Column="0"/>
+
+        <TextBlock x:Name="Label" Grid.Column="1"
+                   VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10, 0, 0, 0"
+                   Foreground="#1cbbb4" FontFamily="/Assets/Fonts/digital-7.ttf#Digital-7"/>
+
+
+    </Grid>
+</UserControl>

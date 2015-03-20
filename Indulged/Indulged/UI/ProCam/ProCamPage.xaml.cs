@@ -47,6 +47,9 @@ namespace Indulged.UI.ProCam
 
             // Initialize camera
             InitializeCamera();
+
+            // Initialize events
+            InitializeEventListeners();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -55,6 +58,7 @@ namespace Indulged.UI.ProCam
 
             // Remove event handlers
             DisplayInformation.GetForCurrentView().OrientationChanged -= DisplayInfo_OrientationChanged;
+            RemoveAllEventListeners();
 
             // Destroy camera
             DestroyCamera();

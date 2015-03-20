@@ -54,16 +54,12 @@ namespace Indulged.UI.ProCam
 
                     OnOrientationChanged();
 
-                    // Get supported ev values
+                    // Get supported capabilities
                     EnumerateEVValues();
-                    if (!evSupported)
-                    {
-                        EVDialer.Visibility = Visibility.Collapsed;
-                    }
-                    else
-                    {
-                        EVDialer.SupportedValues = supportedEVValues;
-                    }
+                    EnumerateISOValues();
+
+                    // Initialize camera chrome
+                    InitializeChrome();
 
                     // Hide loading view
                     LoadingView.Visibility = Visibility.Collapsed;
