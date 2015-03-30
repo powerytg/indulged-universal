@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
+using Windows.Media.Capture;
 using Windows.Media.Devices;
+using Windows.Media.MediaProperties;
 
 namespace Indulged.UI.ProCam
 {
@@ -16,6 +18,7 @@ namespace Indulged.UI.ProCam
         private DeviceInformation frontCamera;
         private DeviceInformation backCamera;
         private DeviceInformation currentCamera;
+        private VideoEncodingProperties currentResolution;
 
         private List<SceneMode> availableSceneModes;
         private List<float> supportedEVValues;
@@ -24,6 +27,21 @@ namespace Indulged.UI.ProCam
         private List<uint> _supportedISOFixtures = new List<uint> { 100, 125, 160, 200, 250, 320, 400, 500, 640, 800, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6400, 12800, 25600 };
         private List<uint> supportedISOValues;
         private bool isoSupported;
+
+        private List<VideoEncodingProperties> supportedResolutions = new List<VideoEncodingProperties>();
+
+        private bool wbSupported;
+        private List<ColorTemperaturePreset> supportWhiteBalances = new List<ColorTemperaturePreset>();
+
+        private bool flashSupported;
+        private List<FlashMode> flashModes = new List<FlashMode> { FlashMode.AUTO, FlashMode.ON, FlashMode.OFF };
+        private FlashMode currentFlashMode = FlashMode.AUTO;
+
+        private List<FocusAssistMode> supportedFocusAssistModes = new List<FocusAssistMode>();
+        private bool focusAssistSupported;
+        private bool focusSupported;
+        private bool autoFocusSupported;
+        private bool focusRegionSupported;
 
         private async Task<bool> EnumerateCamerasAsync()
         {
@@ -71,9 +89,10 @@ namespace Indulged.UI.ProCam
 
         private void EnumerateSceneMode()
         {
+            availableSceneModes = new List<SceneMode>();
+
             try
-            {
-                availableSceneModes = new List<SceneMode>();
+            {                
                 var sceneModes = captureManager.VideoDeviceController.SceneModeControl.SupportedModes;
                 
                 // We only support a limit number of modes. Too many modes can be annoying and confusing
@@ -159,6 +178,84 @@ namespace Indulged.UI.ProCam
                     }                    
                 }
             }
+        }
+
+        private void EnumerateResolutions()
+        {
+            supportedResolutions = new List<VideoEncodingProperties>();
+
+            var resList = captureManager.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.Photo);
+            var list = resList.OrderByDescending(res => (res as VideoEncodingProperties).Width).ToList();
+            foreach (VideoEncodingProperties res in list)
+            {
+                supportedResolutions.Add(res);
+            }
+        }
+
+        private void EnumerateWhiteBalances()
+        {
+            supportWhiteBalances = new List<ColorTemperaturePreset>();
+
+            wbSupported = captureManager.VideoDeviceController.WhiteBalanceControl.Supported;
+            if (wbSupported)
+            {
+                supportWhiteBalances.Add(ColorTemperaturePreset.Auto);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Daylight);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Cloudy);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Fluorescent);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Tungsten);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Flash);
+                supportWhiteBalances.Add(ColorTemperaturePreset.Candlelight);
+            }
+        }
+
+        private void CheckFocusSupport()
+        {
+            focusSupported = captureManager.VideoDeviceController.FocusControl.Supported;
+            autoFocusSupported = captureManager.VideoDeviceController.FocusControl.SupportedFocusModes.Contains(FocusMode.Auto);
+            focusRegionSupported = captureManager.VideoDeviceController.RegionsOfInterestControl.AutoFocusSupported && captureManager.VideoDeviceController.RegionsOfInterestControl.MaxRegions > 0;
+        }
+
+        /// <summary>
+        /// There's a known issue where on certain devices, calling FlashControl.Supported causes exception
+        /// </summary>
+        private void CheckFlashSupport()
+        {
+            try
+            {
+                flashSupported = captureManager.VideoDeviceController.FlashControl.Supported;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                flashSupported = false;
+            }
+        }
+
+        /// <summary>
+        /// There's a know issue where on certain devices, calling FlashControl.AssistantLightSupport causes exception
+        /// </summary>
+        private void CheckFocusAssistSupport()
+        {
+            try
+            {
+                focusAssistSupported = captureManager.VideoDeviceController.FlashControl.AssistantLightSupported;
+            } 
+            catch(Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                focusAssistSupported = false;
+            }
+            
+            if (focusAssistSupported)
+            {
+                supportedFocusAssistModes = new List<FocusAssistMode> { FocusAssistMode.ON, FocusAssistMode.OFF };
+            }
+            else
+            {
+                supportedFocusAssistModes = new List<FocusAssistMode> { FocusAssistMode.OFF };
+            }
+
         }
 
     }

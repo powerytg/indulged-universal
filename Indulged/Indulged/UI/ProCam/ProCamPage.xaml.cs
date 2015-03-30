@@ -31,7 +31,7 @@ namespace Indulged.UI.ProCam
             this.InitializeComponent();
 
             // Disable auto rotation (which gives a strange animation)
-            DisplayInformation.AutoRotationPreferences = DisplayOrientations.Landscape;
+            //DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         /// <summary>
@@ -39,14 +39,26 @@ namespace Indulged.UI.ProCam
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             // Listen for orientation events
             DisplayInformation.GetForCurrentView().OrientationChanged += DisplayInfo_OrientationChanged;
             currentOrientation = DisplayInformation.GetForCurrentView().CurrentOrientation;
 
+            // Find available cameras (default camera is the back camera)
+            // Detect available cameras
+            var hasCameras = await EnumerateCamerasAsync();
+            if (!hasCameras)
+            {
+                LoadingView.Text = "No cameras found";
+                return;
+            }
+
             // Initialize camera
-            InitializeCamera();
+            await InitializeCamera();
+
+            // Initialize camera chrome
+            InitializeChrome();
 
             // Initialize events
             InitializeEventListeners();
@@ -69,5 +81,6 @@ namespace Indulged.UI.ProCam
             currentOrientation = sender.CurrentOrientation;
             OnOrientationChanged();
         }
+
     }
 }

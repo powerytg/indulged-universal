@@ -16,6 +16,10 @@
         <ResourceDictionary Source="/Themes/DetailPageStyle.xaml"/>
         <ResourceDictionary Source="/Themes/TagButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/UserProfilePageStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/HUDButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/HUDActiveButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/HUDRadioButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/ProCamStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

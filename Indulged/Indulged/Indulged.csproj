@@ -97,6 +97,16 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Themes\HUDActiveButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\HUDButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\MainButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,12 +117,22 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
+    <Page Include="Themes\ProCamStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\MainControlStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\MainPivotStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\HUDRadioButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -359,6 +379,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProCam\Controls\HUDSwitchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProCam\Controls\ISODialControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -367,7 +391,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProCam\HUD\FocusAssistHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\HUDContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProCam\HUD\ISOHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\MainHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\SceneHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProCam\HUD\WhiteBalanceHUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -668,17 +712,38 @@
     <Compile Include="UI\ProCam\Controls\FocusRect.xaml.cs">
       <DependentUpon>FocusRect.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProCam\Controls\HUDSwitchControl.xaml.cs">
+      <DependentUpon>HUDSwitchControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProCam\Controls\ISODialControl.xaml.cs">
       <DependentUpon>ISODialControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProCam\HUD\EVHUD.xaml.cs">
       <DependentUpon>EVHUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProCam\HUD\FocusAssistHUD.xaml.cs">
+      <DependentUpon>FocusAssistHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\HUD\HUDContainer.xaml.cs">
+      <DependentUpon>HUDContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProCam\HUD\ISOHUD.xaml.cs">
       <DependentUpon>ISOHUD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProCam\HUD\MainHUD.xaml.cs">
+      <DependentUpon>MainHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\HUD\SceneHUD.xaml.cs">
+      <DependentUpon>SceneHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\HUD\WhiteBalanceHUD.xaml.cs">
+      <DependentUpon>WhiteBalanceHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProCam\Models\FlashMode.cs" />
+    <Compile Include="UI\ProCam\Models\FocusAssistMode.cs" />
     <Compile Include="UI\ProCam\Models\ProCamConstraints.cs" />
     <Compile Include="UI\ProCam\Models\SceneMode.cs" />
+    <Compile Include="UI\ProCam\ProCamPage.Animations.cs" />
     <Compile Include="UI\ProCam\ProCamPage.OSD.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Devices.cs" />
     <Compile Include="UI\ProCam\ProCamPage.Events.cs" />
@@ -755,9 +820,6 @@
     <Content Include="Assets\Login\LoginTitle.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\ProCam\ArrowDown.png" />
-    <Content Include="Assets\ProCam\ArrowLeft.png" />
-    <Content Include="Assets\ProCam\ArrowRight.png" />
-    <Content Include="Assets\ProCam\BottomToolbar.png" />
     <Content Include="Assets\ProCam\EVDial.png" />
     <Content Include="Assets\ProCam\EVHighlight.png" />
     <Content Include="Assets\ProCam\EVHUDTitle.png" />
@@ -789,13 +851,11 @@
     <Content Include="Assets\ProCam\ISOHighlight.png" />
     <Content Include="Assets\ProCam\ISOHUDTitle.png" />
     <Content Include="Assets\ProCam\ISOTick.png" />
-    <Content Include="Assets\ProCam\Logo.png" />
     <Content Include="Assets\ProCam\MainCamera.png" />
     <Content Include="Assets\ProCam\OSDArrow.png" />
     <Content Include="Assets\ProCam\OSDOff.png" />
     <Content Include="Assets\ProCam\OSDOn.png" />
     <Content Include="Assets\ProCam\Shutter.png" />
-    <Content Include="Assets\ProCam\TopToolbar.png" />
     <Content Include="Assets\ProCam\UI\CapsuleButtonLeft.png" />
     <Content Include="Assets\ProCam\UI\CapsuleButtonLeftActive.png" />
     <Content Include="Assets\ProCam\UI\CapsuleButtonMiddle.png" />

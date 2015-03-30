@@ -209,5 +209,38 @@ namespace Indulged.UI.ProCam
 
         #endregion
 
+        #region OSD
+
+        public void ShowOSD(FrameworkElement view = null)
+        {
+            if (currentOrientation == DisplayOrientations.Landscape)
+            {
+                HideLandscapeShutterButton();
+            }
+
+            if (view == null)
+            {
+                view = OSD.GetMainOSD();
+            }
+
+            OSD.ShowOSD(view);
+            HUDSwitchButton.IsOn = true;
+        }
+
+        public void DismissOSD()
+        {
+            OSD.DismissOSD(() =>
+            {
+                if (currentOrientation == DisplayOrientations.Landscape)
+                {
+                    ShowLandscapeShutterButton();
+                }
+
+            });
+
+            HUDSwitchButton.IsOn = false;
+        }
+
+        #endregion
     }
 }

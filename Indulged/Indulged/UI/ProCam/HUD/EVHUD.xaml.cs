@@ -18,7 +18,7 @@ namespace Indulged.UI.ProCam.HUD
 
         private int baseIndex;
 
-        protected List<float> _supportedValues;
+        private List<float> _supportedValues;
         public List<float> SupportedValues
         {
             get
@@ -48,7 +48,7 @@ namespace Indulged.UI.ProCam.HUD
                     }
 
                     evLabel.Foreground = new SolidColorBrush(Colors.White);
-                    evLabel.FontSize = 18;
+                    evLabel.FontSize = 24;
                     evLabel.FontWeight = FontWeights.Medium;
                     evLabel.Text = ev.ToEVString();
                     evLabel.Margin = new Thickness(0, 0, 6, 0);
@@ -62,7 +62,7 @@ namespace Indulged.UI.ProCam.HUD
             }
         }
 
-        protected float _selectedValue;
+        private float _selectedValue;
         public float SelectedValue
         {
             get
@@ -90,7 +90,8 @@ namespace Indulged.UI.ProCam.HUD
             double targetY = itemHeight * index - Scroller.ActualHeight / 2 + itemHeight / 2;
             targetY += paddingHeader.Height;
 
-            Scroller.ScrollToVerticalOffset(targetY);
+            //Scroller.ScrollToVerticalOffset(targetY);
+            Scroller.ChangeView(null, targetY, null);
         }
     }
 }

@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="Indulged.UI.ProCam.HUD.FocusAssistHUD"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProCam.HUD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Width="340" Height="200">
+
+    <UserControl.RenderTransform>
+        <TranslateTransform x:Name="PanelTransform"/>
+    </UserControl.RenderTransform>
+
+    <StackPanel x:Name="LayoutRoot" Orientation="Vertical" >
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0, 20, 0, 12">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Label"
+                           Style="{StaticResource OSDValueStyle}"
+                           Text="Auto" />
+
+                <TextBlock Style="{StaticResource OSDKeyStyle}"
+                           Text="FOCUS ASSIST" />
+
+            </StackPanel>
+            <Rectangle Height="1" Fill="White" Opacity="0.6"
+                       Margin="0, 4, 0, 0" />
+        </StackPanel>
+
+        <!--Radio buttons-->
+        <ScrollViewer Margin="0, 0, 0, 20" Height="210">
+            <StackPanel x:Name="RadioGroupPanel" Orientation="Vertical"/>
+
+        </ScrollViewer>
+    </StackPanel>
+</UserControl>

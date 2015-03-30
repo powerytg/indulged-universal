@@ -2,13 +2,43 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace Indulged.UI.ProCam
 {
     public partial class ProCamPage
     {
+        private static BitmapImage flashIconAuto = new BitmapImage(new Uri("ms-appx:///Assets/ProCam/FlashAuto.png"));
+        private static BitmapImage flashIconOn = new BitmapImage(new Uri("ms-appx:///Assets/ProCam/FlashOn.png"));
+        private static BitmapImage flashIconOff = new BitmapImage(new Uri("ms-appx:///Assets/ProCam/FlashOff.png"));
+
+        private void ShowLoadingView()
+        {
+            HideUIChrome();
+            LoadingView.Visibility = Visibility.Visible;
+        }
+
+        private void HideLoadingView()
+        {
+            LoadingView.Visibility = Visibility.Collapsed;
+            ShowUIChrome();
+        }
+
+        private void ShowUIChrome()
+        {
+            LayoutRoot.IsHitTestVisible = true;
+            Chrome.Visibility = Visibility.Visible;
+        }
+
+        private void HideUIChrome()
+        {
+            LayoutRoot.IsHitTestVisible = false;
+            Chrome.Visibility = Visibility.Collapsed;
+        }
+
         private void InitializeChrome()
         {
+            // EV
             if (!evSupported)
             {
                 EVDialer.Opacity = 0.3;
@@ -19,6 +49,7 @@ namespace Indulged.UI.ProCam
                 EVDialer.SupportedValues = supportedEVValues;
             }
 
+            // ISO
             if (!isoSupported)
             {
                 ISODialer.Opacity = 0.3;
@@ -28,6 +59,35 @@ namespace Indulged.UI.ProCam
             {
                 ISODialer.SupportedValues = supportedISOValues;
             }
+
+            // White balance
+            if (wbSupported)
+            {                
+                OSD.GetWhiteBalanceOSD().SupportedWhiteBalances = supportWhiteBalances;
+                WBButton.IsEnabled = true;
+            }
+            else
+            {
+                OSD.GetWhiteBalanceOSD().SupportedWhiteBalances = new System.Collections.Generic.List<Windows.Media.Devices.ColorTemperaturePreset>();
+                WBButton.IsEnabled = false;
+            }
+
+            // Resolution
+            OSD.GetMainOSD().SupportedResolutions = supportedResolutions;
+            OSD.GetMainOSD().CurrentResolution = currentResolution;
+
+            // Scene modes
+            OSD.GetSceneOSD().SupportedSceneModes = availableSceneModes;
+
+            // Focus assist
+            if (focusAssistSupported)
+            {
+                OSD.GetFocusAssistOSD().SupportedModes = supportedFocusAssistModes;
+                OSD.GetFocusAssistOSD().CurrentIndex = 0;
+            }
+
+            // Hide loading view
+            HideLoadingView();
         }
 
         private void HideLandscapeShutterButton()
@@ -83,9 +143,27 @@ namespace Indulged.UI.ProCam
             }
         }
 
-        private void OnShutterButtonClick(object sender, RoutedEventArgs e)
+        private void LayoutInLandscapeMode()
         {
+            LandscapeShutterButton.Visibility = Visibility.Visible;
+            PortraitShutterButton.Visibility = Visibility.Collapsed;
 
+            EVDialer.HorizontalAlignment = HorizontalAlignment.Left;
+            EVDialer.Margin = new Thickness(140, 0, 0, 20);
+
+            CameraSwitchButton.Margin = new Thickness(0, 0, 155, 120);
         }
+
+        private void LayoutInPortraitMode()
+        {
+            LandscapeShutterButton.Visibility = Visibility.Collapsed;
+            PortraitShutterButton.Visibility = Visibility.Visible;
+
+            EVDialer.HorizontalAlignment = HorizontalAlignment.Right;
+            EVDialer.Margin = new Thickness(0, 0, 20, 20);
+
+            CameraSwitchButton.Margin = new Thickness(20, 0, 15, 180);
+        }
+
     }
 }

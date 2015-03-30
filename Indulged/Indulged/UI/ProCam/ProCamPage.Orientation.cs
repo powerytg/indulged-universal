@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Graphics.Display;
+using Windows.Media.Capture;
 
 namespace Indulged.UI.ProCam
 {
@@ -12,87 +13,36 @@ namespace Indulged.UI.ProCam
     {
         private DisplayOrientations currentOrientation;
         private Guid rotGUID = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1");
-        private double rotHeight;
-        private double rotWidth;
 
         // Orientation is reversed for front camera
         private bool reversePreviewRotation;
-
-        private uint VideoPreviewRotationLookup(
-            Windows.Graphics.Display.DisplayOrientations displayOrientation, bool counterclockwise)
+        
+        private void OnOrientationChanged()
         {
-            switch (displayOrientation)
+            if (captureManager == null)
             {
-                case Windows.Graphics.Display.DisplayOrientations.Landscape:
-                    return 0;
-
-                case Windows.Graphics.Display.DisplayOrientations.Portrait:
-                    {
-                        if (counterclockwise)
-                        {
-                            return 270;
-                        }
-                        else
-                        {
-                            return 90;
-                        }
-                    }
-
-                case Windows.Graphics.Display.DisplayOrientations.LandscapeFlipped:
-                    return 180;
-
-                case Windows.Graphics.Display.DisplayOrientations.PortraitFlipped:
-                    {
-                        if (counterclockwise)
-                        {
-                            return 90;
-                        }
-                        else
-                        {
-                            return 270;
-                        }
-                    }
-
-                default:
-                    return 0;
+                return;
             }
-        }
 
-        private async void OnOrientationChanged()
-        {
-            try
+            bool previewMirroring = captureManager.GetPreviewMirroring();
+            bool counterclockwiseRotation = (previewMirroring && !reversePreviewRotation) ||
+                (!previewMirroring && reversePreviewRotation);
+
+            if (isPreviewing)
             {
-                if (captureManager == null)
-                {
-                    return;
-                }
-
-                var videoEncodingProperties = captureManager.VideoDeviceController.GetMediaStreamProperties(Windows.Media.Capture.MediaStreamType.VideoPreview);
-
-                bool previewMirroring = captureManager.GetPreviewMirroring();
-                bool counterclockwiseRotation = (previewMirroring && !reversePreviewRotation) ||
-                    (!previewMirroring && reversePreviewRotation);
-
-                if (isPreviewing)
-                {
-                    var rotDegree = VideoPreviewRotationLookup(currentOrientation, counterclockwiseRotation);
-                    videoEncodingProperties.Properties.Add(rotGUID, rotDegree);
-                    await captureManager.SetEncodingPropertiesAsync(Windows.Media.Capture.MediaStreamType.VideoPreview, videoEncodingProperties, null);
-                    if (rotDegree == 90 || rotDegree == 270)
-                    {
-                        CameraView.Height = rotHeight;
-                        CameraView.Width = rotWidth;
-                    }
-                    else
-                    {
-                        CameraView.Height = rotWidth;
-                        CameraView.Width = rotHeight;
-                    }
-                }
+                captureManager.SetPreviewRotation(PreviewRotationLookup(currentOrientation, counterclockwiseRotation));
             }
-            catch (Exception exception)
+
+            // Update UI
+            DismissOSD();
+
+            if (currentOrientation == DisplayOrientations.Landscape)
             {
-                Debug.WriteLine(exception.Message);
+                LayoutInLandscapeMode();
+            }
+            else
+            {
+                LayoutInPortraitMode();
             }
         }
 
@@ -119,6 +69,34 @@ namespace Indulged.UI.ProCam
                 default:
                     return Windows.Storage.FileProperties.PhotoOrientation.Unspecified;
             }
+        }
+
+        private VideoRotation PreviewRotationLookup(DisplayOrientations displayOrientation, bool counterclockwise)
+        {
+            switch (displayOrientation)
+            {
+                case DisplayOrientations.Landscape:
+                    return VideoRotation.None;
+
+                case DisplayOrientations.Portrait:
+                    return (counterclockwise) ? VideoRotation.Clockwise270Degrees : VideoRotation.Clockwise90Degrees;
+
+                case DisplayOrientations.LandscapeFlipped:
+                    return VideoRotation.Clockwise180Degrees;
+
+                case DisplayOrientations.PortraitFlipped:
+                    return (counterclockwise) ? VideoRotation.Clockwise90Degrees :
+                    VideoRotation.Clockwise270Degrees;
+
+                default:
+                    return VideoRotation.None;
+            }
+        }
+
+        private Windows.Storage.FileProperties.PhotoOrientation GetCurrentPhotoRotation()
+        {
+            bool counterclockwiseRotation = reversePreviewRotation;
+            return PhotoRotationLookup(currentOrientation, counterclockwiseRotation);
         }
 
     }

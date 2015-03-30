@@ -204,39 +204,5 @@ namespace Indulged.UI.ProCam.Controls
             }
         }
 
-        public void LayoutInLandscapeMode()
-        {
-            LayoutRoot.ColumnDefinitions.Clear();
-            LayoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            LayoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Pixel) });
-
-            Dialer.SetValue(Grid.ColumnProperty, 0);
-
-            Label.SetValue(Grid.ColumnProperty, 1);
-            Label.HorizontalAlignment = HorizontalAlignment.Left;
-            Label.Margin = new Thickness(10, 0, 0, 0);
-
-            Arrow.SetValue(Grid.ColumnProperty, 0);
-            Arrow.Source = arrowRightImage;
-            GestureCaptureCanvas.SetValue(Grid.ColumnProperty, 0);
-        }
-
-        public void LayoutInPortraitMode()
-        {
-            LayoutRoot.ColumnDefinitions.Clear();
-            LayoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60, GridUnitType.Pixel) });
-            LayoutRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-
-            Label.SetValue(Grid.ColumnProperty, 0);
-            Label.HorizontalAlignment = HorizontalAlignment.Right;
-            Label.Margin = new Thickness(0, 0, 10, 0);
-
-            Dialer.SetValue(Grid.ColumnProperty, 1);
-
-
-            Arrow.SetValue(Grid.ColumnProperty, 1);
-            Arrow.Source = arrowLeftImage;
-            GestureCaptureCanvas.SetValue(Grid.ColumnProperty, 1);
-        }
     }
 }

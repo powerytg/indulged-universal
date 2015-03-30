@@ -10,42 +10,29 @@
     d:DesignWidth="400">
 
     <Grid x:Name="LayoutRoot">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-
-        <TextBlock x:Name="Label" Grid.Column="0"
-                   VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 10, 0"
-                   Foreground="#1cbbb4"/>
-
         <Grid x:Name="Dialer" Width="90" Height="90" 
-              IsHitTestVisible="False" Grid.Column="1">
+              IsHitTestVisible="False">
 
             <Grid.RenderTransform>
                 <RotateTransform x:Name="DialerTransform" CenterX="45" CenterY="45"/>
             </Grid.RenderTransform>
 
-            <Image Source="/Assets/ProCam/EVDial.png" IsHitTestVisible="False"
-               Grid.Column="1">
-            </Image>
+            <Image Source="/Assets/ProCam/EVDial.png" IsHitTestVisible="False"/>
+
 
             <!--Ticks-->
             <Image x:Name="EVTickView"
-               Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Source="/Assets/ProCam/EV/EV0.png" />
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Source="/Assets/ProCam/EV/EV0.png" />
         </Grid>
 
-        <!--Unmovable arrow-->
-        <Image x:Name="Arrow" Source="/Assets/ProCam/ArrowLeft.png" IsHitTestVisible="False"
-               Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-               Width="12">
-        </Image>
+        <TextBlock x:Name="Label" Grid.Column="0"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Foreground="#1cbbb4"/>
 
         <!--This invisle canvas captures manipulation events-->
         <Canvas x:Name="GestureCaptureCanvas" 
                 Background="Black" Opacity="0" IsHitTestVisible="True"
-                ManipulationMode="All"
-                Grid.Column="1"/>
+                ManipulationMode="All"/>
     </Grid>
 </UserControl>

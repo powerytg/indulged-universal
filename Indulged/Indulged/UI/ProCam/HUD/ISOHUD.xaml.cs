@@ -16,7 +16,7 @@ namespace Indulged.UI.ProCam.HUD
         private FrameworkElement firstRenderer = null;
         private Canvas paddingHeader, paddingFooter;
 
-        protected List<uint> _supportedValues;
+        private List<uint> _supportedValues;
         public List<uint> SupportedValues
         {
             get
@@ -46,7 +46,7 @@ namespace Indulged.UI.ProCam.HUD
                     }
 
                     isoLabel.Foreground = new SolidColorBrush(Colors.White);
-                    isoLabel.FontSize = 18;
+                    isoLabel.FontSize = 24;
                     isoLabel.FontWeight = FontWeights.Medium;
                     isoLabel.Text = iso.ToISOString();
                     isoLabel.Margin = new Thickness(6, 0, 0, 0);
@@ -61,7 +61,7 @@ namespace Indulged.UI.ProCam.HUD
             }
         }
 
-        protected uint _selectedValue;
+        private uint _selectedValue;
         public uint SelectedValue
         {
             get
@@ -88,8 +88,8 @@ namespace Indulged.UI.ProCam.HUD
             double itemHeight = firstRenderer.ActualHeight;
             double targetY = itemHeight * index - Scroller.ActualHeight / 2 + itemHeight / 2;
             targetY += paddingHeader.Height;
-
-            Scroller.ScrollToVerticalOffset(targetY);
+            Scroller.ChangeView(null, targetY, null);
+            //Scroller.ScrollToVerticalOffset(targetY);
         }
     }
 }

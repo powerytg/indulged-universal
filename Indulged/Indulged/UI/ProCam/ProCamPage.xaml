@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Indulged.UI.ProCam"
     xmlns:controls="using:Indulged.UI.ProCam.Controls"
+    xmlns:hud="using:Indulged.UI.ProCam.HUD"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -13,60 +14,122 @@
 
         <!--Loading view-->
         <TextBlock x:Name="LoadingView" Foreground="White" 
-                   Text="Initializing camera..."
+                   Text="Initializing camera..." FontSize="18"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <!--Media capture-->
-        <CaptureElement x:Name="CameraView" Visibility="Collapsed"/>
+        <Grid x:Name="Chrome" Visibility="Collapsed">
+            <CaptureElement x:Name="CameraView"
+                            Tapped="OnViewFinderTap"
+                            Stretch="UniformToFill"/>
 
-        <!--Camera switch-->
-        <controls:CamSwitchControl x:Name="CameraSwitchButton" 
+            <!--Top toolbar-->
+            <Grid x:Name="TopToolbar" VerticalAlignment="Top" Height="64">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <!--Flash-->
+                    <Button x:Name="FlashButton"
+                        Margin="0, 0, 14, 0"
+                            Style="{StaticResource HUDButtonStyle}"
+                        Click="OnFlashButtonClick">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="FlashIcon"  Source="/Assets/ProCam/FlashAuto.png" Width="15" 
+                                   VerticalAlignment="Center" Margin="14, 0, 0, 0"/>
+                                <TextBlock x:Name="FlashLabel" Text="AUTO" Foreground="White" Width="60" 
+                                       FontSize="18"
+                                       VerticalAlignment="Center" TextAlignment="Right" Margin="0, 0, 14, 0" />
+
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <!--White balance-->
+                    <TextBlock Text="WB" Foreground="White" 
+                           FontSize="22"
+                           VerticalAlignment="Center" Margin="0, 0, 8, 0" />
+                    <Button x:Name="WBButton"
+                        Margin="0, 0, 15, 0" 
+                        Style="{StaticResource HUDButtonStyle}"
+                        Click="OnWhiteBalanceButtonClick" >
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="WBLabel" Text="AUTO" Foreground="White" Width="60" 
+                           FontSize="18"
+                           VerticalAlignment="Center" TextAlignment="Right" Margin="14, 0, 12, 0" />
+
+                                <Image Source="/Assets/ProCam/ArrowDown.png" Width="11" 
+                                   VerticalAlignment="Center" Margin="0, 0, 14, 0"/>
+
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!--Focus rect-->
+            <Image x:Name="AutoFocusBrackets" Width="266" Height="266"
+                   Source="/Assets/ProCam/FocusRect.png"
+                   Visibility="Collapsed" IsHitTestVisible="False">
+                <Image.RenderTransform>
+                    <CompositeTransform/>
+                </Image.RenderTransform>
+            </Image>
+
+            <!--HUD switch-->
+            <controls:HUDSwitchControl x:Name="HUDSwitchButton"
+                                   HorizontalAlignment="Right" VerticalAlignment="Top"
+                                   Margin="0, 90, 15, 0" />
+            <!--HUD container-->
+            <hud:HUDContainer x:Name="OSD" Visibility="Collapsed"
+                          HorizontalAlignment="Right" VerticalAlignment="Top"
+                          Margin="0, 145, 0, 0" />
+
+            <!--Camera switch-->
+            <controls:CamSwitchControl x:Name="CameraSwitchButton" 
                                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                    Margin="20, 0, 15, 180">
-            <controls:CamSwitchControl.RenderTransform>
-                <TranslateTransform x:Name="CameraSwitchButtonTranslate"/>
-            </controls:CamSwitchControl.RenderTransform>
-        </controls:CamSwitchControl>
+                <controls:CamSwitchControl.RenderTransform>
+                    <TranslateTransform x:Name="CameraSwitchButtonTranslate"/>
+                </controls:CamSwitchControl.RenderTransform>
+            </controls:CamSwitchControl>
 
-        <!--Landscape mode shutter-->
-        <Button x:Name="LandscapeShutterButton" Visibility="Collapsed" 
+            <!--Landscape mode shutter-->
+            <Button x:Name="LandscapeShutterButton" Visibility="Collapsed" 
                     HorizontalAlignment="Right" VerticalAlignment="Bottom"
                     Style="{StaticResource RoundedTransparentButtonStyle}" 
                     Margin="0, 0, 20, 20" Click="OnShutterButtonClick">
-            <Button.Content>
-                <Image Source="/Assets/ProCam/Shutter.png" Width="150"/>
-            </Button.Content>
-
-            <Button.RenderTransform>
-                <TranslateTransform x:Name="LandscapeShutterButtonTranslate"/>
-            </Button.RenderTransform>
-        </Button>
-
-        <!--Bottom toolbar-->
-        <Grid x:Name="BottomToolbar" Height="212" VerticalAlignment="Bottom">
-            <Image x:Name="BottomToolbarBackground" Source="/Assets/ProCam/BottomToolbar.png" Stretch="Fill" Opacity="0.85"
-                   IsHitTestVisible="False" />
-
-            <!--ISO-->
-            <controls:ISODialControl x:Name="ISODialer" 
-                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                                    Margin="20, 0, 0, 20" />
-
-            <!--Shutter-->
-            <Button x:Name="PortraitShutterButton" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Style="{StaticResource RoundedTransparentButtonStyle}" 
-                    Click="OnShutterButtonClick" >
                 <Button.Content>
                     <Image Source="/Assets/ProCam/Shutter.png" Width="150"/>
                 </Button.Content>
+
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="LandscapeShutterButtonTranslate"/>
+                </Button.RenderTransform>
             </Button>
 
-            <!--EXP Comp-->
-            <controls:EVDialControl x:Name="EVDialer" 
+            <!--Bottom toolbar-->
+            <Grid x:Name="BottomToolbar" Height="212" VerticalAlignment="Bottom">
+                <!--ISO-->
+                <controls:ISODialControl x:Name="ISODialer" 
+                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                    Margin="20, 0, 0, 20" />
+
+                <!--Shutter-->
+                <Button x:Name="PortraitShutterButton" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Style="{StaticResource RoundedTransparentButtonStyle}" 
+                    Click="OnShutterButtonClick" >
+                    <Button.Content>
+                        <Image Source="/Assets/ProCam/Shutter.png" Width="150"/>
+                    </Button.Content>
+                </Button>
+
+                <!--EXP Comp-->
+                <controls:EVDialControl x:Name="EVDialer" 
                                     HorizontalAlignment="Right" VerticalAlignment="Bottom"
                                     Margin="0, 0, 20, 20" />
+            </Grid>
+
         </Grid>
-        
-    </Grid>    
+    </Grid>
 </Page>

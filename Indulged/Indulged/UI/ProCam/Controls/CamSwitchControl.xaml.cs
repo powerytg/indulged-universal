@@ -15,21 +15,6 @@ namespace Indulged.UI.ProCam.Controls
         private BitmapImage backCamIcon = new BitmapImage(new Uri("ms-appx:///Assets/ProCam/MainCamera.png"));
         private BitmapImage frontCamIcon = new BitmapImage(new Uri("ms-appx:///Assets/ProCam/FrontCamera.png"));
 
-        private bool _shouldUseShortNames = false;
-        public bool ShouldUserShortNames
-        {
-            get
-            {
-                return _shouldUseShortNames;
-            }
-
-            set
-            {
-                _shouldUseShortNames = value;
-                UpdateLabel();
-            }
-        }
-
         private Windows.Devices.Enumeration.Panel _currentCamera = Windows.Devices.Enumeration.Panel.Back;
         public Windows.Devices.Enumeration.Panel CurrentCamera
         {
@@ -50,8 +35,6 @@ namespace Indulged.UI.ProCam.Controls
                 {
                     Icon.Source = frontCamIcon;
                 }
-
-                UpdateLabel();
             }
         }
 
@@ -61,29 +44,7 @@ namespace Indulged.UI.ProCam.Controls
             InitializeComponent();
         }
 
-        private void UpdateLabel()
-        {
-            if (_currentCamera == Windows.Devices.Enumeration.Panel.Back)
-            {
-                Label.Text = _shouldUseShortNames ? "BACK" : "BACK CAMERA";
-            }
-            else if (_currentCamera == Windows.Devices.Enumeration.Panel.Front)
-            {
-                Label.Text = _shouldUseShortNames ? "FRONT" : "FRONT CAMERA";
-            }
-        }
-
-        public void LayoutInLandscapeMode()
-        {
-            ShouldUserShortNames = true;
-        }
-
-        public void LayoutInPortraitMode()
-        {
-            ShouldUserShortNames = false;
-        }
-
-        private void LayoutRoot_Tapped(object sender, TappedRoutedEventArgs e)
+        private void SwitchButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (_currentCamera == Windows.Devices.Enumeration.Panel.Front)
             {
