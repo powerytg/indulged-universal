@@ -856,12 +856,6 @@
     <Content Include="Assets\ProCam\OSDOff.png" />
     <Content Include="Assets\ProCam\OSDOn.png" />
     <Content Include="Assets\ProCam\Shutter.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonLeft.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonLeftActive.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonMiddle.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonMiddleActive.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonRight.png" />
-    <Content Include="Assets\ProCam\UI\CapsuleButtonRightActive.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />
@@ -896,7 +890,6 @@
   <ItemGroup>
     <Compile Include="API\Networking\APIService.Storage.cs" />
     <None Include="Assets\ProCam\EV\Thumbs.db" />
-    <None Include="Assets\ProCam\UI\Thumbs.db" />
     <None Include="Help\Nokia Imaging SDK.chm" />
     <None Include="packages.config" />
     <Compile Include="UI\ProCam\ProCamPage.Core.cs" />
