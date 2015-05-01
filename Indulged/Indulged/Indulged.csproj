@@ -87,6 +87,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\FXComboButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\FXButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\FXSliderStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +126,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Themes\DetailPageStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\ProFXStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -151,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\ActionButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\FXCropButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -428,6 +450,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Profile\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Filters\FXAntiqueFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Filters\FXAutoEnhanceFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Filters\FXCropFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Filters\FXRotationFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Filters\FXVignetteFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\ProFXPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -764,6 +810,31 @@
     <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProFX\Events\AddFilterEventArgs.cs" />
+    <Compile Include="UI\ProFX\Events\CropAreaChangedEventArgs.cs" />
+    <Compile Include="UI\ProFX\Events\DeleteFilterEventArgs.cs" />
+    <Compile Include="UI\ProFX\Events\RequestFilterEventArgs.cs" />
+    <Compile Include="UI\ProFX\Filters\FilterBase.cs" />
+    <Compile Include="UI\ProFX\Filters\FXAntiqueFilter.xaml.cs">
+      <DependentUpon>FXAntiqueFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Filters\FXAutoEnhanceFilter.xaml.cs">
+      <DependentUpon>FXAutoEnhanceFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Filters\FXCropFilter.xaml.cs">
+      <DependentUpon>FXCropFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Filters\FXFilterManager.cs" />
+    <Compile Include="UI\ProFX\Filters\FXRotationFilter.xaml.cs">
+      <DependentUpon>FXRotationFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Filters\FXVignetteFilter.xaml.cs">
+      <DependentUpon>FXVignetteFilter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\ProFXPage.Core.cs" />
+    <Compile Include="UI\ProFX\ProFXPage.xaml.cs">
+      <DependentUpon>ProFXPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Search\Renderers\GroupRenderer.xaml.cs">
       <DependentUpon>GroupRenderer.xaml</DependentUpon>
     </Compile>
@@ -856,6 +927,32 @@
     <Content Include="Assets\ProCam\OSDOff.png" />
     <Content Include="Assets\ProCam\OSDOn.png" />
     <Content Include="Assets\ProCam\Shutter.png" />
+    <Content Include="Assets\ProFX\FXActiveFilters.png" />
+    <Content Include="Assets\ProFX\FXAdd.png" />
+    <Content Include="Assets\ProFX\FXArrowDown.png" />
+    <Content Include="Assets\ProFX\FXBackButton2.png" />
+    <Content Include="Assets\ProFX\FXBackward.png" />
+    <Content Include="Assets\ProFX\FXCheckmark.png" />
+    <Content Include="Assets\ProFX\FXCrop.png" />
+    <Content Include="Assets\ProFX\FXCropHandle.png" />
+    <Content Include="Assets\ProFX\FXDelete.png" />
+    <Content Include="Assets\ProFX\FXDeleteFilter.png" />
+    <Content Include="Assets\ProFX\FXDone.png" />
+    <Content Include="Assets\ProFX\FXFilterDisabled.png" />
+    <Content Include="Assets\ProFX\FXFilterEnabled.png" />
+    <Content Include="Assets\ProFX\FXGallery.png" />
+    <Content Include="Assets\ProFX\FXLogo.png" />
+    <Content Include="Assets\ProFX\FXMagicWand.png" />
+    <Content Include="Assets\ProFX\FXProcessor.png" />
+    <Content Include="Assets\ProFX\FXUpload.png" />
+    <Content Include="Assets\ProFX\FXUploadLogo.png" />
+    <Content Include="Assets\ProFX\IndulgedFXLogo.png" />
+    <Content Include="Assets\ProFX\Ring1.png" />
+    <Content Include="Assets\ProFX\Ring2.png" />
+    <Content Include="Assets\ProFX\Ring3.png" />
+    <Content Include="Assets\ProFX\Ring4.png" />
+    <Content Include="Assets\ProFX\SelectedFilterIcon.png" />
+    <Content Include="Assets\ProFX\SliderThumb.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
     <Content Include="Assets\Square71x71Logo.scale-240.png" />

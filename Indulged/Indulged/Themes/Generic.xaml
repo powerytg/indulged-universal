@@ -20,6 +20,11 @@
         <ResourceDictionary Source="/Themes/HUDActiveButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/HUDRadioButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/ProCamStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/ProFXStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/FXSliderStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/FXButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/FXCropButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/FXComboButtonStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

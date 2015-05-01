@@ -143,5 +143,15 @@ namespace Indulged
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            var root = Window.Current.Content as Frame;
+            var mainPage = root.Content as PivotPage;
+            if (mainPage != null && args is FileOpenPickerContinuationEventArgs)
+            {
+                mainPage.OnFileChoosen(args as FileOpenPickerContinuationEventArgs);
+            }
+        }
     }
 }

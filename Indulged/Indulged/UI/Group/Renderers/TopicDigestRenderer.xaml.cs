@@ -21,6 +21,11 @@ namespace Indulged.UI.Group.Renderers
         {
             base.OnTopicChanged();
 
+            if (Topic == null)
+            {
+                return;
+            }
+
             if (Topic.Author.AvatarUrl != null){
                 IconView.Source = new BitmapImage(new Uri(Topic.Author.AvatarUrl));
             }

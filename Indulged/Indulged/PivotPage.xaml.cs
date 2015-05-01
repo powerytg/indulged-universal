@@ -5,10 +5,13 @@ using Indulged.PolKit;
 using Indulged.UI.Common.Controls;
 using Indulged.UI.Dashboard;
 using Indulged.UI.ProCam;
+using Indulged.UI.ProFX;
 using Indulged.UI.Search;
 using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Resources;
+using Windows.Storage.Pickers;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -176,5 +179,27 @@ namespace Indulged
             Frame.Navigate(typeof(ProCamPage));
         }
 
+        private void UploadButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
+
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.PickSingleFileAndContinue();
+        }
+
+        public void OnFileChoosen(FileOpenPickerContinuationEventArgs e)
+        {
+            if (e.Files != null && e.Files.Count != 0)
+            {
+                // Do something with selected file/s
+                var file = e.Files[0];
+                Frame.Navigate(typeof(ProFXPage), file);
+            }
+        }
     }
 }
