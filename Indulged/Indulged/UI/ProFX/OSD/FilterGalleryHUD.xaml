@@ -1,0 +1,92 @@
+﻿<UserControl
+    x:Class="Indulged.UI.ProFX.OSD.FilterGalleryHUD"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProFX.OSD"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:WinRTXamlToolkit.Controls"
+    xmlns:controls="using:Indulged.UI.ProFX.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Height="480">
+
+    <UserControl.RenderTransform>
+        <TranslateTransform/>
+    </UserControl.RenderTransform>
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Title-->
+        <StackPanel x:Name="OSDToggle" Orientation="Horizontal" Grid.Row="0" Tapped="OSDToggle_Tapped">
+            <Image Source="/Assets/ProCam/OSDArrow.png"
+               HorizontalAlignment="Left" VerticalAlignment="Center"
+               Width="18" Height="10" Margin="20, 0, 20, 0"/>
+
+            <Image Source="/Assets/ProFX/FXGallery.png"
+               HorizontalAlignment="Left" VerticalAlignment="Center"
+               Width="162" />
+        </StackPanel>
+
+        <!--Split line-->
+        <Rectangle Height="3" Grid.Row="1" Margin="0, 10, 0, 0">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                    <GradientStop Color="#ffc4df9b" Offset="0"/>
+                    <GradientStop Color="#ff3cb878" Offset="0.3"/>
+                    <GradientStop Color="#ff1cbbb4" Offset="0.5"/>
+                    <GradientStop Color="#ff0049a3" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <!--Background-->
+        <Grid Grid.Row="2" Grid.RowSpan="2">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.85"/>
+            </Grid.Background>
+
+        </Grid>
+
+        <!--Content-->
+        <ScrollViewer Grid.Row="2">
+            <StackPanel>
+                <!--Enhancement-->
+                <controls:SectionControl Title="Enhancement" Margin="8, 10, 0, 10"/>
+                <toolkit:WrapPanel x:Name="EnhcnacementFilterContainer" Margin="4" />
+
+                <!--Color correction-->
+                <controls:SectionControl Title="Color Correction" Margin="8, 10, 0, 10"/>
+                <toolkit:WrapPanel x:Name="ColorFilterContainer" Margin="4" />
+
+                <!--Effects-->
+                <controls:SectionControl Title="Effects" Margin="8, 10, 0, 10"/>
+                <toolkit:WrapPanel x:Name="EffectFilterContainer" Margin="4" />
+
+                <!--Transform-->
+                <!--
+                <controls:SectionControl Title="Crop &amp; Rotation" Margin="8, 10, 0, 10"/>
+                <toolkit:WrapPanel x:Name="TransformFilterContainer" Margin="4" />
+                -->
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--Dismiss button-->
+        <Button x:Name="CloseButton" Style="{StaticResource FXCircularButtonStyle}"
+                Background="#133e71" Width="48" Height="48" MinWidth="48" MinHeight="48" Grid.Row="3" 
+                Margin="0, 15, 0, 15"
+                Click="CloseButton_Click">
+            <Button.Content>
+                <Image Source="/Assets/ProFX/FXDone.png" Width="27"/>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

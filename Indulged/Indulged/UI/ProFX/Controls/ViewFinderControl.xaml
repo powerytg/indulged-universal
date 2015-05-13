@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="Indulged.UI.ProFX.Controls.ViewFinderControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProFX.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid x:Name="LayoutRoot">
+        <Image x:Name="ImageView" Stretch="Uniform"/>
+
+        <!-- Curtain -->
+        <Grid x:Name="Curtain" Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.45"/>
+            </Grid.Background>
+        </Grid>
+
+        <Canvas x:Name="CropCanvas">
+            <!-- Stretch box -->
+            <Border x:Name="HighlightBox" Visibility="Collapsed" BorderThickness="2">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="White" Opacity="0.7"/>
+                </Border.BorderBrush>
+                <Border.Background>
+                    <SolidColorBrush Color="White" Opacity="0.3"/>
+                </Border.Background>
+            </Border>
+
+            <!-- Drag handles -->
+            <Image x:Name="Handle" Source="/Assets/ProFX/FXCropHandle.png" Width="42" Height="42" Visibility="Collapsed"/>
+
+        </Canvas>
+    </Grid>
+</UserControl>

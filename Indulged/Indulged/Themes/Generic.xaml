@@ -25,6 +25,7 @@
         <ResourceDictionary Source="/Themes/FXButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/FXCropButtonStyle.xaml"/>
         <ResourceDictionary Source="/Themes/FXComboButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Themes/FXCircularButtonStyle.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

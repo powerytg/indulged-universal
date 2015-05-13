@@ -1,0 +1,36 @@
+﻿<local:FilterBase
+    x:Class="Indulged.UI.ProFX.Filters.FXVignetteFilter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProFX.Filters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Height="220">
+
+    <local:FilterBase.RenderTransform>
+        <CompositeTransform />
+    </local:FilterBase.RenderTransform>
+
+    <StackPanel x:Name="LayoutRoot" Margin="14, 14, 14, 14">
+        <Grid Margin="0, 0, 0, 40">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource FXSectionTextStyle}" Text="Color"  VerticalAlignment="Center" Grid.Column="0"/>
+            <Button x:Name="PickerButton" Width="100" Height="45" VerticalAlignment="Center"
+                                          Grid.Column="1"/>
+
+        </Grid>
+
+        <TextBlock Style="{StaticResource FXSectionTextStyle}" Text="Radius" HorizontalAlignment="Left"/>
+        <Slider x:Name="AmountSlider" Minimum="0" Maximum="15" Value="0.4" Margin="0, 0, 0, 40" Padding="0"
+                Foreground="#6d87f6" Style="{StaticResource FXSliderStyle}"
+                ValueChanged="AmountSlider_ValueChanged"/>
+    </StackPanel>
+
+</local:FilterBase>

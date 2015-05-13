@@ -95,6 +95,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\FXCircularButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\FXSliderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -453,6 +457,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProFX\Controls\FilterDropletControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Controls\FilterEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Controls\SectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Controls\ViewFinderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProFX\Filters\FXAntiqueFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -470,6 +490,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProFX\Filters\FXVignetteFilter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\OSD\ActiveFiltersHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\OSD\CropHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\OSD\FilterContainerHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\OSD\FilterGalleryHUD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\OSD\RotationHUD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -810,6 +850,18 @@
     <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProFX\Controls\FilterDropletControl.xaml.cs">
+      <DependentUpon>FilterDropletControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Controls\FilterEntryControl.xaml.cs">
+      <DependentUpon>FilterEntryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Controls\SectionControl.xaml.cs">
+      <DependentUpon>SectionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Controls\ViewFinderControl.xaml.cs">
+      <DependentUpon>ViewFinderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProFX\Events\AddFilterEventArgs.cs" />
     <Compile Include="UI\ProFX\Events\CropAreaChangedEventArgs.cs" />
     <Compile Include="UI\ProFX\Events\DeleteFilterEventArgs.cs" />
@@ -831,6 +883,23 @@
     <Compile Include="UI\ProFX\Filters\FXVignetteFilter.xaml.cs">
       <DependentUpon>FXVignetteFilter.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProFX\OSD\ActiveFiltersHUD.xaml.cs">
+      <DependentUpon>ActiveFiltersHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\OSD\CropHUD.xaml.cs">
+      <DependentUpon>CropHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\OSD\FilterContainerHUD.xaml.cs">
+      <DependentUpon>FilterContainerHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\OSD\FilterGalleryHUD.xaml.cs">
+      <DependentUpon>FilterGalleryHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\OSD\RotationHUD.xaml.cs">
+      <DependentUpon>RotationHUD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\ProFXPage.Animations.cs" />
+    <Compile Include="UI\ProFX\ProFXPage.Events.cs" />
     <Compile Include="UI\ProFX\ProFXPage.Core.cs" />
     <Compile Include="UI\ProFX\ProFXPage.xaml.cs">
       <DependentUpon>ProFXPage.xaml</DependentUpon>
