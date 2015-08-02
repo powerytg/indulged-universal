@@ -85,13 +85,6 @@ namespace Indulged.UI.ProFX.OSD
                     RequestCropFilter(this, null);
                 }
             }
-            else if (droplet.Filter == FilterManager.RotationFilter)
-            {
-                if (RequestRotationFilter != null)
-                {
-                    RequestRotationFilter(this, null);
-                }
-            }
             else if (RequestFilter != null)
             {
                 var evt = new RequestFilterEventArgs();
@@ -107,10 +100,6 @@ namespace Indulged.UI.ProFX.OSD
             if (entry.Filter == FilterManager.CropFilter)
             {
                 FilterManager.DiscardCrop();
-            }
-            else if (entry.Filter == FilterManager.RotationFilter)
-            {
-                FilterManager.DiscardRotationFilter();
             }
             else if (FilterListView.Children.Contains(entry))
             {

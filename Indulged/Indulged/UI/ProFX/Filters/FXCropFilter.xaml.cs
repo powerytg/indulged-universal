@@ -1,5 +1,5 @@
-﻿using Nokia.Graphics.Imaging;
-using Windows.UI.Xaml.Controls;
+﻿using Lumia.Imaging;
+using Lumia.Imaging.Transforms;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 

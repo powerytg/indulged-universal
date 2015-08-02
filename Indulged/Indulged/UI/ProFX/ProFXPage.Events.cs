@@ -21,7 +21,6 @@ namespace Indulged.UI.ProFX
             ActiveFilterView.OnDismiss += OnActiveFilterViewDismiss;
             ActiveFilterView.RequestFilter += OnFilterRequested;
             ActiveFilterView.RequestCropFilter += OnCropFilterRequested;
-            ActiveFilterView.RequestRotationFilter += OnRotationFilterRequested;
             ActiveFilterView.RequestFilterGallery += OnRequestFilterGalleryFromFilterList;
 
             FilterContainerView.OnDismiss += OnFilterContainerDismiss;
@@ -31,9 +30,6 @@ namespace Indulged.UI.ProFX
             CropView.OnDismiss += OnCropFilterDismiss;
             CropView.OnDelete += OnCropFilterDelete;
 
-            RotationView.OnDismiss += OnRotationFilterDismiss;
-            RotationView.OnDelete += OnRotationFilterDelete;
-            RotationView.ValueChanged += OnRotationValueChanged;
             /*
             UploaderPage.RequestDismiss += OnUploaderRequestDismiss;
             UploaderPage.RequestExit += OnUploaderRequestExit;
@@ -81,14 +77,6 @@ namespace Indulged.UI.ProFX
             DismissActiveFilterList(false, () =>
             {
                 OnCropButtonClick(this, null);
-            });
-        }
-
-        private void OnRotationFilterRequested(object sender, EventArgs e)
-        {
-            DismissActiveFilterList(false, () =>
-            {
-                OnRotationButtonClick(this, null);
             });
         }
 
@@ -216,45 +204,6 @@ namespace Indulged.UI.ProFX
             });
         }
 
-        private void OnRotationButtonClick(object sender, RoutedEventArgs e)
-        {
-            ShowRotationOSD(() =>
-            {
-                filterManager.RotationFilter.CurrentImage = currentPreviewBitmap;
-                filterManager.RotationFilter.OriginalImageWidth = originalImageWidth;
-                filterManager.RotationFilter.OriginalImageHeight = originalImageHeight;
-                filterManager.RotationFilter.OriginalPreviewImageWidth = originalPreviewBitmapWidth;
-                filterManager.RotationFilter.OriginalPreviewImageHeight = originalPreviewBitmapHeight;
-
-                filterManager.ApplyRotationFilter();
-            });
-        }
-
-        private void OnRotationValueChanged(object sender, EventArgs e)
-        {
-            int deg = (int)RotationView.Degree;
-            RotationButton.Content = deg.ToString() + " degree";
-
-            filterManager.RotationFilter.Degree = RotationView.Degree;
-            filterManager.RotationFilter.UpdatePreviewAsync();
-        }
-
-        private void OnRotationFilterDismiss(object sender, EventArgs e)
-        {
-            DismissRotationOSD();
-        }
-
-        private void OnRotationFilterDelete(object sender, EventArgs e)
-        {
-            DismissRotationOSD(() =>
-            {
-                RotationButton.Content = "0 degree";
-                RotationView.Degree = 0;
-                RotationView.GetAmountSlider().Value = 0;
-                filterManager.DiscardRotationFilter();
-            });
-        }
-
         private void OnFilterListButtonClick(object sender, RoutedEventArgs e)
         {
             ShowActiveFilterList();
@@ -262,8 +211,7 @@ namespace Indulged.UI.ProFX
 
         private void OnResetTransformButtonClick(object sender, RoutedEventArgs e)
         {
-            if (!filterManager.AppliedFilters.Contains(filterManager.CropFilter)
-                && !filterManager.AppliedFilters.Contains(filterManager.RotationFilter))
+            if (!filterManager.AppliedFilters.Contains(filterManager.CropFilter))
             {
                 return;
             }

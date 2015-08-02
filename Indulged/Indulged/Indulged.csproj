@@ -16,7 +16,7 @@
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>0f0aafe0</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>6f0d9a71</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -84,6 +84,10 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <Page Include="PivotPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\HSBSliderStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -457,11 +461,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProFX\Controls\ColorEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\ProFX\Controls\FilterDropletControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProFX\Controls\FilterEntryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ProFX\Controls\HSBLinearEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -482,10 +494,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ProFX\Filters\FXCropFilter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\ProFX\Filters\FXRotationFilter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -539,6 +547,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Media\HSBColor.cs" />
     <Compile Include="API\Networking\APIResponse.cs" />
     <Compile Include="API\Networking\APIService.Photos.cs" />
     <Compile Include="API\Networking\APIService.Groups.cs" />
@@ -850,11 +859,18 @@
     <Compile Include="UI\Profile\UserProfilePage.xaml.cs">
       <DependentUpon>UserProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProFX\Controls\ColorEditor.xaml.cs">
+      <DependentUpon>ColorEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ProFX\Controls\FilterDropletControl.xaml.cs">
       <DependentUpon>FilterDropletControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProFX\Controls\FilterEntryControl.xaml.cs">
       <DependentUpon>FilterEntryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ProFX\Controls\HSBColorEditorBase.cs" />
+    <Compile Include="UI\ProFX\Controls\HSBLinearEditor.xaml.cs">
+      <DependentUpon>HSBLinearEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProFX\Controls\SectionControl.xaml.cs">
       <DependentUpon>SectionControl.xaml</DependentUpon>
@@ -877,9 +893,6 @@
       <DependentUpon>FXCropFilter.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\ProFX\Filters\FXFilterManager.cs" />
-    <Compile Include="UI\ProFX\Filters\FXRotationFilter.xaml.cs">
-      <DependentUpon>FXRotationFilter.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\ProFX\Filters\FXVignetteFilter.xaml.cs">
       <DependentUpon>FXVignetteFilter.xaml</DependentUpon>
     </Compile>
@@ -1056,7 +1069,7 @@
   <ItemGroup>
     <Compile Include="API\Networking\APIService.Storage.cs" />
     <None Include="Assets\ProCam\EV\Thumbs.db" />
-    <None Include="Help\Nokia Imaging SDK.chm" />
+    <None Include="Help\Lumia Imaging SDK.chm" />
     <None Include="packages.config" />
     <Compile Include="UI\ProCam\ProCamPage.Core.cs" />
   </ItemGroup>
@@ -1073,9 +1086,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\NokiaImagingSDK.1.2.151\build\wpa81\NokiaImagingSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NokiaImagingSDK.1.2.151\build\wpa81\NokiaImagingSDK.targets'))" />
+    <Error Condition="!Exists('..\packages\LumiaImagingSDK.2.0.208\build\wpa81\LumiaImagingSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LumiaImagingSDK.2.0.208\build\wpa81\LumiaImagingSDK.targets'))" />
   </Target>
-  <Import Project="..\packages\NokiaImagingSDK.1.2.151\build\wpa81\NokiaImagingSDK.targets" Condition="Exists('..\packages\NokiaImagingSDK.1.2.151\build\wpa81\NokiaImagingSDK.targets')" />
+  <Import Project="..\packages\LumiaImagingSDK.2.0.208\build\wpa81\LumiaImagingSDK.targets" Condition="Exists('..\packages\LumiaImagingSDK.2.0.208\build\wpa81\LumiaImagingSDK.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

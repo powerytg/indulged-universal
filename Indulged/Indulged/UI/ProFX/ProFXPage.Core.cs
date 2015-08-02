@@ -1,7 +1,7 @@
 ﻿using Indulged.UI.Common.Controls;
 using Indulged.UI.Common.Controls.Events;
 using Indulged.UI.ProFX.Filters;
-using Nokia.Graphics.Imaging;
+using Lumia.Imaging;
 using System;
 using System.Collections.Generic;
 using Windows.Graphics.Imaging;

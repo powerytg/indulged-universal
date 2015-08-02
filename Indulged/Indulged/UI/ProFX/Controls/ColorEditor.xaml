@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="Indulged.UI.ProFX.Controls.ColorEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProFX.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Margin="0, 0, 25, 0"
+              VerticalAlignment="Center">
+            <Ellipse x:Name="PreviewBorder" Width="160" Height="160"
+                     Stroke="#666666" StrokeDashArray="1, 3"/>
+
+            <Ellipse x:Name="ThumbnailView" 
+                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <SolidColorBrush x:Name="ThumbnailFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <TextBlock x:Name="ColorNameLabel"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="24" FontWeight="Thin" Foreground="White"/>
+        </Grid>
+
+        <local:HSBLinearEditor x:Name="Editor" Grid.Column="1" VerticalAlignment="Center"/>
+
+    </Grid>
+</UserControl>

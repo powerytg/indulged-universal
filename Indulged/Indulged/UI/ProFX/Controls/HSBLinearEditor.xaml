@@ -1,0 +1,43 @@
+﻿<local:HSBColorEditorBase
+    x:Class="Indulged.UI.ProFX.Controls.HSBLinearEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Indulged.UI.ProFX.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <StackPanel>
+        <Slider x:Name="HueSlider" Minimum="0" Maximum="65535"
+                Foreground="Transparent"
+                Style="{StaticResource HSBSliderStyle}"
+                ValueChanged="HueSlider_ValueChanged">
+            <Slider.Background>
+                <LinearGradientBrush x:Name="HueGradient" StartPoint="0, 0" EndPoint="1, 0"/>
+            </Slider.Background>
+        </Slider>
+
+        <Slider x:Name="SaturationSlider" Minimum="0" Maximum="255"
+                Style="{StaticResource HSBSliderStyle}" Background="#444444"
+                ValueChanged="SaturationSlider_ValueChanged">
+            <Slider.Foreground>
+                <SolidColorBrush x:Name="SaturationSliderHighlightBrush"/>
+            </Slider.Foreground>
+        </Slider>
+
+        <Slider x:Name="BrightnessSlider" Minimum="0" Maximum="255"
+                Foreground="Transparent"
+                Style="{StaticResource HSBSliderStyle}"
+                ValueChanged="BrightnessSlider_ValueChanged">
+            <Slider.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 0">
+                    <GradientStop Color="#222222" Offset="0"/>
+                    <GradientStop Color="#aaaaaa" Offset="1"/>
+                </LinearGradientBrush>
+            </Slider.Background>
+        </Slider>
+
+    </StackPanel>
+    </local:HSBColorEditorBase>

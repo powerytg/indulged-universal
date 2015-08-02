@@ -22,7 +22,6 @@ namespace Indulged.UI.ProFX.Filters
 
         // Transform filters
         public FXCropFilter CropFilter { get; set; }
-        public FXRotationFilter RotationFilter { get; set; }
 
         // Auto enhance filters
         public List<FilterBase> AutoEnhanceFilters { get; set; }
@@ -33,7 +32,6 @@ namespace Indulged.UI.ProFX.Filters
         public FXFilterManager()
         {
             CropFilter = new FXCropFilter();
-            RotationFilter = new FXRotationFilter();
             AutoEnhanceFilter = new FXAutoEnhanceFilter();
             VignetteFilter = new FXVignetteFilter();
             AutoEnhanceFilters = new List<FilterBase> { AutoEnhanceFilter, VignetteFilter };
@@ -67,7 +65,7 @@ namespace Indulged.UI.ProFX.Filters
              */
 
             AvailableFilters = new List<FilterBase> {
-                CropFilter, RotationFilter, AutoEnhanceFilter, VignetteFilter,
+                CropFilter, AutoEnhanceFilter, VignetteFilter,
                 new FXAntiqueFilter(),
             };
 
@@ -233,47 +231,8 @@ namespace Indulged.UI.ProFX.Filters
             }
         }
 
-        public void ApplyRotationFilter()
-        {
-            RotationFilter.CreateFilter();
-
-            if (!AppliedFilters.Contains(RotationFilter))
-            {
-                RotationFilter.IsFilterEnabled = true;
-                AppliedFilters.Add(RotationFilter);
-
-                if (FilterCountChanged != null)
-                {
-                    FilterCountChanged(this, null);
-                }
-            }
-
-            PerformInvalidatePreview();
-        }
-
-        public void DiscardRotationFilter()
-        {
-            if (AppliedFilters.Contains(RotationFilter))
-            {
-                AppliedFilters.Remove(RotationFilter);
-
-                if (FilterCountChanged != null)
-                {
-                    FilterCountChanged(this, null);
-                }
-            }
-
-            RotationFilter.Degree = 0;
-            PerformInvalidatePreview();
-        }
-
         public void ResetTransform()
         {
-            if (AppliedFilters.Contains(RotationFilter))
-            {
-                AppliedFilters.Remove(RotationFilter);
-            }
-
             if (AppliedFilters.Contains(CropFilter))
             {
                 AppliedFilters.Remove(CropFilter);
